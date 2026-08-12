@@ -1,0 +1,24 @@
+{
+  "chapters": 15,
+  "lessons": 257,
+  "words": 317110,
+  "code": 1909,
+  "quizzes": 0,
+  "chapter_titles": [
+    "0. Setup and the .NET CLI",
+    "1. A tour of C#",
+    "2. Program structure and types",
+    "3. Values, nulls, and strings",
+    "4. Expressions, statements, and control flow",
+    "5. Object-oriented C#",
+    "6. Methods, delegates, and events",
+    "7. Generics and collections",
+    "8. LINQ",
+    "9. Asynchronous programming",
+    "10. Exceptions and functional techniques",
+    "11. Advanced C#",
+    "12. The .NET runtime",
+    "13. What's new in C#",
+    "14. Guided tutorials"
+  ]
+}

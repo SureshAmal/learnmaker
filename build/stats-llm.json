@@ -1,0 +1,22 @@
+{
+  "chapters": 13,
+  "lessons": 100,
+  "words": 163265,
+  "code": 1354,
+  "quizzes": 133,
+  "chapter_titles": [
+    "0. Setup",
+    "1. Transformer models",
+    "2. Using Hugging Face Transformers",
+    "3. Fine-tuning a pretrained model",
+    "4. Sharing models and tokenizers",
+    "5. The Hugging Face Datasets library",
+    "6. The Hugging Face Tokenizers library",
+    "7. Classical NLP tasks",
+    "8. How to ask for help",
+    "9. Building and sharing demos",
+    "10. Curate high-quality datasets",
+    "11. Fine-tune Large Language Models",
+    "12. Build Reasoning Models"
+  ]
+}
