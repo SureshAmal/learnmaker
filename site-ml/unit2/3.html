@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Decision Tree &middot; Machine Learning</title>
+<title>Gradient Descent for Convex Functions &middot; Machine Learning</title>
 <script>/* set the theme before the first paint, or every page flashes light */
 (function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
 document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
@@ -13,41 +13,184 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 </head>
 <body class="">
 <button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a class="active" href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a href="../unit2/10.html">VC Dimension</a></li><li><a href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
-<div class="paper"><div class="topbar"><a href="../unit2/2.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/4.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">Decision Tree</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>Decision Tree</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#how-it-works">How it works</a></li><li class="lvl2"><a href="#advantages">Advantages</a></li><li class="lvl2"><a href="#limitations">Limitations</a></li></ul></nav><ul>
-<li><strong>Purpose:</strong> Used for both classification and regression.</li>
-<li><strong>Concept:</strong></li>
-<li>A tree-like structure where each internal node tests a feature.</li>
-<li>Branches represent outcomes of the test.</li>
-<li>Leaf nodes represent class labels or predicted values.</li>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Classifiers and Decision Regions</a></li><li><a href="../unit1/9.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/10.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/11.html">Modeling</a></li><li><a href="../unit1/12.html">Regression</a></li><li><a href="../unit1/13.html">Discriminant Functions</a></li><li><a href="../unit1/14.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/15.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Regression</a></li><li><a href="../unit2/2.html">Cost Function</a></li><li><a class="active" href="../unit2/3.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/4.html">Logistic Regression</a></li><li><a href="../unit2/5.html">Decision Tree</a></li><li><a href="../unit2/6.html">Random Forest</a></li><li><a href="../unit2/7.html">Neural Networks</a></li><li><a href="../unit2/8.html">Ensemble Learning</a></li><li><a href="../unit2/9.html">Evaluation Metrics and the Confusion Matrix</a></li><li><a href="../unit2/10.html">Bias–Variance Tradeoff</a></li><li><a href="../unit2/11.html">Regularization</a></li><li><a href="../unit2/12.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/13.html">Empirical Risk Minimization</a></li><li><a href="../unit2/14.html">Loss Functions</a></li><li><a href="../unit2/15.html">VC Dimension</a></li><li><a href="../unit2/16.html">Data Partitioning</a></li><li><a href="../unit2/17.html">Cross-Validation</a></li><li><a href="../unit2/18.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/19.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/20.html">Matrix Factorization</a></li><li><a href="../unit2/21.html">Matrix Completion</a></li><li><a href="../unit2/22.html">Generative Models</a></li><li><a href="../unit2/23.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">Machine Learning Security</a></li><li><a href="../unit3/8.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/9.html">Hierarchical Clustering</a></li><li><a href="../unit3/10.html">Dendrograms</a></li><li><a href="../unit3/11.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/12.html">Discriminant Functions</a></li><li><a href="../unit3/13.html">Hypothesis Space</a></li><li><a href="../unit3/14.html">VC Dimension</a></li><li><a href="../unit3/15.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit2/2.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/4.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">Gradient Descent for Convex Functions</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>Gradient Descent for Convex Functions</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#how-it-works">How it works</a></li><li class="lvl2"><a href="#types-of-gradient-descents">Types of Gradient Descents</a></li><li class="lvl2"><a href="#what-is-convex-function">What is Convex Function?</a></li><li class="lvl2"><a href="#properties-of-convex-functions">Properties of Convex Functions</a></li><li class="lvl2"><a href="#why-are-convex-functions-important-in-ml">Why Are Convex Functions Important in ML?</a></li><li class="lvl2"><a href="#real-world-applications-of-convex-cost-functions">Real-World Applications of Convex Cost Functions</a></li><li class="lvl2"><a href="#real-time-example">Real Time Example</a></li></ul></nav><ul>
+<li>Gradient Descent is an optimization algorithm used to minimize a function by updating parameters in the opposite direction of the gradient of the loss function.</li>
+<li>Gradient Descent is an optimization algorithm that is used to minimize a function by slowly moving in the direction of steepest descent, which is defined by the negative of the gradient.</li>
 </ul>
-<p>A decision tree is a type of machine learning model that is used when the relationship between a set of predictor variables and a response variable is non-linear.</p>
+<p>The gradient-descent update rule:</p>
+<p>$$\theta := \theta - \alpha \nabla_\theta J(\theta)$$</p>
+<ul>
+<li>$\nabla_\theta J(\theta)$ — the gradient, a vector of partial derivatives that points in the direction of steepest <strong>ascent</strong>.</li>
+<li>The minus sign is the whole idea: to go down, step <em>against</em> the gradient.</li>
+<li>$\alpha$ — the <strong>learning rate</strong>, the step size. Too large and the algorithm overshoots or diverges; too small and training crawls.</li>
+</ul>
+<p>The classic image is standing on a hillside in fog: you cannot see the valley floor, but you can feel which way the ground falls, so you step that way and repeat.</p>
 <h2>How it works <a class="anchor" href="#how-it-works" id="how-it-works">#</a></h2>
+<ol>
+<li>Start with random values for slope and intercept.</li>
+<li>Calculate the error between predicted and actual values.</li>
+<li>Find how much each parameter contributes to the error (gradient).</li>
+<li>Update the parameters in the direction that reduces the error.</li>
+<li>Repeat until the error is as small as possible.</li>
+<li>This helps the model find the best-fit line for the data.</li>
+</ol>
+<p>Step 3 is calculus — $\frac{\partial J}{\partial m}$ and $\frac{\partial J}{\partial c}$ — and step 4 is the update rule above.</p>
+<h2>Types of Gradient Descents <a class="anchor" href="#types-of-gradient-descents" id="types-of-gradient-descents">#</a></h2>
+<p>3 types of gradient descent:</p>
+<ol>
+<li>Stochastic Gradient Descent</li>
+<li>Batch Gradient Descent</li>
+<li>Mini-Batch Gradient Descent</li>
+</ol>
 <ul>
-<li>Uses measures like Gini Impurity or Entropy to split nodes.</li>
-<li>Greedy algorithm (splits that give the best immediate gain).</li>
+<li><strong>Stochastic Gradient Descent</strong> — in extreme cases, gradient descent picks one instance of training data at every step and update based on that one instance of data point</li>
+<li><strong>Batch Gradient Descent</strong> — in batch gradient descent, the algorithm uses whole data-set to update the values of coefficients.</li>
+<li><strong>Mini-Batch Gradient Descent</strong> — in mini-batch gradient descent, algorithm picks a mini batch from the whole data-set at every step and update the values of coefficients. This method has the advantages of both stochastic and batch gradient descent.</li>
 </ul>
-<div class="codeblock"><span class="lang">code</span><div class="hl"><pre><span></span><code>Is age &gt; 30?
-    Yes: Is income &gt; 50k?
-            Yes → Class A
-            No  → Class B
-    No → Class C
-</code></pre></div></div>
-
+<p>The only thing that changes between the three is <strong>how much data is used to compute one update</strong>. Batch is stable but slow and memory-hungry; SGD is fast but its path to the minimum is noisy, and that noise can actually help it escape poor local minima; mini-batch (typically 32, 64 or 128 samples) is the modern default because it balances the two and vectorises well on a GPU.</p>
+<p>Different Types of Gradient Descent:</p>
 <pre class="mermaid">flowchart TD
-    A[&quot;Is age &gt; 30?&quot;] --&gt;|Yes| B[&quot;Is income &gt; 50k?&quot;]
-    A --&gt;|No| C[&quot;Class C&quot;]
-    B --&gt;|Yes| D[&quot;Class A&quot;]
-    B --&gt;|No| E[&quot;Class B&quot;]</pre>
-<h2>Advantages <a class="anchor" href="#advantages" id="advantages">#</a></h2>
+    A[&quot;Gradient Descent&quot;] --&gt; B[&quot;Stochastic Gradient Descent&quot;]
+    A --&gt; C[&quot;Batch Gradient Descent&quot;]
+    A --&gt; D[&quot;Mini-Batch Gradient Descent&quot;]
+    A --&gt; E[&quot;Momentum&quot;]
+    E --&gt; F[&quot;Nesterov Accelerated Gradient&quot;]
+    A --&gt; G[&quot;Adagrad&quot;]
+    G --&gt; H[&quot;RMSprop&quot;]
+    H --&gt; I[&quot;Adam (Adaptive Moment Estimation)&quot;]</pre>
+<p>Beyond the three data-based variants, the family extends in two directions. <strong>Velocity</strong> methods — Momentum, and its look-ahead refinement Nesterov Accelerated Gradient — add a fraction of the previous update to the current one, gaining speed in a consistent direction and damping oscillations. <strong>Adaptive learning rate</strong> methods give every parameter its own step size: Adagrad scales by the history of gradients (good for sparse data), RMSprop replaces that history with an exponentially decaying average so the rate cannot vanish, and Adam combines momentum with RMSprop and is the standard choice in deep learning.</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch gradient descent</td>
+<td>Guaranteed convergence to global optimum (for convex functions)</td>
+<td>Computationally expensive for large datasets, slow convergence</td>
+</tr>
+<tr>
+<td>Stochastic gradient descent</td>
+<td>Faster convergence, more efficient for large datasets</td>
+<td>High variance, may not converge to the global optimum</td>
+</tr>
+<tr>
+<td>Mini-batch gradient descent</td>
+<td>Balanced convergence speed and computational cost, efficient for large datasets</td>
+<td>Choice of mini-batch size can be a challenge</td>
+</tr>
+<tr>
+<td>Momentum gradient descent</td>
+<td>Faster convergence, less likely to get stuck in local minima</td>
+<td>May overshoot and oscillate around the optimum</td>
+</tr>
+<tr>
+<td>Adagrad</td>
+<td>Adaptive learning rate, efficient for sparse data</td>
+<td>Can stop learning too early</td>
+</tr>
+<tr>
+<td>RMSProp</td>
+<td>Adaptive learning rate, efficient for non-stationary problems</td>
+<td>Can stop learning too early, requires tuning of hyperparameters</td>
+</tr>
+<tr>
+<td>Adam</td>
+<td>Adaptive learning rate, efficient for large datasets and noisy data</td>
+<td>Can converge to suboptimal solutions, requires tuning of hyperparameters</td>
+</tr>
+</tbody>
+</table>
+<p>Adagrad's failure mode has a name worth remembering: the accumulated squared gradients in its denominator keep growing, so the effective learning rate shrinks towards zero and training stalls. RMSprop's decaying average is the fix.</p>
+<h2>What is Convex Function? <a class="anchor" href="#what-is-convex-function" id="what-is-convex-function">#</a></h2>
 <ul>
-<li>Easy to understand and visualize.</li>
-<li>Handles both numerical and categorical data.</li>
+<li>A convex function is a function where the line segment between any two points on the graph lies above or on the graph itself.</li>
 </ul>
-<h2>Limitations <a class="anchor" href="#limitations" id="limitations">#</a></h2>
+<p>Geometrically, pick any two points on the bowl and join them: the chord passes through the air <em>inside</em> the bowl, never below the surface. In 2D this is the familiar "U"; in two parameters it is a paraboloid.</p>
+<h2>Properties of Convex Functions <a class="anchor" href="#properties-of-convex-functions" id="properties-of-convex-functions">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single global minimum</td>
+<td>Only one lowest point; no local minima</td>
+</tr>
+<tr>
+<td>Second derivative ≥ 0</td>
+<td>$f''(x) \geq 0$ for all $x$</td>
+</tr>
+<tr>
+<td>Gradient always increasing</td>
+<td>Slope gets steeper as $x$ increases</td>
+</tr>
+<tr>
+<td>Easy to optimize</td>
+<td>Gradient descent always converges to the global minimum</td>
+</tr>
+</tbody>
+</table>
+<p>The second-order condition $f''(x) \ge 0$ is the formal test for convexity: the curvature never turns downward. Consequently the gradient is <strong>monotonically increasing</strong>, and any local minimum is automatically the global minimum.</p>
+<h2>Why Are Convex Functions Important in ML? <a class="anchor" href="#why-are-convex-functions-important-in-ml" id="why-are-convex-functions-important-in-ml">#</a></h2>
 <ul>
-<li>Prone to over fitting.</li>
-</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit2/2.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Logistic Regression</span></a><a class="next" href="../unit2/4.html"><span><em>Next</em>Random Forest</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+<li>Most machine learning algorithms (like linear regression, logistic regression) use convex cost functions.</li>
+<li>Convexity ensures easy optimization with algorithms like gradient descent.</li>
+<li>It don't get stuck in local minima.</li>
+</ul>
+<p>If the cost surface were non-convex — wavy, full of pits — gradient descent could settle in a local minimum that is not the best solution. Deep neural networks live in exactly that non-convex world, which is why their training is so much more delicate than fitting a linear regression.</p>
+<h2>Real-World Applications of Convex Cost Functions <a class="anchor" href="#real-world-applications-of-convex-cost-functions" id="real-world-applications-of-convex-cost-functions">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Convex Function Used</th>
+<th>Algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>House price prediction</td>
+<td>MSE</td>
+<td>Linear Regression</td>
+</tr>
+<tr>
+<td>Spam classification</td>
+<td>Log Loss (cross-entropy)</td>
+<td>Logistic Regression</td>
+</tr>
+<tr>
+<td>Face recognition</td>
+<td>Hinge Loss</td>
+<td>SVM</td>
+</tr>
+<tr>
+<td>Resource allocation in cloud</td>
+<td>Quadratic Cost Functions</td>
+<td>Optimization Systems</td>
+</tr>
+</tbody>
+</table>
+<p>MSE is quadratic and therefore convex. Log loss stays convex while penalising confident mistakes ever more steeply. Hinge loss is piecewise-linear and convex, and it is what turns maximum-margin classification into a solvable convex program. Quadratic costs of the form $ax^2+bx+c$ with $a>0$ are convex by construction.</p>
+<h2>Real Time Example <a class="anchor" href="#real-time-example" id="real-time-example">#</a></h2>
+<p>Let's say we want to predict the price of a house based on its size (in square feet). We can use Linear Regression, where the cost function used is a convex function.</p>
+<ol>
+<li>Predict house price using: input $x$ = size of the house, output $y$ = price of the house</li>
+<li>Model (Hypothesis Function):</li>
+</ol>
+<p>$$\hat{y} = w_0 + w_1 x$$</p>
+<p>where $\hat{y}$ is the predicted price, $w_0$ the intercept, and $w_1$ the slope — how much the price changes per square foot.</p>
+<p>We use Mean Squared Error as the loss function:</p>
+<p>$$J(w_0, w_1) = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2$$</p>
+<p>This is a convex function. Its plot looks like a bowl-shaped curve, and it has only one global minimum. Since the MSE is convex, algorithms like gradient descent can find the best $w_0$, $w_1$ easily.</p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit2/2.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Cost Function</span></a><a class="next" href="../unit2/4.html"><span><em>Next</em>Logistic Regression</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
 <div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
 <div class="palette" hidden data-base="../" data-v="9f75a64a">
   <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
@@ -125,9 +268,69 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 const mtheme = () => dark() ? 'dark' : 'neutral';
-mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+// Diagrams are laid out to fit the column (useMaxWidth), so nothing is ever clipped or
+// needs sideways scrolling; a click opens the same diagram in a full-screen overlay
+// where it is scaled once to fit the viewport -- no panning, no zoom controls.
+// Mermaid's own light/dark themes, unmodified -- they are known-good, and overriding the
+// palette by hand only produced black-on-black. Layout defaults are left alone too.
+const mconf = () => ({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  flowchart: { curve: 'basis', useMaxWidth: true } });
+mermaid.initialize(mconf());
 const paper = () => document.querySelector('.paper') || document.body;
+
+// ---- full-screen diagram viewer -------------------------------------------------------
+function lightbox() {
+  let el = document.querySelector('.figbox');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'figbox';
+  el.hidden = true;
+  el.innerHTML = '<button class="figbox-exit" type="button">Exit</button>'
+    + '<div class="figbox-stage"></div>';
+  el.addEventListener('click', e => {
+    if (e.target === el || e.target.closest('.figbox-exit')) closeFig();
+  });
+  document.body.appendChild(el);
+  return el;
+}
+// The diagram is MOVED into the overlay and moved back on close -- never cloned. Mermaid
+// scopes its CSS and its arrowhead markers to the svg's own id, so a clone (or a copy with
+// the id stripped) loses every fill and every marker and renders as black blocks.
+let held = null;                       // { svg, home, css } while the overlay is open
+function closeFig() {
+  const el = document.querySelector('.figbox');
+  if (!el) return;
+  if (held) {
+    held.svg.setAttribute('style', held.css);
+    held.home.appendChild(held.svg);
+    held = null;
+  }
+  el.hidden = true;
+  document.documentElement.classList.remove('figbox-open');
+}
+function openFig(pre) {
+  const svg = pre.querySelector('svg, img');
+  if (!svg || held) return;
+  const el = lightbox();
+  const stage = el.querySelector('.figbox-stage');
+  held = { svg: svg, home: pre, css: svg.getAttribute('style') || '' };
+  stage.appendChild(svg);
+  el.hidden = false;
+  document.documentElement.classList.add('figbox-open');
+  // one fit-scale so the whole figure sits inside the stage: no scrollbars, no panning
+  svg.style.maxWidth = 'none';
+  svg.style.maxHeight = 'none';
+  svg.style.width = 'auto';
+  svg.style.height = 'auto';
+  const box = svg.getBoundingClientRect();
+  const room = stage.getBoundingClientRect();
+  if (box.width && box.height) {
+    const k = Math.min(room.width / box.width, room.height / box.height, 2.4);
+    svg.style.transformOrigin = 'center center';
+    svg.style.transform = 'scale(' + k.toFixed(4) + ')';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFig(); });
 function math(el) {
   if (!window.renderMathInElement) return;
   try { renderMathInElement(el, { delimiters: [
@@ -143,20 +346,35 @@ async function diagrams(el) {
   nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
   if (!nodes.length) return;
   try { await mermaid.run({ nodes }); } catch (e) {}
-  nodes.forEach(n => n.dataset.done = '1');
+  nodes.forEach(n => {
+    n.dataset.done = '1';
+    n.title = 'Click to view full screen';
+    if (!n.dataset.zoom) {
+      n.dataset.zoom = '1';
+      n.addEventListener('click', () => openFig(n));
+    }
+  });
+}
+function handFigures(el) {
+  el.querySelectorAll('.figsvg:not([data-zoom]),.figimg:not([data-zoom])').forEach(f => {
+    f.dataset.zoom = '1';
+    f.addEventListener('click', () => openFig(f));
+  });
 }
 let raf = 0;
 function renderAll() {
   cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+  raf = requestAnimationFrame(() => {
+    const el = paper(); diagrams(el); handFigures(el); math(el);
+  });
 }
 if (document.readyState !== 'loading') renderAll();
 window.addEventListener('load', renderAll);
 const p = document.querySelector('.paper');
 if (p) new MutationObserver(renderAll).observe(p, { childList: true });
 new MutationObserver(() => {
-  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  closeFig();                          // a theme switch re-renders every diagram
+  mermaid.initialize(mconf());
   paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
     n.removeAttribute('data-done'); n.removeAttribute('data-processed');
     n.innerHTML = ''; n.textContent = n.dataset.src || '';

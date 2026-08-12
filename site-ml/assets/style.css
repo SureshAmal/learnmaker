@@ -529,9 +529,55 @@ html[data-theme=dark] .hl .o,html[data-theme=dark] .hl .p{color:#9a9aa4}
 }
 
 /* diagrams and math (Mermaid + KaTeX, loaded from a CDN) */
+/* A diagram is laid out to fit the column: never clipped, never scrolled sideways.
+   Click one and it reopens in .figbox, scaled once to fill the screen. */
 pre.mermaid{background:none;border:0;padding:0;margin:1.8em 0;text-align:center;
-  font:inherit;line-height:normal;overflow-x:auto}
-pre.mermaid:not([data-done]){color:var(--faint);font:400 12px/1.6 var(--mono)}
-pre.mermaid svg{max-width:100%;height:auto}
+  font:inherit;line-height:normal;overflow:visible;cursor:zoom-in}
+pre.mermaid:not([data-done]){color:var(--faint);font:400 12px/1.6 var(--mono);
+  text-align:left;white-space:pre-wrap;cursor:default}
+pre.mermaid svg{max-width:100%;max-height:60vh;width:auto;height:auto}
+/* the page's 1.72 body line-height makes a two-line node label taller than the box
+   mermaid measured for it, so labels get their own tight leading */
+pre.mermaid svg,.figbox svg{line-height:1.25}
+pre.mermaid foreignObject div,.figbox foreignObject div,
+pre.mermaid .nodeLabel,.figbox .nodeLabel,
+pre.mermaid .edgeLabel,.figbox .edgeLabel{line-height:1.25}
+
+/* hand-drawn figures: radial cycles, curves and plots mermaid cannot express */
+.figsvg{margin:1.8em 0;text-align:center;cursor:zoom-in}
+.figsvg svg{max-width:100%;max-height:62vh;width:auto;height:auto;overflow:visible}
+.figsvg text,.figbox .figsvg text{fill:var(--ink);font-family:var(--serif)}
+.cyc-ring{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 6}
+.cyc-node circle{fill:var(--sink);stroke:var(--line);stroke-width:1.2}
+.cyc-tip{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;
+  stroke-linejoin:round}
+.cyc-num{font:600 13px/1 var(--mono);fill:var(--blue)}
+.cyc-lab{font:400 13px/1.25 var(--serif);fill:var(--ink)}
+.cyc-hub{font:500 15px/1.3 var(--serif);fill:var(--muted)}
+
+/* a rendered slide, used where the lecture figure is the clearest form of the idea */
+.figimg{margin:2em 0;text-align:center;cursor:zoom-in}
+.figimg img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:2px;
+  background:var(--paper)}
+.figimg figcaption{margin-top:.7em;font:400 12.5px/1.6 var(--mono);color:var(--muted);
+  letter-spacing:.01em}
+.figbox .figimg img,.figbox img{border:0;max-width:none;max-height:none}
+
+/* full-screen diagram viewer */
+html.figbox-open,html.figbox-open body{overflow:hidden}
+.figbox{position:fixed;inset:0;z-index:120;display:flex;align-items:center;
+  justify-content:center;padding:3.4rem 2.2rem 2.2rem;
+  background:rgba(8,8,10,.62);backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px)}
+.figbox[hidden]{display:none}
+.figbox-stage{width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;background:var(--paper);
+  border:1px solid var(--line);border-radius:3px;
+  box-shadow:0 24px 70px -18px rgba(0,0,0,.45)}
+.figbox-stage svg{flex:none}
+.figbox-exit{position:absolute;top:1rem;right:1.6rem;z-index:1;
+  font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);background:none;border:0;padding:.5rem;cursor:pointer}
+.figbox-exit:hover{color:var(--blue)}
 .katex{font-size:1.03em}
 .katex-display{margin:1.2em 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}

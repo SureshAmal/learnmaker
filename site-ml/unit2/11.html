@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Data Partitioning &middot; Machine Learning</title>
+<title>Regularization &middot; Machine Learning</title>
 <script>/* set the theme before the first paint, or every page flashes light */
 (function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
 document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
@@ -13,32 +13,135 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 </head>
 <body class="">
 <button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a href="../unit2/10.html">VC Dimension</a></li><li><a class="active" href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
-<div class="paper"><div class="topbar"><a href="../unit2/10.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/12.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">Data Partitioning</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>Data Partitioning</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#data-partitioning-traintestvalidation">Data Partitioning (Train/Test/Validation)</a></li><li class="lvl3"><a href="#a-training-set">a. Training Set</a></li><li class="lvl3"><a href="#b-validation-set">b. Validation Set</a></li><li class="lvl3"><a href="#c-test-set">c. Test Set</a></li></ul></nav><h2>Data Partitioning (Train/Test/Validation) <a class="anchor" href="#data-partitioning-traintestvalidation" id="data-partitioning-traintestvalidation">#</a></h2>
-<p>In Machine Learning, the dataset is typically split into three subsets:</p>
-<h3>a. Training Set <a class="anchor" href="#a-training-set" id="a-training-set">#</a></h3>
-<ul>
-<li>Used to train the model (i.e., fit the parameters).</li>
-<li>Usually comprises 60–80% of the original dataset.</li>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Classifiers and Decision Regions</a></li><li><a href="../unit1/9.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/10.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/11.html">Modeling</a></li><li><a href="../unit1/12.html">Regression</a></li><li><a href="../unit1/13.html">Discriminant Functions</a></li><li><a href="../unit1/14.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/15.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Regression</a></li><li><a href="../unit2/2.html">Cost Function</a></li><li><a href="../unit2/3.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/4.html">Logistic Regression</a></li><li><a href="../unit2/5.html">Decision Tree</a></li><li><a href="../unit2/6.html">Random Forest</a></li><li><a href="../unit2/7.html">Neural Networks</a></li><li><a href="../unit2/8.html">Ensemble Learning</a></li><li><a href="../unit2/9.html">Evaluation Metrics and the Confusion Matrix</a></li><li><a href="../unit2/10.html">Bias–Variance Tradeoff</a></li><li><a class="active" href="../unit2/11.html">Regularization</a></li><li><a href="../unit2/12.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/13.html">Empirical Risk Minimization</a></li><li><a href="../unit2/14.html">Loss Functions</a></li><li><a href="../unit2/15.html">VC Dimension</a></li><li><a href="../unit2/16.html">Data Partitioning</a></li><li><a href="../unit2/17.html">Cross-Validation</a></li><li><a href="../unit2/18.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/19.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/20.html">Matrix Factorization</a></li><li><a href="../unit2/21.html">Matrix Completion</a></li><li><a href="../unit2/22.html">Generative Models</a></li><li><a href="../unit2/23.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">Machine Learning Security</a></li><li><a href="../unit3/8.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/9.html">Hierarchical Clustering</a></li><li><a href="../unit3/10.html">Dendrograms</a></li><li><a href="../unit3/11.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/12.html">Discriminant Functions</a></li><li><a href="../unit3/13.html">Hypothesis Space</a></li><li><a href="../unit3/14.html">VC Dimension</a></li><li><a href="../unit3/15.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit2/10.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/12.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">Regularization</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>Regularization</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#types-of-regularization">Types of Regularization</a></li><li class="lvl2"><a href="#a-l1-regularization-lasso">a. L1 Regularization (Lasso)</a></li><li class="lvl2"><a href="#b-l2-regularization-ridge">b. L2 Regularization (Ridge)</a></li><li class="lvl2"><a href="#why-l1-zeroes-coefficients-and-l2-does-not">Why L1 zeroes coefficients and L2 does not</a></li><li class="lvl2"><a href="#c-elastic-net">c. Elastic Net</a></li><li class="lvl2"><a href="#benefits-of-regularization">Benefits of Regularization</a></li></ul></nav><ul>
+<li>Regularization adds a penalty term to the loss function to reduce over fitting by discouraging overly complex models.</li>
+<li>By adding a penalty for complexity, regularization encourages simpler and more generalizable models.</li>
+<li><strong>Prevents overfitting:</strong> adds constraints to the model to reduce the risk of memorising noise in the training data.</li>
+<li><strong>Improves generalization:</strong> encourages simpler models that perform better on new, unseen data.</li>
 </ul>
-<h3>b. Validation Set <a class="anchor" href="#b-validation-set" id="b-validation-set">#</a></h3>
+<p>The principle behind it is Occam's razor: given two models that fit equally well, the simpler one is more likely to be right about the future.</p>
+<pre class="mermaid">flowchart LR
+    U[&quot;Under-fitting&lt;br/&gt;straight line through curved data&lt;br/&gt;high bias&quot;] --- A[&quot;Appropriate fitting&lt;br/&gt;smooth curve&lt;br/&gt;balanced&quot;] --- O[&quot;Over-fitting&lt;br/&gt;wiggly boundary through every point&lt;br/&gt;high variance&quot;]</pre>
+<p>Regularization is the force that pulls the right-hand picture back towards the middle one.</p>
+<h2>Types of Regularization <a class="anchor" href="#types-of-regularization" id="types-of-regularization">#</a></h2>
+<p>There are mainly 3 types of regularization techniques, each applying penalties in different ways to control model complexity and improve generalization.</p>
+<h2>a. L1 Regularization (Lasso) <a class="anchor" href="#a-l1-regularization-lasso" id="a-l1-regularization-lasso">#</a></h2>
+<p>A regression model which uses the L1 regularization technique is called <strong>LASSO (Least Absolute Shrinkage and Selection Operator)</strong> regression.</p>
+<ol>
+<li>It adds the absolute value of magnitude of the coefficient as a penalty term to the loss function $L$.</li>
+<li>This penalty can shrink some coefficients to zero, which helps in selecting only the important features and ignoring the less important ones.</li>
+</ol>
+<p>$$\text{Cost} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^{m} \lvert w_j \rvert$$</p>
+<p>Where $m$ is the number of features, $n$ the number of examples, $y_i$ the actual target value, $\hat{y}_i$ the predicted target value, $w_j$ the coefficient of feature $j$, and $\lambda$ the regularization parameter controlling the strength of the penalty. If $\lambda = 0$ the cost reduces to ordinary least squares; as $\lambda \to \infty$ all coefficients are driven towards zero.</p>
+<p>Lasso does two things at once: it <strong>shrinks</strong> coefficients, and because the L1 penalty can push them to <em>exactly</em> zero, it performs <strong>automatic feature selection</strong>, producing a sparse and more interpretable model.</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lasso</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_regression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock"><span class="lang">code</span><div class="hl"><pre><span></span><code>Mean Squared Error: 0.06362439921332456
+Coefficients: [60.50305581 98.52475354 64.3929265 56.96061238 35.52928502]
+</code></pre></div></div>
+
 <ul>
-<li>Used to tune hyperparameters (like learning rate, regularization strength, etc.).</li>
-<li>Helps in preventing overfitting.</li>
-<li>Typically 10–20% of the data.</li>
+<li><code>make_regression(n_samples=100, n_features=5, noise=0.1, random_state=42)</code> generates a regression dataset with 100 samples, 5 features and some noise.</li>
+<li><code>train_test_split(..., test_size=0.2, random_state=42)</code> splits the data into 80 % training and 20 % testing sets.</li>
+<li><code>Lasso(alpha=0.1)</code> creates a Lasso model with regularization strength <code>alpha</code> set to 0.1; <code>alpha</code> is the code's name for $\lambda$.</li>
+<li><code>random_state=42</code> fixes the seed so the data and the split are reproducible.</li>
+<li>The learned weights live in <code>.coef_</code>; with a larger <code>alpha</code>, more of them would be exactly zero.</li>
 </ul>
-<h3>c. Test Set <a class="anchor" href="#c-test-set" id="c-test-set">#</a></h3>
+<h2>b. L2 Regularization (Ridge) <a class="anchor" href="#b-l2-regularization-ridge" id="b-l2-regularization-ridge">#</a></h2>
+<p>A regression model that uses the L2 regularization technique is called <strong>Ridge regression</strong>. It adds the squared magnitude of the coefficient as a penalty term to the loss function. It handles <strong>multicollinearity</strong> by shrinking the coefficients of correlated features, reducing their variance and preventing any single feature from dominating the model.</p>
+<p>$$\text{Cost} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^{m} w_j^2$$</p>
+<p>Ridge shrinks coefficients <strong>towards</strong> zero but never exactly to zero, so every feature stays in the model with reduced influence. That is the crucial contrast with Lasso.</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_regression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error:&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock"><span class="lang">code</span><div class="hl"><pre><span></span><code>Mean Squared Error: 4.114050771972589
+Coefficients: [59.87954432 97.15091098 63.24364738 56.31999433 35.34591136]
+</code></pre></div></div>
+
+<p>Note that none of Ridge's coefficients is zero, and compare with the Lasso run above.</p>
+<h2>Why L1 zeroes coefficients and L2 does not <a class="anchor" href="#why-l1-zeroes-coefficients-and-l2-does-not" id="why-l1-zeroes-coefficients-and-l2-does-not">#</a></h2>
+<p>Both penalties can be written as a <strong>constraint</strong> on the coefficients rather than as an added term:</p>
+<p>$$\text{L1 (Lasso)}: \ \lvert \beta_1 \rvert + \lvert \beta_2 \rvert \le C \qquad\qquad \text{L2 (Ridge)}: \ \beta_1^2 + \beta_2^2 \le C$$</p>
+<p>In the $(\beta_1, \beta_2)$ plane the least-squares error forms concentric elliptical contours around the unconstrained OLS solution, and the regularised answer is the point where the smallest ellipse first <strong>touches</strong> the constraint region.</p>
 <ul>
-<li>Used to evaluate the final model performance.</li>
-<li>Never used in training or validation.</li>
-<li>Also about 10–20% of the data.</li>
+<li>The L1 region is a <strong>diamond</strong> with sharp corners <em>on the axes</em>. An ellipse approaching it very often touches a corner — and a corner means one coefficient is exactly zero. Hence sparsity and feature selection.</li>
+<li>The L2 region is a smooth <strong>circle</strong> with no corners, so the touch point almost never lands on an axis. Every coefficient is shrunk, none eliminated.</li>
 </ul>
-<p>Example: If you have 1000 samples, you might split them as:</p>
+<p>A smaller budget $C$ corresponds to a larger penalty $\lambda$.</p>
+<h2>c. Elastic Net <a class="anchor" href="#c-elastic-net" id="c-elastic-net">#</a></h2>
+<p><strong>Elastic Net Regression</strong> is a combination of both L1 as well as L2 regularization. It combines both L1 (absolute values) and L2 (squared values) penalties on the coefficients, with the help of an extra hyperparameter that controls the ratio of the L1 and L2 regularization.</p>
+<p>$$\text{Cost} = \frac{1}{n} \sum_{i=1}^{n}(y_i - \hat{y}_i)^2 + \lambda \left( (1 - \alpha) \sum_{j=1}^{m} \lvert w_j \rvert + \alpha \sum_{j=1}^{m} w_j^2 \right)$$</p>
 <ul>
-<li>Train: 700 samples</li>
-<li>Test: 150 samples</li>
-<li>Validation: 150</li>
-</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit2/10.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>VC Dimension</span></a><a class="next" href="../unit2/12.html"><span><em>Next</em>Cross-Validation</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+<li>$\lambda$ — overall regularization strength.</li>
+<li>$\alpha$ — the mixing parameter, $0 \le \alpha \le 1$. In this form $\alpha = 0$ leaves only the L1 term (pure Lasso) and $\alpha = 1$ leaves only the L2 term (pure Ridge); values in between blend the two. <strong>Conventions differ between textbooks and libraries</strong> — in scikit-learn the parameter is <code>l1_ratio</code>, where <code>l1_ratio=1</code> is pure Lasso and <code>l1_ratio=0</code> is pure Ridge — so always check which convention a question is using.</li>
+</ul>
+<p>Why it exists: faced with a group of highly correlated features, Lasso arbitrarily keeps one and zeroes the rest, while Ridge keeps them all. Elastic Net finds the middle ground, which is why it is preferred on wide datasets with correlated predictors.</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">ElasticNet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_regression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error:&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock"><span class="lang">code</span><div class="hl"><pre><span></span><code>Mean Squared Error: 7785.886176938014
+Coefficients: [16.84528938 31.77080959 4.05901996 40.18486737 57.25856154
+ 45.81463318 58.97979422 -0. 3.82816854 41.1096051]
+</code></pre></div></div>
+
+<p>The <code>-0.</code> in that output is the point of the example: the L1 half of Elastic Net has performed feature selection and eliminated one feature entirely.</p>
+<p>In general:</p>
+<p>$$\text{Regularized Loss} = \text{Original Loss} + \lambda \cdot (\text{Penalty})$$</p>
+<p>Where $\lambda$ (lambda) controls the strength of the penalty.</p>
+<h2>Benefits of Regularization <a class="anchor" href="#benefits-of-regularization" id="benefits-of-regularization">#</a></h2>
+<ol>
+<li><strong>Prevents overfitting:</strong> helps models focus on underlying patterns instead of memorising noise in the training data.</li>
+<li><strong>Enhances performance:</strong> prevents excessive weighting of outliers or irrelevant features, improving overall model accuracy.</li>
+<li><strong>Stabilizes models:</strong> reduces sensitivity to minor data changes, ensuring consistency across different data subsets.</li>
+<li><strong>Prevents complexity:</strong> keeps the model from becoming too complex, which matters most with limited or noisy data.</li>
+<li><strong>Handles multicollinearity:</strong> reduces the magnitudes of correlated coefficients, improving model stability.</li>
+<li><strong>Promotes consistency:</strong> ensures reliable performance across different datasets, reducing the risk of large performance shifts.</li>
+</ol><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit2/10.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Bias–Variance Tradeoff</span></a><a class="next" href="../unit2/12.html"><span><em>Next</em>Apriori Algorithm for Association Rules</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
 <div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
 <div class="palette" hidden data-base="../" data-v="9f75a64a">
   <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
@@ -116,9 +219,69 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 const mtheme = () => dark() ? 'dark' : 'neutral';
-mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+// Diagrams are laid out to fit the column (useMaxWidth), so nothing is ever clipped or
+// needs sideways scrolling; a click opens the same diagram in a full-screen overlay
+// where it is scaled once to fit the viewport -- no panning, no zoom controls.
+// Mermaid's own light/dark themes, unmodified -- they are known-good, and overriding the
+// palette by hand only produced black-on-black. Layout defaults are left alone too.
+const mconf = () => ({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  flowchart: { curve: 'basis', useMaxWidth: true } });
+mermaid.initialize(mconf());
 const paper = () => document.querySelector('.paper') || document.body;
+
+// ---- full-screen diagram viewer -------------------------------------------------------
+function lightbox() {
+  let el = document.querySelector('.figbox');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'figbox';
+  el.hidden = true;
+  el.innerHTML = '<button class="figbox-exit" type="button">Exit</button>'
+    + '<div class="figbox-stage"></div>';
+  el.addEventListener('click', e => {
+    if (e.target === el || e.target.closest('.figbox-exit')) closeFig();
+  });
+  document.body.appendChild(el);
+  return el;
+}
+// The diagram is MOVED into the overlay and moved back on close -- never cloned. Mermaid
+// scopes its CSS and its arrowhead markers to the svg's own id, so a clone (or a copy with
+// the id stripped) loses every fill and every marker and renders as black blocks.
+let held = null;                       // { svg, home, css } while the overlay is open
+function closeFig() {
+  const el = document.querySelector('.figbox');
+  if (!el) return;
+  if (held) {
+    held.svg.setAttribute('style', held.css);
+    held.home.appendChild(held.svg);
+    held = null;
+  }
+  el.hidden = true;
+  document.documentElement.classList.remove('figbox-open');
+}
+function openFig(pre) {
+  const svg = pre.querySelector('svg, img');
+  if (!svg || held) return;
+  const el = lightbox();
+  const stage = el.querySelector('.figbox-stage');
+  held = { svg: svg, home: pre, css: svg.getAttribute('style') || '' };
+  stage.appendChild(svg);
+  el.hidden = false;
+  document.documentElement.classList.add('figbox-open');
+  // one fit-scale so the whole figure sits inside the stage: no scrollbars, no panning
+  svg.style.maxWidth = 'none';
+  svg.style.maxHeight = 'none';
+  svg.style.width = 'auto';
+  svg.style.height = 'auto';
+  const box = svg.getBoundingClientRect();
+  const room = stage.getBoundingClientRect();
+  if (box.width && box.height) {
+    const k = Math.min(room.width / box.width, room.height / box.height, 2.4);
+    svg.style.transformOrigin = 'center center';
+    svg.style.transform = 'scale(' + k.toFixed(4) + ')';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFig(); });
 function math(el) {
   if (!window.renderMathInElement) return;
   try { renderMathInElement(el, { delimiters: [
@@ -134,20 +297,35 @@ async function diagrams(el) {
   nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
   if (!nodes.length) return;
   try { await mermaid.run({ nodes }); } catch (e) {}
-  nodes.forEach(n => n.dataset.done = '1');
+  nodes.forEach(n => {
+    n.dataset.done = '1';
+    n.title = 'Click to view full screen';
+    if (!n.dataset.zoom) {
+      n.dataset.zoom = '1';
+      n.addEventListener('click', () => openFig(n));
+    }
+  });
+}
+function handFigures(el) {
+  el.querySelectorAll('.figsvg:not([data-zoom]),.figimg:not([data-zoom])').forEach(f => {
+    f.dataset.zoom = '1';
+    f.addEventListener('click', () => openFig(f));
+  });
 }
 let raf = 0;
 function renderAll() {
   cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+  raf = requestAnimationFrame(() => {
+    const el = paper(); diagrams(el); handFigures(el); math(el);
+  });
 }
 if (document.readyState !== 'loading') renderAll();
 window.addEventListener('load', renderAll);
 const p = document.querySelector('.paper');
 if (p) new MutationObserver(renderAll).observe(p, { childList: true });
 new MutationObserver(() => {
-  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  closeFig();                          // a theme switch re-renders every diagram
+  mermaid.initialize(mconf());
   paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
     n.removeAttribute('data-done'); n.removeAttribute('data-processed');
     n.innerHTML = ''; n.textContent = n.dataset.src || '';

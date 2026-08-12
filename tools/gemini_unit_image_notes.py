@@ -15,7 +15,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_IMAGE_DIR = ROOT / "slide-notes" / "assets" / "unit1-introduction"
-DEFAULT_OUTPUT_DIR = ROOT / "markdown-ml" / "unit1" / "page-notes"
+# keep notes outside markdown-ml/: build_ml.py wipes that tree on every rebuild
+DEFAULT_OUTPUT_DIR = ROOT / "slide-notes" / "page-notes" / "unit1-introduction"
 DEFAULT_MODEL = "gemini-3-flash-preview"
 DEFAULT_VERTEX_LOCATION = "global"
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Modeling &middot; Machine Learning</title>
+<title>Maximum Likelihood Estimation &middot; Machine Learning</title>
 <script>/* set the theme before the first paint, or every page flashes light */
 (function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
 document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
@@ -13,70 +13,76 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 </head>
 <body class="">
 <button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a class="active" href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a href="../unit2/10.html">VC Dimension</a></li><li><a href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
-<div class="paper"><div class="topbar"><a href="../unit1/9.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit1/11.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit I — Introduction to Machine Learning</span><b>/</b><span class="here">Modeling</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT I — INTRODUCTION TO MACHINE LEARNING</p><h1>Modeling</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#what-is-modeling">What is Modeling?</a></li><li class="lvl2"><a href="#modeling-workflow">Modeling Workflow</a></li><li class="lvl2"><a href="#goal-of-modeling">Goal of Modeling</a></li><li class="lvl2"><a href="#good-modeling-practices">Good Modeling Practices</a></li><li class="lvl2"><a href="#types-of-models-based-on-task">Types of Models based on Task</a></li></ul></nav><h2>What is Modeling? <a class="anchor" href="#what-is-modeling" id="what-is-modeling">#</a></h2>
-<p>Modeling is the process of creating a machine learning model that learns patterns from the training data and can make predictions or decisions on new (unseen) data.</p>
-<h2>Modeling Workflow <a class="anchor" href="#modeling-workflow" id="modeling-workflow">#</a></h2>
-<pre class="mermaid">flowchart TD
-    A[&quot;Collect Data&quot;] --&gt; B[&quot;Preprocess Data&quot;]
-    B --&gt; C[&quot;Select Model (Algorithm)&quot;]
-    C --&gt; D[&quot;Train Model&quot;]
-    D --&gt; E[&quot;Evaluate Model&quot;]
-    E --&gt; F[&quot;Tune Parameters&quot;]
-    F --&gt; G[&quot;Predict on New Data&quot;]</pre>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Classifiers and Decision Regions</a></li><li><a href="../unit1/9.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a class="active" href="../unit1/10.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/11.html">Modeling</a></li><li><a href="../unit1/12.html">Regression</a></li><li><a href="../unit1/13.html">Discriminant Functions</a></li><li><a href="../unit1/14.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/15.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Regression</a></li><li><a href="../unit2/2.html">Cost Function</a></li><li><a href="../unit2/3.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/4.html">Logistic Regression</a></li><li><a href="../unit2/5.html">Decision Tree</a></li><li><a href="../unit2/6.html">Random Forest</a></li><li><a href="../unit2/7.html">Neural Networks</a></li><li><a href="../unit2/8.html">Ensemble Learning</a></li><li><a href="../unit2/9.html">Evaluation Metrics and the Confusion Matrix</a></li><li><a href="../unit2/10.html">Bias–Variance Tradeoff</a></li><li><a href="../unit2/11.html">Regularization</a></li><li><a href="../unit2/12.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/13.html">Empirical Risk Minimization</a></li><li><a href="../unit2/14.html">Loss Functions</a></li><li><a href="../unit2/15.html">VC Dimension</a></li><li><a href="../unit2/16.html">Data Partitioning</a></li><li><a href="../unit2/17.html">Cross-Validation</a></li><li><a href="../unit2/18.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/19.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/20.html">Matrix Factorization</a></li><li><a href="../unit2/21.html">Matrix Completion</a></li><li><a href="../unit2/22.html">Generative Models</a></li><li><a href="../unit2/23.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">Machine Learning Security</a></li><li><a href="../unit3/8.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/9.html">Hierarchical Clustering</a></li><li><a href="../unit3/10.html">Dendrograms</a></li><li><a href="../unit3/11.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/12.html">Discriminant Functions</a></li><li><a href="../unit3/13.html">Hypothesis Space</a></li><li><a href="../unit3/14.html">VC Dimension</a></li><li><a href="../unit3/15.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit1/9.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit1/11.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit I — Introduction to Machine Learning</span><b>/</b><span class="here">Maximum Likelihood Estimation</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT I — INTRODUCTION TO MACHINE LEARNING</p><h1>Maximum Likelihood Estimation</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#what-does-likelihood-mean">What does Likelihood mean?</a></li><li class="lvl2"><a href="#difference-between-likelihood-and-probability">Difference between Likelihood and Probability</a></li><li class="lvl2"><a href="#recursive-estimation-prior-likelihood-posterior-over-time">Recursive estimation: prior, likelihood, posterior over time</a></li><li class="lvl2"><a href="#maximum-likelihood-estimation-with-the-binomial-distribution">Maximum Likelihood Estimation with the Binomial Distribution</a></li></ul></nav><p>Maximum Likelihood Estimation (MLE) is a statistical technique used to estimate the parameters of a probability distribution by maximizing the likelihood function.</p>
+<p>It is widely applied in machine learning, statistics, and AI to optimize models for tasks such as classification, regression, and generative modeling.</p>
+<p>The procedure: assume the data comes from some family of distributions (say Gaussian) whose parameters — the mean $\mu$, the standard deviation $\sigma$ — are unknown; write the likelihood as a function of those parameters with the data held fixed; then find the parameter values at the peak, usually by differentiating the <strong>log</strong>-likelihood and setting it to zero.</p>
+<p>MLE is not a side topic. Logistic regression finds its weights by MLE. Linear regression under Gaussian noise has an OLS solution that <em>is</em> the MLE solution. Generative models learn a data distribution by maximising likelihood.</p>
+<h2>What does Likelihood mean? <a class="anchor" href="#what-does-likelihood-mean" id="what-does-likelihood-mean">#</a></h2>
+<p>Likelihood is a fundamental concept in statistics and machine learning that measures how well a set of parameters explains a given dataset.</p>
+<p>Unlike probability, which measures the chance of an event occurring, likelihood quantifies how probable the observed data is under a specific model.</p>
+<p>Numerically the likelihood $L(\theta \mid x)$ equals the density $P(x \mid \theta)$, but it is read as a function of the <strong>parameters</strong> $\theta$ with the data $x$ fixed, rather than a function of the data with the parameters fixed. A higher likelihood means the parameters fit the observed data better.</p>
+<h2>Difference between Likelihood and Probability <a class="anchor" href="#difference-between-likelihood-and-probability" id="difference-between-likelihood-and-probability">#</a></h2>
 <ul>
-<li>Collect Data: Input dataset (e.g., CSV, Excel)</li>
-<li>Preprocess Data: Cleaning, encoding, normalization, feature scaling, splitting</li>
-<li>Select Model (Algorithm)</li>
-<li>Classification → SVM, KNN, Decision Tree</li>
-<li>Regression → Linear Regression</li>
-<li>Clustering → K-Means</li>
-<li>Train Model: Model learns from training data</li>
-<li>Evaluate Model: Accuracy, precision, recall, confusion matrix, etc.</li>
-<li>Tune Parameters: Adjust hyperparameters (e.g., GridSearchCV)</li>
-<li>Predict on New Data: Final model makes predictions on unseen data</li>
+<li>Probability: Given a known model and parameters, probability predicts future outcomes.</li>
+<li>Likelihood: Given observed data, likelihood estimates the best parameters for a model.</li>
 </ul>
-<h2>Goal of Modeling <a class="anchor" href="#goal-of-modeling" id="goal-of-modeling">#</a></h2>
-<p>To build a generalized model that performs well on unseen/test data, not just the training data.</p>
-<h2>Good Modeling Practices <a class="anchor" href="#good-modeling-practices" id="good-modeling-practices">#</a></h2>
+<pre class="mermaid">flowchart LR
+    M[&quot;Model&lt;br/&gt;(parameters)&quot;] -- &quot;probability&quot; --&gt; O[&quot;Outcomes&lt;br/&gt;(data)&quot;]
+    O -- &quot;likelihood&quot; --&gt; M</pre>
+<p>Geometrically, on the same bell curve:</p>
 <ul>
-<li>Use cross-validation (e.g., K-Fold)</li>
-<li>Avoid overfitting (model memorizes training data)</li>
-<li>Avoid underfitting (model is too simple)</li>
-<li>Use feature scaling when needed</li>
-<li>Choose the right evaluation metric for your problem</li>
+<li><strong>Probability is an area.</strong> $P(a \le X \le b) = \int_a^b f(x \mid \theta)\,dx$ — the shaded region between two data values.</li>
+<li><strong>Likelihood is a height.</strong> $L(\theta \mid x) = f(x \mid \theta)$ — the value of the curve at one observed point.</li>
 </ul>
-<h2>Types of Models based on Task <a class="anchor" href="#types-of-models-based-on-task" id="types-of-models-based-on-task">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Classification</td>
-<td>SVM, KNN, Naive Bayes</td>
-</tr>
-<tr>
-<td>Regression</td>
-<td>Linear Regression, Ridge, Lasso</td>
-</tr>
-<tr>
-<td>Clustering</td>
-<td>K-Means, DBSCAN</td>
-</tr>
-<tr>
-<td>Dim. Reduction</td>
-<td>PCA, t-SNE</td>
-</tr>
-<tr>
-<td>Deep Learning</td>
-<td>ANN, CNN, RNN</td>
-</tr>
-</tbody>
-</table><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit1/9.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Maximum Likelihood Estimation</span></a><a class="next" href="../unit1/11.html"><span><em>Next</em>Regression</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+<p><strong>Worked numbers.</strong> Take a normal distribution with $\mu = 13$ and $\sigma = 4$:</p>
+<p>$$f(x \mid \mu, \sigma) = \frac{1}{\sigma\sqrt{2\pi}}\, e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$</p>
+<ul>
+<li>Probability that $5 \le x \le 10$: $0.204$ (an area).</li>
+<li>Probability that $-1000 \le x \le 1000$: $1.000$ — effectively the whole curve, and the total area under any density is always 1.</li>
+<li>Likelihood of $\mu = 13, \sigma = 4$ if the observed value was $x = 10$: $0.075$ (a height).</li>
+<li>Likelihood of the same parameters if the observed value was $x = 14$: $0.097$.</li>
+</ul>
+<pre class="mermaid">xychart-beta
+  title &quot;Normal density, mu = 13 and sigma = 4&quot;
+  x-axis &quot;x&quot; [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30]
+  y-axis &quot;density f(x)&quot; 0 --&gt; 0.11
+  line [0.0005,0.0023,0.0079,0.0216,0.0457,0.0753,0.0967,0.0967,0.0753,0.0457,0.0216,0.0079,0.0023,0.0005,0.0001,0]</pre>
+<p>Read the curve two ways. <strong>Probability</strong> is an area under it — the region between $x=5$ and $x=10$ integrates to $0.204$. <strong>Likelihood</strong> is a height on it: at the observed $x = 10$ the curve stands at $0.0753$, and at $x = 14$ it stands at $0.0967$. Those are exactly the $0.075$ and $0.097$ quoted below.</p>
+<p>Conclusion: if the observed value was 14, it is <em>more likely</em> that the parameters are $\mu = 13$ and $\sigma = 4$, because $0.097 > 0.075$. In probability the parameters are fixed and the data varies; in likelihood the data is fixed and the parameters vary.</p>
+<h2>Recursive estimation: prior, likelihood, posterior over time <a class="anchor" href="#recursive-estimation-prior-likelihood-posterior-over-time" id="recursive-estimation-prior-likelihood-posterior-over-time">#</a></h2>
+<p>When the quantity being estimated changes over time — a robot's position, a tracked object — the same three terms recur at every step:</p>
+<pre class="mermaid">flowchart LR
+    P0[&quot;Posterior at step k-1&quot;] -- &quot;(1) Prediction&quot; --&gt; PR[&quot;Prior p(theta_k)&quot;]
+    PR -- &quot;(2) Update with likelihood L(z_k | theta_k)&quot; --&gt; W[&quot;weighted particles&quot;]
+    W -- &quot;(3) Resampling&quot; --&gt; P1[&quot;Posterior p(theta_k | x_1:k)&quot;]
+    P1 -- &quot;Prediction&quot; --&gt; PR2[&quot;Prior at step k+1&quot;]</pre>
+<ul>
+<li>$\theta$ — the state being estimated; $z_k$ — the measurement at time $k$; $x_{1:k}$ — all observations up to $k$.</li>
+<li><strong>Prediction</strong> moves the particles (candidate states) forward with a motion model, spreading them out — this produces the prior.</li>
+<li><strong>Update</strong> weights each particle by the likelihood $L(z_k \mid \theta_k)$: particles near the peak of the likelihood curve get large weights, particles at the edges get small ones. This is where "maximum likelihood" enters — the best-matching hypotheses are the most important.</li>
+<li><strong>Resampling</strong> duplicates heavy particles and discards light ones, concentrating computation in high-probability regions and solving the degeneracy problem where one particle would eventually hold all the weight.</li>
+</ul>
+<p>Unlike a Kalman filter, which assumes a Gaussian, this particle-based scheme represents distributions of any shape.</p>
+<h2>Maximum Likelihood Estimation with the Binomial Distribution <a class="anchor" href="#maximum-likelihood-estimation-with-the-binomial-distribution" id="maximum-likelihood-estimation-with-the-binomial-distribution">#</a></h2>
+<p>Consider an experiment with two outcomes, success ($S$) and failure ($F$), for each subject, run over $n$ subjects. The sequence of outcomes can be arranged as</p>
+<div class="codeblock"><span class="lang">code</span><div class="hl"><pre><span></span><code>S S F S F F F S S F S ...... F
+</code></pre></div></div>
+
+<p>where there are $x$ successes out of $n$ trials. The probability distribution of $x$ is</p>
+<p>$$f(x) = \binom{n}{x} p^x (1-p)^{n-x}, \qquad x = 0, 1, \dots, n$$</p>
+<p>where $p = \text{prob}(S)$ and $1 - p = \text{prob}(F)$. The mean and variance of $x$ are $np$ and $np(1-p)$.</p>
+<p>Written out with factorials:</p>
+<p>$$P(X) = \frac{n!}{X!\,(n-X)!}\, p^X q^{\,n-X}, \qquad 0 \le X \le n$$</p>
+<p>$$\mu = n \cdot p, \qquad \sigma^2 = n \cdot p \cdot q, \qquad \sigma = \sqrt{n \cdot p \cdot q}$$</p>
+<p>Term by term:</p>
+<ul>
+<li>$\binom{n}{x} = \frac{n!}{x!(n-x)!}$ — the binomial coefficient, the number of ways to arrange $x$ successes among $n$ trials.</li>
+<li>$p^x$ — the probability of getting those $x$ successes.</li>
+<li>$(1-p)^{n-x}$ or $q^{n-x}$ — the probability of the remaining $n - x$ failures, with $p + q = 1$.</li>
+</ul>
+<p>The four assumptions of a binomial experiment: a <strong>fixed</strong> number of trials $n$; <strong>independent</strong> trials; exactly <strong>two</strong> outcomes per trial; and a <strong>constant</strong> success probability $p$.</p>
+<p>For MLE this PMF is read as the likelihood function $L(p \mid x, n)$, and the task is to find the $p$ that maximises it given the observed number of successes $x$ — which, for the binomial, works out to the intuitive $\hat{p} = x/n$.</p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit1/9.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Basics of Probability and Bayes&#x27; Theorem</span></a><a class="next" href="../unit1/11.html"><span><em>Next</em>Modeling</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
 <div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
 <div class="palette" hidden data-base="../" data-v="9f75a64a">
   <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
@@ -154,9 +160,69 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 const mtheme = () => dark() ? 'dark' : 'neutral';
-mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+// Diagrams are laid out to fit the column (useMaxWidth), so nothing is ever clipped or
+// needs sideways scrolling; a click opens the same diagram in a full-screen overlay
+// where it is scaled once to fit the viewport -- no panning, no zoom controls.
+// Mermaid's own light/dark themes, unmodified -- they are known-good, and overriding the
+// palette by hand only produced black-on-black. Layout defaults are left alone too.
+const mconf = () => ({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  flowchart: { curve: 'basis', useMaxWidth: true } });
+mermaid.initialize(mconf());
 const paper = () => document.querySelector('.paper') || document.body;
+
+// ---- full-screen diagram viewer -------------------------------------------------------
+function lightbox() {
+  let el = document.querySelector('.figbox');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'figbox';
+  el.hidden = true;
+  el.innerHTML = '<button class="figbox-exit" type="button">Exit</button>'
+    + '<div class="figbox-stage"></div>';
+  el.addEventListener('click', e => {
+    if (e.target === el || e.target.closest('.figbox-exit')) closeFig();
+  });
+  document.body.appendChild(el);
+  return el;
+}
+// The diagram is MOVED into the overlay and moved back on close -- never cloned. Mermaid
+// scopes its CSS and its arrowhead markers to the svg's own id, so a clone (or a copy with
+// the id stripped) loses every fill and every marker and renders as black blocks.
+let held = null;                       // { svg, home, css } while the overlay is open
+function closeFig() {
+  const el = document.querySelector('.figbox');
+  if (!el) return;
+  if (held) {
+    held.svg.setAttribute('style', held.css);
+    held.home.appendChild(held.svg);
+    held = null;
+  }
+  el.hidden = true;
+  document.documentElement.classList.remove('figbox-open');
+}
+function openFig(pre) {
+  const svg = pre.querySelector('svg, img');
+  if (!svg || held) return;
+  const el = lightbox();
+  const stage = el.querySelector('.figbox-stage');
+  held = { svg: svg, home: pre, css: svg.getAttribute('style') || '' };
+  stage.appendChild(svg);
+  el.hidden = false;
+  document.documentElement.classList.add('figbox-open');
+  // one fit-scale so the whole figure sits inside the stage: no scrollbars, no panning
+  svg.style.maxWidth = 'none';
+  svg.style.maxHeight = 'none';
+  svg.style.width = 'auto';
+  svg.style.height = 'auto';
+  const box = svg.getBoundingClientRect();
+  const room = stage.getBoundingClientRect();
+  if (box.width && box.height) {
+    const k = Math.min(room.width / box.width, room.height / box.height, 2.4);
+    svg.style.transformOrigin = 'center center';
+    svg.style.transform = 'scale(' + k.toFixed(4) + ')';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFig(); });
 function math(el) {
   if (!window.renderMathInElement) return;
   try { renderMathInElement(el, { delimiters: [
@@ -172,20 +238,35 @@ async function diagrams(el) {
   nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
   if (!nodes.length) return;
   try { await mermaid.run({ nodes }); } catch (e) {}
-  nodes.forEach(n => n.dataset.done = '1');
+  nodes.forEach(n => {
+    n.dataset.done = '1';
+    n.title = 'Click to view full screen';
+    if (!n.dataset.zoom) {
+      n.dataset.zoom = '1';
+      n.addEventListener('click', () => openFig(n));
+    }
+  });
+}
+function handFigures(el) {
+  el.querySelectorAll('.figsvg:not([data-zoom]),.figimg:not([data-zoom])').forEach(f => {
+    f.dataset.zoom = '1';
+    f.addEventListener('click', () => openFig(f));
+  });
 }
 let raf = 0;
 function renderAll() {
   cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+  raf = requestAnimationFrame(() => {
+    const el = paper(); diagrams(el); handFigures(el); math(el);
+  });
 }
 if (document.readyState !== 'loading') renderAll();
 window.addEventListener('load', renderAll);
 const p = document.querySelector('.paper');
 if (p) new MutationObserver(renderAll).observe(p, { childList: true });
 new MutationObserver(() => {
-  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  closeFig();                          // a theme switch re-renders every diagram
+  mermaid.initialize(mconf());
   paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
     n.removeAttribute('data-done'); n.removeAttribute('data-processed');
     n.innerHTML = ''; n.textContent = n.dataset.src || '';

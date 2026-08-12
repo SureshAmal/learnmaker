@@ -20,6 +20,7 @@ notes can carry real diagrams and math instead of screenshots:
 
 from __future__ import annotations
 
+import base64
 import html
 import json
 import re
@@ -31,6 +32,7 @@ import build as engine
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "ml-course"
+FIGS = SRC / "figures"          # slide figures, web-sized by tools/make_figures.py
 SITE = ROOT / "site-ml"
 MD_OUT = ROOT / "markdown-ml"
 SINGLE = ROOT / "ml-course.html"
@@ -54,9 +56,69 @@ MLX_SCRIPT = f"""
 import mermaid from '{MERMAID}';
 const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 const mtheme = () => dark() ? 'dark' : 'neutral';
-mermaid.initialize({{ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-  fontFamily: 'inherit', flowchart: {{ curve: 'basis' }} }});
+// Diagrams are laid out to fit the column (useMaxWidth), so nothing is ever clipped or
+// needs sideways scrolling; a click opens the same diagram in a full-screen overlay
+// where it is scaled once to fit the viewport -- no panning, no zoom controls.
+// Mermaid's own light/dark themes, unmodified -- they are known-good, and overriding the
+// palette by hand only produced black-on-black. Layout defaults are left alone too.
+const mconf = () => ({{ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  flowchart: {{ curve: 'basis', useMaxWidth: true }} }});
+mermaid.initialize(mconf());
 const paper = () => document.querySelector('.paper') || document.body;
+
+// ---- full-screen diagram viewer -------------------------------------------------------
+function lightbox() {{
+  let el = document.querySelector('.figbox');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'figbox';
+  el.hidden = true;
+  el.innerHTML = '<button class="figbox-exit" type="button">Exit</button>'
+    + '<div class="figbox-stage"></div>';
+  el.addEventListener('click', e => {{
+    if (e.target === el || e.target.closest('.figbox-exit')) closeFig();
+  }});
+  document.body.appendChild(el);
+  return el;
+}}
+// The diagram is MOVED into the overlay and moved back on close -- never cloned. Mermaid
+// scopes its CSS and its arrowhead markers to the svg's own id, so a clone (or a copy with
+// the id stripped) loses every fill and every marker and renders as black blocks.
+let held = null;                       // {{ svg, home, css }} while the overlay is open
+function closeFig() {{
+  const el = document.querySelector('.figbox');
+  if (!el) return;
+  if (held) {{
+    held.svg.setAttribute('style', held.css);
+    held.home.appendChild(held.svg);
+    held = null;
+  }}
+  el.hidden = true;
+  document.documentElement.classList.remove('figbox-open');
+}}
+function openFig(pre) {{
+  const svg = pre.querySelector('svg, img');
+  if (!svg || held) return;
+  const el = lightbox();
+  const stage = el.querySelector('.figbox-stage');
+  held = {{ svg: svg, home: pre, css: svg.getAttribute('style') || '' }};
+  stage.appendChild(svg);
+  el.hidden = false;
+  document.documentElement.classList.add('figbox-open');
+  // one fit-scale so the whole figure sits inside the stage: no scrollbars, no panning
+  svg.style.maxWidth = 'none';
+  svg.style.maxHeight = 'none';
+  svg.style.width = 'auto';
+  svg.style.height = 'auto';
+  const box = svg.getBoundingClientRect();
+  const room = stage.getBoundingClientRect();
+  if (box.width && box.height) {{
+    const k = Math.min(room.width / box.width, room.height / box.height, 2.4);
+    svg.style.transformOrigin = 'center center';
+    svg.style.transform = 'scale(' + k.toFixed(4) + ')';
+  }}
+}}
+document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeFig(); }});
 function math(el) {{
   if (!window.renderMathInElement) return;
   try {{ renderMathInElement(el, {{ delimiters: [
@@ -72,20 +134,35 @@ async function diagrams(el) {{
   nodes.forEach(n => {{ if (!n.dataset.src) n.dataset.src = n.textContent; }});
   if (!nodes.length) return;
   try {{ await mermaid.run({{ nodes }}); }} catch (e) {{}}
-  nodes.forEach(n => n.dataset.done = '1');
+  nodes.forEach(n => {{
+    n.dataset.done = '1';
+    n.title = 'Click to view full screen';
+    if (!n.dataset.zoom) {{
+      n.dataset.zoom = '1';
+      n.addEventListener('click', () => openFig(n));
+    }}
+  }});
+}}
+function handFigures(el) {{
+  el.querySelectorAll('.figsvg:not([data-zoom]),.figimg:not([data-zoom])').forEach(f => {{
+    f.dataset.zoom = '1';
+    f.addEventListener('click', () => openFig(f));
+  }});
 }}
 let raf = 0;
 function renderAll() {{
   cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => {{ const el = paper(); diagrams(el); math(el); }});
+  raf = requestAnimationFrame(() => {{
+    const el = paper(); diagrams(el); handFigures(el); math(el);
+  }});
 }}
 if (document.readyState !== 'loading') renderAll();
 window.addEventListener('load', renderAll);
 const p = document.querySelector('.paper');
 if (p) new MutationObserver(renderAll).observe(p, {{ childList: true }});
 new MutationObserver(() => {{
-  mermaid.initialize({{ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-    fontFamily: 'inherit', flowchart: {{ curve: 'basis' }} }});
+  closeFig();                          // a theme switch re-renders every diagram
+  mermaid.initialize(mconf());
   paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {{
     n.removeAttribute('data-done'); n.removeAttribute('data-processed');
     n.innerHTML = ''; n.textContent = n.dataset.src || '';
@@ -97,10 +174,56 @@ new MutationObserver(() => {{
 
 ML_CSS = """
 /* diagrams and math (Mermaid + KaTeX, loaded from a CDN) */
+/* A diagram is laid out to fit the column: never clipped, never scrolled sideways.
+   Click one and it reopens in .figbox, scaled once to fill the screen. */
 pre.mermaid{background:none;border:0;padding:0;margin:1.8em 0;text-align:center;
-  font:inherit;line-height:normal;overflow-x:auto}
-pre.mermaid:not([data-done]){color:var(--faint);font:400 12px/1.6 var(--mono)}
-pre.mermaid svg{max-width:100%;height:auto}
+  font:inherit;line-height:normal;overflow:visible;cursor:zoom-in}
+pre.mermaid:not([data-done]){color:var(--faint);font:400 12px/1.6 var(--mono);
+  text-align:left;white-space:pre-wrap;cursor:default}
+pre.mermaid svg{max-width:100%;max-height:60vh;width:auto;height:auto}
+/* the page's 1.72 body line-height makes a two-line node label taller than the box
+   mermaid measured for it, so labels get their own tight leading */
+pre.mermaid svg,.figbox svg{line-height:1.25}
+pre.mermaid foreignObject div,.figbox foreignObject div,
+pre.mermaid .nodeLabel,.figbox .nodeLabel,
+pre.mermaid .edgeLabel,.figbox .edgeLabel{line-height:1.25}
+
+/* hand-drawn figures: radial cycles, curves and plots mermaid cannot express */
+.figsvg{margin:1.8em 0;text-align:center;cursor:zoom-in}
+.figsvg svg{max-width:100%;max-height:62vh;width:auto;height:auto;overflow:visible}
+.figsvg text,.figbox .figsvg text{fill:var(--ink);font-family:var(--serif)}
+.cyc-ring{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 6}
+.cyc-node circle{fill:var(--sink);stroke:var(--line);stroke-width:1.2}
+.cyc-tip{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;
+  stroke-linejoin:round}
+.cyc-num{font:600 13px/1 var(--mono);fill:var(--blue)}
+.cyc-lab{font:400 13px/1.25 var(--serif);fill:var(--ink)}
+.cyc-hub{font:500 15px/1.3 var(--serif);fill:var(--muted)}
+
+/* a rendered slide, used where the lecture figure is the clearest form of the idea */
+.figimg{margin:2em 0;text-align:center;cursor:zoom-in}
+.figimg img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:2px;
+  background:var(--paper)}
+.figimg figcaption{margin-top:.7em;font:400 12.5px/1.6 var(--mono);color:var(--muted);
+  letter-spacing:.01em}
+.figbox .figimg img,.figbox img{border:0;max-width:none;max-height:none}
+
+/* full-screen diagram viewer */
+html.figbox-open,html.figbox-open body{overflow:hidden}
+.figbox{position:fixed;inset:0;z-index:120;display:flex;align-items:center;
+  justify-content:center;padding:3.4rem 2.2rem 2.2rem;
+  background:rgba(8,8,10,.62);backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px)}
+.figbox[hidden]{display:none}
+.figbox-stage{width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;background:var(--paper);
+  border:1px solid var(--line);border-radius:3px;
+  box-shadow:0 24px 70px -18px rgba(0,0,0,.45)}
+.figbox-stage svg{flex:none}
+.figbox-exit{position:absolute;top:1rem;right:1.6rem;z-index:1;
+  font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);background:none;border:0;padding:.5rem;cursor:pointer}
+.figbox-exit:hover{color:var(--blue)}
 .katex{font-size:1.03em}
 .katex-display{margin:1.2em 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
 """
@@ -179,6 +302,17 @@ def render_section(md_text, converter):
 # --------------------------------------------------------------------------------------
 # page templates (the shared furniture, an ML plate, plus the CDN diagram/math libs)
 # --------------------------------------------------------------------------------------
+
+def inline_figures(body_html):
+    """Rewrite src="figures/x.webp" as a data: URI, for the single-file build."""
+    def swap(m):
+        f = FIGS / m.group(1)
+        if not f.exists():
+            return m.group(0)
+        b64 = base64.b64encode(f.read_bytes()).decode("ascii")
+        return f'src="data:image/webp;base64,{b64}"'
+    return re.sub(r'src="figures/([^"]+)"', swap, body_html)
+
 
 def sidebar(chapters, current=None, depth=1, hashed=False):
     up = "../" * depth
@@ -389,13 +523,17 @@ def build():
     (SITE / "assets").mkdir(parents=True)
     (SITE / "assets" / "style.css").write_text(engine.STYLE.strip() + "\n" + ML_CSS, encoding="utf-8")
     (SITE / "assets" / "app.js").write_text(engine.APP_JS.strip() + "\n", encoding="utf-8")
+    if FIGS.is_dir():
+        shutil.copytree(FIGS, SITE / "assets" / "figures")
 
     converter = engine.make_converter()
     words_total = code_total = diagram_total = 0
     index, bodies = [], []
 
+    fig_count = 0
     for i, (route, title, body_md, unit_title) in enumerate(flat):
         body_html, headings, ndiag = render_section(body_md, converter)
+        fig_count += body_html.count('src="figures/')
         body_text = engine.plain_text(body_html)
         words = len(re.findall(r"\b[\w'-]+\b", body_text))
         words_total += words
@@ -409,7 +547,9 @@ def build():
         next_row = flat[i + 1] if i + 1 < len(flat) else None
         meta = {
             "route": route, "title": title, "chapter": unit_title,
-            "html": body_html, "headings": headings, "words": words,
+            # section pages live one level down, so figures resolve through ../assets
+            "html": body_html.replace('src="figures/', 'src="../assets/figures/'),
+            "headings": headings, "words": words,
             "crumb": (f'<span>{html.escape(unit_title)}</span><b>/</b>'
                       f'<span class="here">{html.escape(title)}</span>'),
             "prev": prev_row[1] if prev_row else None,
@@ -422,6 +562,8 @@ def build():
                                             encoding="utf-8")
 
         hashed = dict(meta)
+        # the one-file build has no asset folder to point at, so figures ride inline
+        hashed["html"] = inline_figures(body_html)
         hashed["prev_href"] = f"#{prev_row[0]}" if prev_row else ""
         hashed["next_href"] = f"#{next_row[0]}" if next_row else ""
         bodies.append((route, engine.in_page_anchors(
@@ -446,7 +588,8 @@ def build():
         json.dumps({**stats, "chapter_titles": [t for t, _ in plan]}, indent=2), encoding="utf-8")
 
     print(f"built {len(flat)} sections in {len(plan)} units")
-    print(f"  {words_total:,} words | {code_total} code blocks | {diagram_total} diagrams")
+    print(f"  {words_total:,} words | {code_total} code blocks | {diagram_total} diagrams"
+          f" | {fig_count} slide figures")
     print(f"  html      -> {SITE}")
     print(f"  markdown  -> {MD_OUT}")
     print(f"  one file  -> {SINGLE} ({SINGLE.stat().st_size / 1048576:.2f} MB)")

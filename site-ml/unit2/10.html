@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VC Dimension &middot; Machine Learning</title>
+<title>Bias–Variance Tradeoff &middot; Machine Learning</title>
 <script>/* set the theme before the first paint, or every page flashes light */
 (function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
 document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
@@ -13,33 +13,66 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 </head>
 <body class="">
 <button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a class="active" href="../unit2/10.html">VC Dimension</a></li><li><a href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
-<div class="paper"><div class="topbar"><a href="../unit2/9.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/11.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">VC Dimension</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>VC Dimension</h1><p class="rule">-----</p></header><h2>VC Dimension (Vapnik–Chervonenkis Dimension) <a class="anchor" href="#vc-dimension-vapnikchervonenkis-dimension" id="vc-dimension-vapnikchervonenkis-dimension">#</a></h2>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Classifiers and Decision Regions</a></li><li><a href="../unit1/9.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/10.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/11.html">Modeling</a></li><li><a href="../unit1/12.html">Regression</a></li><li><a href="../unit1/13.html">Discriminant Functions</a></li><li><a href="../unit1/14.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/15.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Regression</a></li><li><a href="../unit2/2.html">Cost Function</a></li><li><a href="../unit2/3.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/4.html">Logistic Regression</a></li><li><a href="../unit2/5.html">Decision Tree</a></li><li><a href="../unit2/6.html">Random Forest</a></li><li><a href="../unit2/7.html">Neural Networks</a></li><li><a href="../unit2/8.html">Ensemble Learning</a></li><li><a href="../unit2/9.html">Evaluation Metrics and the Confusion Matrix</a></li><li><a class="active" href="../unit2/10.html">Bias–Variance Tradeoff</a></li><li><a href="../unit2/11.html">Regularization</a></li><li><a href="../unit2/12.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/13.html">Empirical Risk Minimization</a></li><li><a href="../unit2/14.html">Loss Functions</a></li><li><a href="../unit2/15.html">VC Dimension</a></li><li><a href="../unit2/16.html">Data Partitioning</a></li><li><a href="../unit2/17.html">Cross-Validation</a></li><li><a href="../unit2/18.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/19.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/20.html">Matrix Factorization</a></li><li><a href="../unit2/21.html">Matrix Completion</a></li><li><a href="../unit2/22.html">Generative Models</a></li><li><a href="../unit2/23.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">Machine Learning Security</a></li><li><a href="../unit3/8.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/9.html">Hierarchical Clustering</a></li><li><a href="../unit3/10.html">Dendrograms</a></li><li><a href="../unit3/11.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/12.html">Discriminant Functions</a></li><li><a href="../unit3/13.html">Hypothesis Space</a></li><li><a href="../unit3/14.html">VC Dimension</a></li><li><a href="../unit3/15.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit2/9.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/11.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">Bias–Variance Tradeoff</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>Bias–Variance Tradeoff</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#1-what-is-bias-the-underfitter">1. What is Bias? (the &quot;underfitter&quot;)</a></li><li class="lvl2"><a href="#2-what-is-variance-the-overfitter">2. What is Variance? (the &quot;overfitter&quot;)</a></li><li class="lvl2"><a href="#the-tradeoff-curve">The tradeoff curve</a></li><li class="lvl2"><a href="#why-do-we-need-to-balance-them">Why do we need to &quot;balance&quot; them?</a></li><li class="lvl2"><a href="#the-golf-pro-analogy">The golf pro analogy</a></li><li class="lvl2"><a href="#the-bridge-to-regularization">The bridge to regularization</a></li></ul></nav><p>Every time we train a model we are trying to minimise the <strong>Total Error</strong>, and that error decomposes into three parts:</p>
+<p>$$\text{Total Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}$$</p>
 <ul>
-<li>VC dimension measures the capacity (complexity) of a hypothesis space — how well a model can fit various patterns.</li>
-<li>It is the maximum number of points that can be shattered (i.e., classified correctly in all possible ways) by the hypothesis class.</li>
+<li><strong>Bias²</strong> — reducible. Error from approximating a complex real problem with a much simpler model.</li>
+<li><strong>Variance</strong> — reducible. Error from sensitivity to small fluctuations in the training set.</li>
+<li><strong>Irreducible error</strong> — noise inherent in the problem itself, which no model can remove. It is why the total-error curve never touches zero.</li>
 </ul>
-<p>Examples:</p>
+<p>Bias is squared because bias can be positive or negative; squaring measures the magnitude of the deviation from the truth.</p>
+<h2>1. What is Bias? (the "underfitter") <a class="anchor" href="#1-what-is-bias-the-underfitter" id="1-what-is-bias-the-underfitter">#</a></h2>
+<p>Bias is the error introduced by approximating a real-life problem (which is usually complicated) with a much simpler model.</p>
 <ul>
-<li>VC Dimension of a linear classifier in 2D: 3</li>
-<li>VC Dimension of a decision stump (1-level decision tree): 1</li>
-<li>
-<p>VC Dimension of a k-nearest neighbor (if k=1): infinite</p>
-</li>
-<li>
-<p>The Vapnik-Chervonenkis (VC) dimension is a measure of the capacity of a hypothesis set to fit different data sets.</p>
-</li>
-<li>It was introduced by Vladimir Vapnik and Alexey Chervonenkis in the 1970s and has become a fundamental concept in statistical learning theory.</li>
-<li>The VC dimension is a measure of the complexity of a model, which can help us understand how well it can fit different data sets.</li>
-<li>The VC dimension of a hypothesis set H is the largest number of points that can be shattered by H.</li>
-<li>A hypothesis set H shatters a set of points S if, for every possible labeling of the points in S, there exists a hypothesis in H that correctly classifies the points</li>
+<li><strong>The problem:</strong> the model makes too many assumptions. It is "prejudiced" about what the data should look like.</li>
+<li><strong>Result: underfitting.</strong> No matter how much data you give it, it just cannot learn the pattern.</li>
+<li><strong>Visual:</strong> a straight line trying to fit a curved U-shaped dataset. It is simply too simple to get it right.</li>
 </ul>
-<h2>Why is it important? <a class="anchor" href="#why-is-it-important" id="why-is-it-important">#</a></h2>
+<p>Plot a linear fit against U-shaped (quadratic) data and the failure is systematic, not random: the line sits below the points at both edges and above them in the middle. Adding more data does not help, because the <em>architecture</em> is what is limiting. High bias, low variance — consistently wrong.</p>
+<h2>2. What is Variance? (the "overfitter") <a class="anchor" href="#2-what-is-variance-the-overfitter" id="2-what-is-variance-the-overfitter">#</a></h2>
+<p>Variance is the model's sensitivity to small fluctuations in the training set.</p>
+<ol>
+<li><strong>The problem:</strong> the model learns the "noise" in the data rather than just the signal. It follows every single data point like a hyper-active puppy.</li>
+<li><strong>Result: overfitting.</strong> The model performs amazingly on training data but fails miserably on new, unseen data.</li>
+<li><strong>Visual:</strong> a wiggly, complex line that passes through every single point on your graph but looks like a mess.</li>
+</ol>
+<p>A high-degree polynomial $y = w_0 + w_1x + \dots + w_nx^n$ on noisy data produces exactly that: many inflection points, sharp turns to reach each individual point, and a shape that would change drastically if one point moved. Low bias, high variance.</p>
+<h2>The tradeoff curve <a class="anchor" href="#the-tradeoff-curve" id="the-tradeoff-curve">#</a></h2>
+<pre class="mermaid">xychart-beta
+  title &quot;Error against model complexity&quot;
+  x-axis &quot;Model complexity (simple to complex)&quot; [1,2,3,4,5,6,7,8]
+  y-axis &quot;Error&quot; 0 --&gt; 10
+  line [9,5.5,3.5,2.2,1.5,1,0.7,0.5]
+  line [0.3,0.6,1,1.6,2.6,4,6,8.5]
+  line [9.3,6.1,4.5,3.8,4.1,5,6.7,9]</pre>
+<p>Three curves, in the order plotted: <strong>Bias²</strong> falls monotonically as the model grows more flexible; <strong>Variance</strong> rises monotonically for the same reason; <strong>Total Error</strong> is their sum and therefore U-shaped. Its minimum is the <strong>optimal model complexity</strong> — the "sweet spot". To the left of it the model underfits; to the right it overfits.</p>
+<h2>Why do we need to "balance" them? <a class="anchor" href="#why-do-we-need-to-balance-them" id="why-do-we-need-to-balance-them">#</a></h2>
+<p>In a perfect world we want <strong>low bias</strong> and <strong>low variance</strong>. In reality there is a tug-of-war:</p>
 <ul>
-<li>Helps understand underfitting vs overfitting</li>
-<li>A model with high VC dimension can overfit.</li>
-<li>A balance is needed between model complexity and generalization</li>
-</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit2/9.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Loss Functions</span></a><a class="next" href="../unit2/11.html"><span><em>Next</em>Data Partitioning</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+<li>As you make a model more <strong>complex</strong> (to reduce bias), it starts to pick up noise, and <strong>variance</strong> increases.</li>
+<li>As you make a model <strong>simpler</strong> (to reduce variance), it loses its ability to learn, and <strong>bias</strong> increases.</li>
+</ul>
+<p><strong>The sweet spot:</strong> the point where the sum of Bias² and Variance is at its lowest — the best model complexity.</p>
+<h2>The golf pro analogy <a class="anchor" href="#the-golf-pro-analogy" id="the-golf-pro-analogy">#</a></h2>
+<p>Imagine a golfer taking several practice shots toward a hole. The hole represents the <strong>true relationship</strong> in your data, the balls are the model's predictions.</p>
+<ul>
+<li><strong>Bias</strong> is the distance between the centre of your ball cluster and the hole.</li>
+<li><strong>Variance</strong> is the "spread", how scattered the balls are from each other.</li>
+</ul>
+<p>The four scenarios on the green:</p>
+<ol>
+<li><strong>Low bias / low variance (the Pro):</strong> all balls land in or right next to the hole — accurate and consistent. The ideal.</li>
+<li><strong>Low bias / high variance (the Wild Hitter):</strong> balls scattered all over the green but centred on the hole. Right on average, wildly inconsistent. <strong>Overfitting.</strong></li>
+<li><strong>High bias / low variance (the Consistent Miss):</strong> a tight cluster, twenty feet left of the hole. Consistent, systematically wrong. <strong>Underfitting.</strong></li>
+<li><strong>High bias / high variance (the Amateur):</strong> scattered <em>and</em> nowhere near the hole. The worst case.</li>
+</ol>
+<p>The same four states are often drawn as bullseye targets: tight-and-off-centre, tight-and-centred, spread-and-centred, spread-and-off-centre.</p>
+<h2>The bridge to regularization <a class="anchor" href="#the-bridge-to-regularization" id="the-bridge-to-regularization">#</a></h2>
+<p>When we find ourselves with <strong>high variance (overfitting)</strong>, our model is being too "flexible" — trying too hard to please every data point in the training set.</p>
+<p>This is exactly where <strong>regularization (L1 and L2)</strong> comes in. Regularization acts like a "penalty" or a "leash" that prevents the model from becoming too complex. It forces the model to stay simpler, effectively trading a tiny bit of bias to significantly reduce the variance.</p>
+<p>Mathematically, overfitting shows up as <strong>exceptionally large coefficients</strong> $W$: to produce the sharp wiggles needed to pass through every noisy point, the weights must blow up. So the fix is to penalise their size:</p>
+<p>$$L = \text{Residual Sum of Squares (RSS)} + \text{Penalty}$$</p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit2/9.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Evaluation Metrics and the Confusion Matrix</span></a><a class="next" href="../unit2/11.html"><span><em>Next</em>Regularization</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
 <div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
 <div class="palette" hidden data-base="../" data-v="9f75a64a">
   <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
@@ -117,9 +150,69 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 const mtheme = () => dark() ? 'dark' : 'neutral';
-mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+// Diagrams are laid out to fit the column (useMaxWidth), so nothing is ever clipped or
+// needs sideways scrolling; a click opens the same diagram in a full-screen overlay
+// where it is scaled once to fit the viewport -- no panning, no zoom controls.
+// Mermaid's own light/dark themes, unmodified -- they are known-good, and overriding the
+// palette by hand only produced black-on-black. Layout defaults are left alone too.
+const mconf = () => ({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  flowchart: { curve: 'basis', useMaxWidth: true } });
+mermaid.initialize(mconf());
 const paper = () => document.querySelector('.paper') || document.body;
+
+// ---- full-screen diagram viewer -------------------------------------------------------
+function lightbox() {
+  let el = document.querySelector('.figbox');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'figbox';
+  el.hidden = true;
+  el.innerHTML = '<button class="figbox-exit" type="button">Exit</button>'
+    + '<div class="figbox-stage"></div>';
+  el.addEventListener('click', e => {
+    if (e.target === el || e.target.closest('.figbox-exit')) closeFig();
+  });
+  document.body.appendChild(el);
+  return el;
+}
+// The diagram is MOVED into the overlay and moved back on close -- never cloned. Mermaid
+// scopes its CSS and its arrowhead markers to the svg's own id, so a clone (or a copy with
+// the id stripped) loses every fill and every marker and renders as black blocks.
+let held = null;                       // { svg, home, css } while the overlay is open
+function closeFig() {
+  const el = document.querySelector('.figbox');
+  if (!el) return;
+  if (held) {
+    held.svg.setAttribute('style', held.css);
+    held.home.appendChild(held.svg);
+    held = null;
+  }
+  el.hidden = true;
+  document.documentElement.classList.remove('figbox-open');
+}
+function openFig(pre) {
+  const svg = pre.querySelector('svg, img');
+  if (!svg || held) return;
+  const el = lightbox();
+  const stage = el.querySelector('.figbox-stage');
+  held = { svg: svg, home: pre, css: svg.getAttribute('style') || '' };
+  stage.appendChild(svg);
+  el.hidden = false;
+  document.documentElement.classList.add('figbox-open');
+  // one fit-scale so the whole figure sits inside the stage: no scrollbars, no panning
+  svg.style.maxWidth = 'none';
+  svg.style.maxHeight = 'none';
+  svg.style.width = 'auto';
+  svg.style.height = 'auto';
+  const box = svg.getBoundingClientRect();
+  const room = stage.getBoundingClientRect();
+  if (box.width && box.height) {
+    const k = Math.min(room.width / box.width, room.height / box.height, 2.4);
+    svg.style.transformOrigin = 'center center';
+    svg.style.transform = 'scale(' + k.toFixed(4) + ')';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFig(); });
 function math(el) {
   if (!window.renderMathInElement) return;
   try { renderMathInElement(el, { delimiters: [
@@ -135,20 +228,35 @@ async function diagrams(el) {
   nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
   if (!nodes.length) return;
   try { await mermaid.run({ nodes }); } catch (e) {}
-  nodes.forEach(n => n.dataset.done = '1');
+  nodes.forEach(n => {
+    n.dataset.done = '1';
+    n.title = 'Click to view full screen';
+    if (!n.dataset.zoom) {
+      n.dataset.zoom = '1';
+      n.addEventListener('click', () => openFig(n));
+    }
+  });
+}
+function handFigures(el) {
+  el.querySelectorAll('.figsvg:not([data-zoom]),.figimg:not([data-zoom])').forEach(f => {
+    f.dataset.zoom = '1';
+    f.addEventListener('click', () => openFig(f));
+  });
 }
 let raf = 0;
 function renderAll() {
   cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+  raf = requestAnimationFrame(() => {
+    const el = paper(); diagrams(el); handFigures(el); math(el);
+  });
 }
 if (document.readyState !== 'loading') renderAll();
 window.addEventListener('load', renderAll);
 const p = document.querySelector('.paper');
 if (p) new MutationObserver(renderAll).observe(p, { childList: true });
 new MutationObserver(() => {
-  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  closeFig();                          // a theme switch re-renders every diagram
+  mermaid.initialize(mconf());
   paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
     n.removeAttribute('data-done'); n.removeAttribute('data-processed');
     n.innerHTML = ''; n.textContent = n.dataset.src || '';

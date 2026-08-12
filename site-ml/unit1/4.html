@@ -13,17 +13,87 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 </head>
 <body class="">
 <button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a class="active" href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a href="../unit2/10.html">VC Dimension</a></li><li><a href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
-<div class="paper"><div class="topbar"><a href="../unit1/3.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit1/5.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit I — Introduction to Machine Learning</span><b>/</b><span class="here">The Machine Learning Pipeline</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT I — INTRODUCTION TO MACHINE LEARNING</p><h1>The Machine Learning Pipeline</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#step-1-problem-definition">Step 1: Problem Definition</a></li><li class="lvl2"><a href="#step-2-data-collection">Step 2: Data Collection</a></li><li class="lvl2"><a href="#step-3-data-cleaning-and-preprocessing">Step 3: Data Cleaning and Preprocessing</a></li><li class="lvl2"><a href="#step-4-exploratory-data-analysis-eda">Step 4: Exploratory Data Analysis (EDA)</a></li><li class="lvl2"><a href="#step-5-feature-engineering-and-selection">Step 5: Feature Engineering and Selection</a></li><li class="lvl2"><a href="#step-6-model-selection">Step 6: Model Selection</a></li><li class="lvl2"><a href="#step-7-model-training">Step 7: Model Training</a></li><li class="lvl2"><a href="#step-8-model-evaluation-and-tuning">Step 8: Model Evaluation and Tuning</a></li><li class="lvl2"><a href="#step-9-model-deployment">Step 9: Model Deployment</a></li><li class="lvl2"><a href="#step-10-model-monitoring-and-maintenance">Step 10: Model Monitoring and Maintenance</a></li></ul></nav><pre class="mermaid">flowchart TD
-    A[&quot;Step 1: Problem Definition&quot;] --&gt; B[&quot;Step 2: Data Collection&quot;]
-    B --&gt; C[&quot;Step 3: Data Cleaning and Preprocessing&quot;]
-    C --&gt; D[&quot;Step 4: Exploratory Data Analysis (EDA)&quot;]
-    D --&gt; E[&quot;Step 5: Feature Engineering and Selection&quot;]
-    E --&gt; F[&quot;Step 6: Model Selection&quot;]
-    F --&gt; G[&quot;Step 7: Model Training&quot;]
-    G --&gt; H[&quot;Step 8: Model Evaluation and Tuning&quot;]
-    H --&gt; I[&quot;Step 9: Model Deployment&quot;]
-    I --&gt; J[&quot;Step 10: Model Monitoring and Maintenance&quot;]</pre>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a class="active" href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Classifiers and Decision Regions</a></li><li><a href="../unit1/9.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/10.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/11.html">Modeling</a></li><li><a href="../unit1/12.html">Regression</a></li><li><a href="../unit1/13.html">Discriminant Functions</a></li><li><a href="../unit1/14.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/15.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Regression</a></li><li><a href="../unit2/2.html">Cost Function</a></li><li><a href="../unit2/3.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/4.html">Logistic Regression</a></li><li><a href="../unit2/5.html">Decision Tree</a></li><li><a href="../unit2/6.html">Random Forest</a></li><li><a href="../unit2/7.html">Neural Networks</a></li><li><a href="../unit2/8.html">Ensemble Learning</a></li><li><a href="../unit2/9.html">Evaluation Metrics and the Confusion Matrix</a></li><li><a href="../unit2/10.html">Bias–Variance Tradeoff</a></li><li><a href="../unit2/11.html">Regularization</a></li><li><a href="../unit2/12.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/13.html">Empirical Risk Minimization</a></li><li><a href="../unit2/14.html">Loss Functions</a></li><li><a href="../unit2/15.html">VC Dimension</a></li><li><a href="../unit2/16.html">Data Partitioning</a></li><li><a href="../unit2/17.html">Cross-Validation</a></li><li><a href="../unit2/18.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/19.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/20.html">Matrix Factorization</a></li><li><a href="../unit2/21.html">Matrix Completion</a></li><li><a href="../unit2/22.html">Generative Models</a></li><li><a href="../unit2/23.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">Machine Learning Security</a></li><li><a href="../unit3/8.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/9.html">Hierarchical Clustering</a></li><li><a href="../unit3/10.html">Dendrograms</a></li><li><a href="../unit3/11.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/12.html">Discriminant Functions</a></li><li><a href="../unit3/13.html">Hypothesis Space</a></li><li><a href="../unit3/14.html">VC Dimension</a></li><li><a href="../unit3/15.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit1/3.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit1/5.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit I — Introduction to Machine Learning</span><b>/</b><span class="here">The Machine Learning Pipeline</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT I — INTRODUCTION TO MACHINE LEARNING</p><h1>The Machine Learning Pipeline</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#the-training-loop-inside-the-pipeline">The training loop inside the pipeline</a></li><li class="lvl2"><a href="#step-1-problem-definition">Step 1: Problem Definition</a></li><li class="lvl2"><a href="#step-2-data-collection">Step 2: Data Collection</a></li><li class="lvl2"><a href="#step-3-data-cleaning-and-preprocessing">Step 3: Data Cleaning and Preprocessing</a></li><li class="lvl2"><a href="#step-4-exploratory-data-analysis-eda">Step 4: Exploratory Data Analysis (EDA)</a></li><li class="lvl2"><a href="#step-5-feature-engineering-and-selection">Step 5: Feature Engineering and Selection</a></li><li class="lvl3"><a href="#feature-selection-methods-compared">Feature selection methods compared</a></li><li class="lvl2"><a href="#step-6-model-selection">Step 6: Model Selection</a></li><li class="lvl2"><a href="#step-7-model-training">Step 7: Model Training</a></li><li class="lvl2"><a href="#step-8-model-evaluation-and-tuning">Step 8: Model Evaluation and Tuning</a></li><li class="lvl2"><a href="#step-9-model-deployment">Step 9: Model Deployment</a></li><li class="lvl2"><a href="#step-10-model-monitoring-and-maintenance">Step 10: Model Monitoring and Maintenance</a></li></ul></nav><div class="figsvg" title="Click to view full screen">
+<svg viewBox="0 0 720 660" role="img" aria-label="The machine learning lifecycle as a ten-step cycle">
+  <circle class="cyc-ring" cx="360.0" cy="330.0" r="190.0"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(418.7 149.3) rotate(18.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(513.7 218.3) rotate(54.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(550.0 330.0) rotate(90.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(513.7 441.7) rotate(126.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(418.7 510.7) rotate(162.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(301.3 510.7) rotate(198.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(206.3 441.7) rotate(234.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(170.0 330.0) rotate(270.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(206.3 218.3) rotate(306.0)"/>
+  <path class="cyc-tip" d="M -6 -5 L 0 0 L -6 5" transform="translate(301.3 149.3) rotate(342.0)"/>
+  <g class="cyc-node">
+    <circle cx="360.0" cy="140.0" r="26.0"/>
+    <text class="cyc-num" x="360.0" y="145.0" text-anchor="middle">01</text>
+    <text class="cyc-lab" x="360.0" y="90.0" text-anchor="middle"><tspan x="360.0">Problem</tspan><tspan x="360.0" dy="15">definition</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="471.7" cy="176.3" r="26.0"/>
+    <text class="cyc-num" x="471.7" y="181.3" text-anchor="middle">02</text>
+    <text class="cyc-lab" x="498.7" y="135.1" text-anchor="start"><tspan x="498.7">Data</tspan><tspan x="498.7" dy="15">collection</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="540.7" cy="271.3" r="26.0"/>
+    <text class="cyc-num" x="540.7" y="276.3" text-anchor="middle">03</text>
+    <text class="cyc-lab" x="584.4" y="257.1" text-anchor="start"><tspan x="584.4">Cleaning &</tspan><tspan x="584.4" dy="15">preprocessing</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="540.7" cy="388.7" r="26.0"/>
+    <text class="cyc-num" x="540.7" y="393.7" text-anchor="middle">04</text>
+    <text class="cyc-lab" x="584.4" y="402.9" text-anchor="start"><tspan x="584.4">Exploratory</tspan><tspan x="584.4" dy="15">data analysis</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="471.7" cy="483.7" r="26.0"/>
+    <text class="cyc-num" x="471.7" y="488.7" text-anchor="middle">05</text>
+    <text class="cyc-lab" x="498.7" y="536.9" text-anchor="start"><tspan x="498.7">Feature</tspan><tspan x="498.7" dy="15">engineering</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="360.0" cy="520.0" r="26.0"/>
+    <text class="cyc-num" x="360.0" y="525.0" text-anchor="middle">06</text>
+    <text class="cyc-lab" x="360.0" y="582.0" text-anchor="middle"><tspan x="360.0">Model</tspan><tspan x="360.0" dy="15">selection</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="248.3" cy="483.7" r="26.0"/>
+    <text class="cyc-num" x="248.3" y="488.7" text-anchor="middle">07</text>
+    <text class="cyc-lab" x="221.3" y="536.9" text-anchor="end"><tspan x="221.3">Model</tspan><tspan x="221.3" dy="15">training</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="179.3" cy="388.7" r="26.0"/>
+    <text class="cyc-num" x="179.3" y="393.7" text-anchor="middle">08</text>
+    <text class="cyc-lab" x="135.6" y="402.9" text-anchor="end"><tspan x="135.6">Evaluation</tspan><tspan x="135.6" dy="15">& tuning</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="179.3" cy="271.3" r="26.0"/>
+    <text class="cyc-num" x="179.3" y="276.3" text-anchor="middle">09</text>
+    <text class="cyc-lab" x="135.6" y="257.1" text-anchor="end"><tspan x="135.6">Model</tspan><tspan x="135.6" dy="15">deployment</tspan></text>
+  </g>
+  <g class="cyc-node">
+    <circle cx="248.3" cy="176.3" r="26.0"/>
+    <text class="cyc-num" x="248.3" y="181.3" text-anchor="middle">10</text>
+    <text class="cyc-lab" x="221.3" y="135.1" text-anchor="end"><tspan x="221.3">Monitoring &</tspan><tspan x="221.3" dy="15">maintenance</tspan></text>
+  </g>
+  <text class="cyc-hub" x="360.0" y="324.0" text-anchor="middle">Machine Learning</text>
+  <text class="cyc-hub" x="360.0" y="348.0" text-anchor="middle">Lifecycle</text>
+</svg>
+</div>
+
+<p>The dotted return arrow is the reason this is called a <strong>lifecycle</strong> rather than a checklist: monitoring turns up drift, drift triggers a new problem definition, and the cycle starts again.</p>
+<p>A shorter seven-stage form of the same pipeline is also common — Data Collection → Feature Engineering → Model Training → Evaluation → Deployment → Monitoring → Maintenance.</p>
+<h2>The training loop inside the pipeline <a class="anchor" href="#the-training-loop-inside-the-pipeline" id="the-training-loop-inside-the-pipeline">#</a></h2>
+<pre class="mermaid">flowchart LR
+    P[&quot;Problem&lt;br/&gt;statement&quot;] --&gt; DC[&quot;Data&lt;br/&gt;collection&quot;] --&gt; DP[&quot;Data&lt;br/&gt;preprocessing&quot;] --&gt; CM[&quot;Choose&lt;br/&gt;model&quot;]
+    CM --&gt; TR[&quot;Train&lt;br/&gt;model&quot;]
+    TR --&gt; CV[&quot;Cross&lt;br/&gt;validation&quot;]
+    CV --&gt; Q{&quot;Goal&lt;br/&gt;met?&quot;}
+    Q -- &quot;No&quot; --&gt; PT[&quot;Tune&lt;br/&gt;parameters&quot;]
+    PT --&gt; TR
+    Q -- &quot;Yes&quot; --&gt; DEP[&quot;Deployment&quot;]</pre>
+<p>Everything inside the loop repeats: train, cross-validate, check the goal, tune hyperparameters, train again. Only when the performance target is met does the model leave for deployment.</p>
 <h2>Step 1: Problem Definition <a class="anchor" href="#step-1-problem-definition" id="step-1-problem-definition">#</a></h2>
 <p>The first step is clearly defining the problem that needs to be solved. A well-framed problem provides the foundation to determine the project goals, expected outcomes and the type of solution required.</p>
 <ul>
@@ -31,6 +101,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Define project objectives, scope and success criteria</li>
 <li>Ensure clarity in desired outcomes</li>
 </ul>
+<p>This step decides what the model actually predicts — "will this customer churn?" (classification) is a different project from "how much will this customer spend?" (regression). It also bridges stakeholders who want revenue and engineers who need a loss function to minimise. A badly framed problem wastes the entire budget downstream because there is no agreed measure of success.</p>
 <h2>Step 2: Data Collection <a class="anchor" href="#step-2-data-collection" id="step-2-data-collection">#</a></h2>
 <p>Data Collection phase involves systematic collection of datasets that can be used as raw data to train model. The quality and variety of data directly affect the model's performance.</p>
 <p>Here are some basic features of Data Collection:</p>
@@ -40,6 +111,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Quantity: Gather sufficient data volume to train a robust model.</li>
 <li>Diversity: Include diverse datasets to capture a broad range of scenarios and patterns.</li>
 </ul>
+<p>This is where "garbage in, garbage out" is decided. Relevance means the features actually influence the target. Quality means accurate <em>and</em> ethically obtained. Quantity means enough samples that the model learns patterns instead of coincidences. Diversity means every real-world situation the model will meet is represented, which is the first defence against bias.</p>
 <h2>Step 3: Data Cleaning and Preprocessing <a class="anchor" href="#step-3-data-cleaning-and-preprocessing" id="step-3-data-cleaning-and-preprocessing">#</a></h2>
 <p>Raw data is often messy and unstructured and if we use this data directly to train then it can lead to poor accuracy.</p>
 <p>We need to do data cleaning and preprocessing which often involves:</p>
@@ -48,6 +120,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Data Preprocessing: Standardize formats, scale values and encode categorical variables for consistency.</li>
 <li>Data Quality: Ensure that the data is well-organized and prepared for meaningful analysis.</li>
 </ul>
+<p>Typical defects: a blank age field (missing value), a height recorded as 10 feet (outlier from a typo), "USA" in one row and "United States" in the next (inconsistency). Scaling stops one large-magnitude feature from dominating; encoding turns "Red"/"Blue" into numbers the algorithm can compute with.</p>
 <h2>Step 4: Exploratory Data Analysis (EDA) <a class="anchor" href="#step-4-exploratory-data-analysis-eda" id="step-4-exploratory-data-analysis-eda">#</a></h2>
 <p>To find patterns and characteristics hidden in the data Exploratory Data Analysis (EDA) is used to uncover insights and understand the dataset's structure. During EDA patterns, trends and insights are provided which may not be visible by naked eyes. This valuable insight can be used to make informed decision.</p>
 <p>Here are the basic features of Exploratory Data Analysis:</p>
@@ -57,6 +130,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Insights: Gain valuable insights for informed decisions making in later stages.</li>
 <li>Decision Making: Use EDA for feature engineering and model selection</li>
 </ul>
+<p>EDA leans on <strong>visualisation</strong> (histograms, scatter plots, box plots) and <strong>descriptive statistics</strong> (mean, median, standard deviation, correlation matrices). It is not decoration: what you see here dictates which features you build next and which algorithm suits the data's shape.</p>
 <h2>Step 5: Feature Engineering and Selection <a class="anchor" href="#step-5-feature-engineering-and-selection" id="step-5-feature-engineering-and-selection">#</a></h2>
 <p>Feature engineering and selection is a transformative process that involve selecting only relevant features to enhance model efficiency and prediction while reducing complexity.</p>
 <p>Here are the basic features of Feature Engineering and Selection:</p>
@@ -102,6 +176,71 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 </tr>
 </tbody>
 </table>
+<p>Selection is <strong>subtractive</strong> — drop 98 of 100 columns and keep Age and Salary. Engineering is <strong>additive/transformative</strong> — compute $\text{BMI} = \text{weight} / \text{height}^2$, a quantity that was not in the raw data at all. Selection is the primary tool against overfitting and the curse of dimensionality; engineering is usually the fastest route to higher accuracy.</p>
+<h3>Feature selection methods compared <a class="anchor" href="#feature-selection-methods-compared" id="feature-selection-methods-compared">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Point of comparison</th>
+<th>Filter</th>
+<th>Wrapper</th>
+<th>Embedded</th>
+<th>Hybrid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How it works</td>
+<td>Statistical scores computed before any model is trained</td>
+<td>Trains a model repeatedly on different subsets and keeps the best</td>
+<td>The model selects features while it trains</td>
+<td>Filter out weak features first, then refine with wrapper/embedded</td>
+</tr>
+<tr>
+<td>Math intuition</td>
+<td>correlation $r$, chi-square $\chi^2$, ANOVA F, mutual information</td>
+<td>accuracy, F1, RMSE over the subset space</td>
+<td>L1 penalty driving coefficients to 0; Gini / information gain</td>
+<td>statistical score + model-based selection</td>
+</tr>
+<tr>
+<td>Model dependency</td>
+<td>Independent of the model</td>
+<td>Strongly model-dependent</td>
+<td>Tied to the specific algorithm</td>
+<td>Partly independent, partly dependent</td>
+</tr>
+<tr>
+<td>Captures interactions</td>
+<td>No</td>
+<td>Yes</td>
+<td>Sometimes (trees yes, Lasso partly)</td>
+<td>Yes, after the filter stage</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Fastest — no training</td>
+<td>Slowest — repeated training</td>
+<td>Medium</td>
+<td>Medium to slow</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>Moderate — may miss interactions</td>
+<td>Highest — considers combinations</td>
+<td>High and reliable in practice</td>
+<td>Very high</td>
+</tr>
+<tr>
+<td>Best used for</td>
+<td>High-dimensional data, initial cleaning</td>
+<td>Small/medium data where accuracy dominates</td>
+<td>Tree models, regularised linear models, production</td>
+<td>Large noisy data needing speed and accuracy</td>
+</tr>
+</tbody>
+</table>
+<p>Filter methods look only at intrinsic properties of the data, which makes them fast but blind to features that are useless alone and powerful together. Wrapper methods treat selection as a search problem and pay for it in compute, with a real risk of overfitting to one dataset. Embedded methods get selection for free: a decision tree naturally splits on the best feature, and Lasso (L1) drives useless coefficients to exactly zero. Hybrid methods drop the obvious junk with a filter and then spend wrapper effort only on what survives.</p>
 <h2>Step 6: Model Selection <a class="anchor" href="#step-6-model-selection" id="step-6-model-selection">#</a></h2>
 <p>For a good machine learning model, model selection is a very important part as we need to find model that aligns with our defined problem, nature of the data, complexity of problem and the desired outcomes.</p>
 <p>Here are the basic features of Model Selection:</p>
@@ -110,6 +249,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Decision Factors: Evaluate factors like performance, interpretability and scalability when selecting a model.</li>
 <li>Experimentation: Experiment with different models to find the best fit for the problem.</li>
 </ul>
+<p>No single algorithm wins everywhere — this is the "No Free Lunch" theorem. The three decision factors pull against each other: <strong>performance</strong> (how accurate), <strong>interpretability</strong> (can a human explain a decision, which is mandatory in medicine and law) and <strong>scalability</strong> (millions of rows, millisecond responses). Because the trade-off is empirical, model selection is inherently experimental.</p>
 <h2>Step 7: Model Training <a class="anchor" href="#step-7-model-training" id="step-7-model-training">#</a></h2>
 <p>With the selected model the machine learning lifecycle moves to model training process.</p>
 <p>This process involves exposing model to historical data allowing it to learn patterns, relationships and dependencies within the dataset.</p>
@@ -119,8 +259,9 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Optimization: Fine-tune model to optimize its predictive capabilities.</li>
 <li>Validation: Rigorously train model to ensure accuracy to new unseen data.</li>
 </ul>
+<p>One training step is: predict → measure the error → nudge the parameters to reduce it. Repeat for many passes over the data (<strong>epochs</strong>), typically driven by <strong>gradient descent</strong>. The target is never a perfect score on the training set but low error on data the model has never seen.</p>
 <h2>Step 8: Model Evaluation and Tuning <a class="anchor" href="#step-8-model-evaluation-and-tuning" id="step-8-model-evaluation-and-tuning">#</a></h2>
-<p>Model evaluation involves rigorous testing against validation or test datasets to test accuracy of model on new unseen data. It provides insights into model's strengths and weaknesses. If the model fails to acheive desired performance levels we may need to tune model again and adjust its hyperparameters to enhance predictive accuracy.</p>
+<p>Model evaluation involves rigorous testing against validation or test datasets to test accuracy of model on new unseen data. It provides insights into model's strengths and weaknesses. If the model fails to achieve desired performance levels we may need to tune model again and adjust its hyperparameters to enhance predictive accuracy.</p>
 <p>Here are the basic features of Model Evaluation and Tuning:</p>
 <ul>
 <li>Evaluation Metrics: Use metrics like accuracy, precision, recall and F1 score to evaluate model performance.</li>
@@ -128,6 +269,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Iterative Improvement: Initiate model tuning to adjust hyperparameters and enhance predictive accuracy.</li>
 <li>Model Robustness: Iterative tuning to achieve desired levels of model robustness and reliability.</li>
 </ul>
+<p><strong>Accuracy</strong> is the share of correct predictions; <strong>precision</strong>, <strong>recall</strong> and <strong>F1</strong> matter when the classes are imbalanced, such as a rare disease. Tuning adjusts <strong>hyperparameters</strong> — the settings that are <em>not</em> learned from data, such as the learning rate or a tree's maximum depth — as opposed to <strong>parameters</strong>, which are learned.</p>
 <h2>Step 9: Model Deployment <a class="anchor" href="#step-9-model-deployment" id="step-9-model-deployment">#</a></h2>
 <p>Now model is ready for deployment for real-world application. It involves integrating the predictive model with existing systems allowing business to use this for informed decision-making.</p>
 <p>Here are the basic features of Model Deployment:</p>
@@ -137,6 +279,7 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Ensure deployment scalability and security</li>
 <li>Provide APIs or pipelines for production use</li>
 </ul>
+<p>A model in a notebook is worth nothing. Deployment wires it into the website, app or database so it receives live data automatically. <strong>Scalability</strong> keeps it standing under traffic spikes; <strong>security</strong> protects the model and the data flowing through it; an <strong>API</strong> lets other software call it, and a <strong>pipeline</strong> automates the flow from source to prediction to consumer.</p>
 <h2>Step 10: Model Monitoring and Maintenance <a class="anchor" href="#step-10-model-monitoring-and-maintenance" id="step-10-model-monitoring-and-maintenance">#</a></h2>
 <p>After Deployment models must be monitored to ensure they perform well over time. Regular tracking helps detect data drift, accuracy drops or changing patterns and retraining may be needed to keep the model reliable in real-world use.</p>
 <p>Here are the basic features of Model Monitoring and Maintenance:</p>
@@ -145,7 +288,13 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 <li>Detect data drift or concept drift</li>
 <li>Update and retrain the model when accuracy drops</li>
 <li>Maintain logs and alerts for real-time issues</li>
-</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit1/3.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Major Categories of ML Techniques</span></a><a class="next" href="../unit1/5.html"><span><em>Next</em>Data Preprocessing</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+</ul>
+<p>A model is trained on the past, and the world moves. A house-price model fitted in 2019 misprices 2024 houses.</p>
+<ul>
+<li><strong>Data drift</strong> — the statistical properties of the <em>inputs</em> change.</li>
+<li><strong>Concept drift</strong> — the <em>relationship</em> between inputs and target changes.</li>
+</ul>
+<p>The response is retraining on recent data, with logging and alerting so engineers hear about it before the users do.</p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit1/3.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Major Categories of ML Techniques</span></a><a class="next" href="../unit1/5.html"><span><em>Next</em>Data Preprocessing</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
 <div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
 <div class="palette" hidden data-base="../" data-v="9f75a64a">
   <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
@@ -223,9 +372,69 @@ window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();<
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 const mtheme = () => dark() ? 'dark' : 'neutral';
-mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+// Diagrams are laid out to fit the column (useMaxWidth), so nothing is ever clipped or
+// needs sideways scrolling; a click opens the same diagram in a full-screen overlay
+// where it is scaled once to fit the viewport -- no panning, no zoom controls.
+// Mermaid's own light/dark themes, unmodified -- they are known-good, and overriding the
+// palette by hand only produced black-on-black. Layout defaults are left alone too.
+const mconf = () => ({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  flowchart: { curve: 'basis', useMaxWidth: true } });
+mermaid.initialize(mconf());
 const paper = () => document.querySelector('.paper') || document.body;
+
+// ---- full-screen diagram viewer -------------------------------------------------------
+function lightbox() {
+  let el = document.querySelector('.figbox');
+  if (el) return el;
+  el = document.createElement('div');
+  el.className = 'figbox';
+  el.hidden = true;
+  el.innerHTML = '<button class="figbox-exit" type="button">Exit</button>'
+    + '<div class="figbox-stage"></div>';
+  el.addEventListener('click', e => {
+    if (e.target === el || e.target.closest('.figbox-exit')) closeFig();
+  });
+  document.body.appendChild(el);
+  return el;
+}
+// The diagram is MOVED into the overlay and moved back on close -- never cloned. Mermaid
+// scopes its CSS and its arrowhead markers to the svg's own id, so a clone (or a copy with
+// the id stripped) loses every fill and every marker and renders as black blocks.
+let held = null;                       // { svg, home, css } while the overlay is open
+function closeFig() {
+  const el = document.querySelector('.figbox');
+  if (!el) return;
+  if (held) {
+    held.svg.setAttribute('style', held.css);
+    held.home.appendChild(held.svg);
+    held = null;
+  }
+  el.hidden = true;
+  document.documentElement.classList.remove('figbox-open');
+}
+function openFig(pre) {
+  const svg = pre.querySelector('svg, img');
+  if (!svg || held) return;
+  const el = lightbox();
+  const stage = el.querySelector('.figbox-stage');
+  held = { svg: svg, home: pre, css: svg.getAttribute('style') || '' };
+  stage.appendChild(svg);
+  el.hidden = false;
+  document.documentElement.classList.add('figbox-open');
+  // one fit-scale so the whole figure sits inside the stage: no scrollbars, no panning
+  svg.style.maxWidth = 'none';
+  svg.style.maxHeight = 'none';
+  svg.style.width = 'auto';
+  svg.style.height = 'auto';
+  const box = svg.getBoundingClientRect();
+  const room = stage.getBoundingClientRect();
+  if (box.width && box.height) {
+    const k = Math.min(room.width / box.width, room.height / box.height, 2.4);
+    svg.style.transformOrigin = 'center center';
+    svg.style.transform = 'scale(' + k.toFixed(4) + ')';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFig(); });
 function math(el) {
   if (!window.renderMathInElement) return;
   try { renderMathInElement(el, { delimiters: [
@@ -241,20 +450,35 @@ async function diagrams(el) {
   nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
   if (!nodes.length) return;
   try { await mermaid.run({ nodes }); } catch (e) {}
-  nodes.forEach(n => n.dataset.done = '1');
+  nodes.forEach(n => {
+    n.dataset.done = '1';
+    n.title = 'Click to view full screen';
+    if (!n.dataset.zoom) {
+      n.dataset.zoom = '1';
+      n.addEventListener('click', () => openFig(n));
+    }
+  });
+}
+function handFigures(el) {
+  el.querySelectorAll('.figsvg:not([data-zoom]),.figimg:not([data-zoom])').forEach(f => {
+    f.dataset.zoom = '1';
+    f.addEventListener('click', () => openFig(f));
+  });
 }
 let raf = 0;
 function renderAll() {
   cancelAnimationFrame(raf);
-  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+  raf = requestAnimationFrame(() => {
+    const el = paper(); diagrams(el); handFigures(el); math(el);
+  });
 }
 if (document.readyState !== 'loading') renderAll();
 window.addEventListener('load', renderAll);
 const p = document.querySelector('.paper');
 if (p) new MutationObserver(renderAll).observe(p, { childList: true });
 new MutationObserver(() => {
-  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
-    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  closeFig();                          // a theme switch re-renders every diagram
+  mermaid.initialize(mconf());
   paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
     n.removeAttribute('data-done'); n.removeAttribute('data-processed');
     n.innerHTML = ''; n.textContent = n.dataset.src || '';
