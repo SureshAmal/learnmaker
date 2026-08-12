@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tutorial: Build file-based C# programs &middot; C# and .NET</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">C# / .NET</a><nav><section><h2>0. Setup and the .NET CLI</h2><ul><li><a href="../ch0/1.html">Introduction to .NET</a></li><li><a href="../ch0/2.html">What you can build with .NET</a></li><li><a href="../ch0/3.html">Get started with .NET</a></li><li><a href="../ch0/4.html">The .NET SDK</a></li><li><a href="../ch0/5.html">Releases, patches, and support</a></li><li><a href="../ch0/6.html">The dotnet command</a></li><li><a href="../ch0/7.html">dotnet new: create a project</a></li><li><a href="../ch0/8.html">dotnet build: compile</a></li><li><a href="../ch0/9.html">dotnet run: build and run</a></li><li><a href="../ch0/10.html">dotnet test: run tests</a></li><li><a href="../ch0/11.html">dotnet publish: ship it</a></li><li><a href="../ch0/12.html">dotnet package add: use a library</a></li><li><a href="../ch0/13.html">dotnet format: fix style</a></li><li><a href="../ch0/14.html">Global, tool-path, and local tools</a></li></ul></section><section><h2>1. A tour of C#</h2><ul><li><a href="../ch1/1.html">Tour of C#</a></li><li><a href="../ch1/2.html">What you can build</a></li><li><a href="../ch1/3.html">Hello world and text</a></li><li><a href="../ch1/4.html">Numbers in C#</a></li><li><a href="../ch1/5.html">Tuples and types</a></li><li><a href="../ch1/6.html">Branches and loops</a></li><li><a href="../ch1/7.html">List collections</a></li><li><a href="../ch1/8.html">Pattern matching</a></li><li><a href="../ch1/9.html">C# language strategy</a></li><li><a href="../ch1/10.html">Learn C# for Java developers</a></li><li><a href="../ch1/11.html">Learn C# for JavaScript developers</a></li><li><a href="../ch1/12.html">Learn C# for Python developers</a></li></ul></section><section><h2>2. Program structure and types</h2><ul><li><a href="../ch2/1.html">Overview</a></li><li><a href="../ch2/2.html">Namespaces and using directives</a></li><li><a href="../ch2/3.html">Preprocessor directives</a></li><li><a href="../ch2/4.html">Program organization</a></li><li><a href="../ch2/5.html">Top-level statements</a></li><li><a href="../ch2/6.html">Main method</a></li><li><a href="../ch2/7.html">Overview</a></li><li><a href="../ch2/8.html">Built-in types and literals</a></li><li><a href="../ch2/9.html">Classes</a></li><li><a href="../ch2/10.html">Structs</a></li><li><a href="../ch2/11.html">Records</a></li><li><a href="../ch2/12.html">Interfaces</a></li><li><a href="../ch2/13.html">Enumerations</a></li><li><a href="../ch2/14.html">Generics</a></li><li><a href="../ch2/15.html">Tuples and deconstruction</a></li><li><a href="../ch2/16.html">Type conversions, casting, and boxing</a></li><li><a href="../ch2/17.html">Lambda expressions, delegates, and events</a></li><li><a href="../ch2/18.html">Anonymous types</a></li></ul></section><section><h2>3. Values, nulls, and strings</h2><ul><li><a href="../ch3/1.html">Overview</a></li><li><a href="../ch3/2.html">Nullable value types</a></li><li><a href="../ch3/3.html">Nullable reference types</a></li><li><a href="../ch3/4.html">Null operators</a></li><li><a href="../ch3/5.html">Resolve nullable warnings</a></li><li><a href="../ch3/6.html">Overview</a></li><li><a href="../ch3/7.html">Raw string literals</a></li><li><a href="../ch3/8.html">String interpolation</a></li><li><a href="../ch3/9.html">nameof operator</a></li><li><a href="../ch3/10.html">Concatenate strings</a></li><li><a href="../ch3/11.html">Modify string contents</a></li><li><a href="../ch3/12.html">Compare strings</a></li><li><a href="../ch3/13.html">Search strings</a></li><li><a href="../ch3/14.html">Split strings into substrings</a></li><li><a href="../ch3/15.html">Use string interpolation</a></li></ul></section><section><h2>4. Expressions, statements, and control flow</h2><ul><li><a href="../ch4/1.html">Equality</a></li><li><a href="../ch4/2.html">Selection statements</a></li><li><a href="../ch4/3.html">Iteration statements</a></li><li><a href="../ch4/4.html">Collections</a></li><li><a href="../ch4/5.html">LINQ</a></li><li><a href="../ch4/6.html">Statements</a></li><li><a href="../ch4/7.html">Expression-bodied members</a></li><li><a href="../ch4/8.html">Equality comparisons</a></li><li><a href="../ch4/9.html">How to define value equality for a type</a></li><li><a href="../ch4/10.html">How to test for reference equality (identity)</a></li></ul></section><section><h2>5. Object-oriented C#</h2><ul><li><a href="../ch5/1.html">Classes, structs, and records</a></li><li><a href="../ch5/2.html">Objects</a></li><li><a href="../ch5/3.html">Inheritance</a></li><li><a href="../ch5/4.html">Polymorphism</a></li><li><a href="../ch5/5.html">Versioning with the Override and New Keywords</a></li><li><a href="../ch5/6.html">Knowing When to Use Override and New Keywords</a></li><li><a href="../ch5/7.html">How to override the ToString method</a></li><li><a href="../ch5/8.html">Members overview</a></li><li><a href="../ch5/9.html">Abstract and Sealed Classes and Class Members</a></li><li><a href="../ch5/10.html">Static Classes and Static Class Members</a></li><li><a href="../ch5/11.html">Access Modifiers</a></li><li><a href="../ch5/12.html">Fields</a></li><li><a href="../ch5/13.html">Constants</a></li><li><a href="../ch5/14.html">How to define abstract properties</a></li><li><a href="../ch5/15.html">How to define constants in C#</a></li><li><a href="../ch5/16.html">Properties overview</a></li><li><a href="../ch5/17.html">Using Properties</a></li><li><a href="../ch5/18.html">Interface Properties</a></li><li><a href="../ch5/19.html">Restricting Accessor Accessibility</a></li><li><a href="../ch5/20.html">How to declare and use read write properties</a></li><li><a href="../ch5/21.html">Automatically implemented properties</a></li><li><a href="../ch5/22.html">How to implement a lightweight class with automatically implemented properties</a></li><li><a href="../ch5/23.html">Explicit Interface Implementation</a></li><li><a href="../ch5/24.html">How to explicitly implement interface members</a></li><li><a href="../ch5/25.html">How to explicitly implement members of two interfaces</a></li></ul></section><section><h2>6. Methods, delegates, and events</h2><ul><li><a href="../ch6/1.html">Methods</a></li><li><a href="../ch6/2.html">Iterators</a></li><li><a href="../ch6/3.html">Introduction to delegates</a></li><li><a href="../ch6/4.html">System.Delegate and the delegate keyword</a></li><li><a href="../ch6/5.html">Strongly typed delegates</a></li><li><a href="../ch6/6.html">Common patterns for delegates</a></li><li><a href="../ch6/7.html">Introduction to events</a></li><li><a href="../ch6/8.html">Standard .NET event patterns</a></li><li><a href="../ch6/9.html">The updated .NET event pattern</a></li><li><a href="../ch6/10.html">Distinguish delegates and events</a></li><li><a href="../ch6/11.html">Versioning</a></li><li><a href="../ch6/12.html">Overview</a></li><li><a href="../ch6/13.html">Using Delegates</a></li><li><a href="../ch6/14.html">Delegates with Named vs. Anonymous Methods</a></li><li><a href="../ch6/15.html">How to combine delegates (Multicast Delegates) (C# Programming Guide)</a></li><li><a href="../ch6/16.html">How to declare, instantiate, and use a delegate</a></li><li><a href="../ch6/17.html">Overview</a></li><li><a href="../ch6/18.html">How to subscribe to and unsubscribe from events</a></li><li><a href="../ch6/19.html">How to raise base class events in derived classes</a></li><li><a href="../ch6/20.html">How to implement interface events</a></li><li><a href="../ch6/21.html">How to implement custom event accessors</a></li><li><a href="../ch6/22.html">Overview</a></li><li><a href="../ch6/23.html">Using Indexers</a></li><li><a href="../ch6/24.html">Indexers in Interfaces</a></li><li><a href="../ch6/25.html">Comparison Between Properties and Indexers</a></li></ul></section><section><h2>7. Generics and collections</h2><ul><li><a href="../ch7/1.html">Generic Type Parameters</a></li><li><a href="../ch7/2.html">Constraints on Type Parameters</a></li><li><a href="../ch7/3.html">Generic Classes</a></li><li><a href="../ch7/4.html">Generic Interfaces</a></li><li><a href="../ch7/5.html">Generic Methods</a></li><li><a href="../ch7/6.html">Generics and Arrays</a></li><li><a href="../ch7/7.html">Generic Delegates</a></li><li><a href="../ch7/8.html">Differences Between C++ Templates and C# Generics</a></li><li><a href="../ch7/9.html">Generics in the Run Time</a></li><li><a href="../ch7/10.html">Collections and data structures</a></li><li><a href="../ch7/11.html">Commonly used collection types</a></li><li><a href="../ch7/12.html">Selecting a collection class</a></li><li><a href="../ch7/13.html">Comparisons and sorts within collections</a></li><li><a href="../ch7/14.html">Sorted collection types</a></li><li><a href="../ch7/15.html">Hashtable and dictionary types</a></li><li><a href="../ch7/16.html">Thread-safe collections</a></li><li><a href="../ch7/17.html">When to use a thread-safe collection</a></li><li><a href="../ch7/18.html">Generic types in .NET</a></li><li><a href="../ch7/19.html">Generic collections in .NET</a></li><li><a href="../ch7/20.html">Generic delegates for manipulating arrays and lists</a></li><li><a href="../ch7/21.html">Generic interfaces</a></li><li><a href="../ch7/22.html">Covariance and contravariance</a></li></ul></section><section><h2>8. LINQ</h2><ul><li><a href="../ch8/1.html">Overview of LINQ</a></li><li><a href="../ch8/2.html">Introduction to LINQ queries</a></li><li><a href="../ch8/3.html">Query expression basics</a></li><li><a href="../ch8/4.html">Write LINQ queries</a></li><li><a href="../ch8/5.html">Type relationships in LINQ query operations</a></li><li><a href="../ch8/6.html">C# features that support LINQ</a></li><li><a href="../ch8/7.html">Tutorial: Writing queries in C#</a></li><li><a href="../ch8/8.html">Overview</a></li><li><a href="../ch8/9.html">Filter data</a></li><li><a href="../ch8/10.html">Projection operations</a></li><li><a href="../ch8/11.html">Set operations</a></li><li><a href="../ch8/12.html">Sort data</a></li><li><a href="../ch8/13.html">Quantifier operations</a></li><li><a href="../ch8/14.html">Partition data</a></li><li><a href="../ch8/15.html">Convert data types</a></li><li><a href="../ch8/16.html">Join operations</a></li><li><a href="../ch8/17.html">Group data</a></li><li><a href="../ch8/18.html">How to: LINQ and file directories</a></li><li><a href="../ch8/19.html">How to: LINQ and strings</a></li><li><a href="../ch8/20.html">How to: LINQ and collections</a></li></ul></section><section><h2>9. Asynchronous programming</h2><ul><li><a href="../ch9/1.html">Overview</a></li><li><a href="../ch9/2.html">Asynchronous programming scenarios</a></li><li><a href="../ch9/3.html">Task asynchronous programming model</a></li><li><a href="../ch9/4.html">Async return types</a></li><li><a href="../ch9/5.html">Process asynchronous tasks as they complete</a></li><li><a href="../ch9/6.html">Asynchronous file access</a></li><li><a href="../ch9/7.html">Cancel a list of tasks</a></li><li><a href="../ch9/8.html">Cancel tasks after a period of time</a></li><li><a href="../ch9/9.html">Generate and consume asynchronous streams</a></li><li><a href="../ch9/10.html">The task asynchronous programming model</a></li><li><a href="../ch9/11.html">Consuming the task-based pattern</a></li><li><a href="../ch9/12.html">Parallel programming in .NET</a></li><li><a href="../ch9/13.html">Task parallel library (TPL)</a></li><li><a href="../ch9/14.html">Data parallelism</a></li><li><a href="../ch9/15.html">Cancellation in managed threads</a></li></ul></section><section><h2>10. Exceptions and functional techniques</h2><ul><li><a href="../ch10/1.html">Overview</a></li><li><a href="../ch10/2.html">Using exceptions</a></li><li><a href="../ch10/3.html">Exception handling</a></li><li><a href="../ch10/4.html">Creating and throwing exceptions</a></li><li><a href="../ch10/5.html">Compiler-generated exceptions</a></li><li><a href="../ch10/6.html">Pattern matching</a></li><li><a href="../ch10/7.html">Discards</a></li><li><a href="../ch10/8.html">Deconstructing tuples and other types</a></li><li><a href="../ch10/9.html">Handling and throwing exceptions in .NET</a></li><li><a href="../ch10/10.html">Best practices for exceptions</a></li><li><a href="../ch10/11.html">Create user-defined exceptions</a></li></ul></section><section><h2>11. Advanced C#</h2><ul><li><a href="../ch11/1.html">Overview</a></li><li><a href="../ch11/2.html">Create custom attributes</a></li><li><a href="../ch11/3.html">Access attributes using reflection</a></li><li><a href="../ch11/4.html">How to create a C/C++ union by using attributes</a></li><li><a href="../ch11/5.html">Generics and attributes</a></li><li><a href="../ch11/6.html">How to query an assembly&#x27;s metadata with reflection and LINQ</a></li><li><a href="../ch11/7.html">Generics and reflection</a></li><li><a href="../ch11/8.html">Tutorial: Define and use attributes</a></li><li><a href="../ch11/9.html">Overview</a></li><li><a href="../ch11/10.html">Expression Trees Explained</a></li><li><a href="../ch11/11.html">Framework Types Supporting Expression Trees</a></li><li><a href="../ch11/12.html">Execute expressions</a></li><li><a href="../ch11/13.html">Interpret expressions</a></li><li><a href="../ch11/14.html">Build expressions</a></li><li><a href="../ch11/15.html">Overview</a></li><li><a href="../ch11/16.html">Tutorial - reduce allocations</a></li><li><a href="../ch11/17.html">Tutorial - Write a custom string interpolation handler</a></li><li><a href="../ch11/18.html">Safely update interfaces with default interface methods</a></li><li><a href="../ch11/19.html">Create mixin functionality with default interface methods</a></li><li><a href="../ch11/20.html">Explore static interface members</a></li><li><a href="../ch11/21.html">Overview</a></li><li><a href="../ch11/22.html">Example COM class</a></li><li><a href="../ch11/23.html">Walkthrough: Office programming</a></li><li><a href="../ch11/24.html">Use platform invoke to play a WAV file</a></li><li><a href="../ch11/25.html">Use indexed properties in COM interop programming</a></li></ul></section><section><h2>12. The .NET runtime</h2><ul><li><a href="../ch12/1.html">Common Language Runtime (CLR)</a></li><li><a href="../ch12/2.html">The managed execution process</a></li><li><a href="../ch12/3.html">Automatic memory management</a></li><li><a href="../ch12/4.html">Garbage collection fundamentals</a></li><li><a href="../ch12/5.html">Memory management and garbage collection</a></li><li><a href="../ch12/6.html">Workstation and server garbage collection</a></li><li><a href="../ch12/7.html">Cleaning up unmanaged resources</a></li><li><a href="../ch12/8.html">Implementing a Dispose method</a></li><li><a href="../ch12/9.html">Using objects that implement IDisposable</a></li><li><a href="../ch12/10.html">Memory and spans</a></li><li><a href="../ch12/11.html">Memory-related types</a></li><li><a href="../ch12/12.html">Assemblies in .NET</a></li><li><a href="../ch12/13.html">Reflection in .NET</a></li><li><a href="../ch12/14.html">The .NET class libraries</a></li><li><a href="../ch12/15.html">Framework libraries overview</a></li><li><a href="../ch12/16.html">Serialization in .NET</a></li><li><a href="../ch12/17.html">JSON serialization with System.Text.Json</a></li><li><a href="../ch12/18.html">How to serialize and deserialize JSON</a></li><li><a href="../ch12/19.html">File and stream I/O</a></li><li><a href="../ch12/20.html">Regular expressions in .NET</a></li><li><a href="../ch12/21.html">Dates, times, and time zones</a></li><li><a href="../ch12/22.html">Framework design guidelines</a></li><li><a href="../ch12/23.html">Naming guidelines</a></li><li><a href="../ch12/24.html">Member design guidelines</a></li></ul></section><section><h2>13. What&#x27;s new in C#</h2><ul><li><a href="../ch13/1.html">C# 15</a></li><li><a href="../ch13/2.html">C# 14</a></li><li><a href="../ch13/3.html">C# 13</a></li><li><a href="../ch13/4.html">C# 12</a></li><li><a href="../ch13/5.html">C# version history</a></li><li><a href="../ch13/6.html">Relationships to .NET library</a></li><li><a href="../ch13/7.html">Version compatibility</a></li></ul></section><section><h2>14. Guided tutorials</h2><ul><li><a href="../ch14/1.html">Explore top-level statements</a></li><li><a href="../ch14/2.html">Explore indexes and ranges</a></li><li><a href="../ch14/3.html">Explore patterns in objects</a></li><li><a href="../ch14/4.html">Console Application</a></li><li><a href="../ch14/5.html">REST Client</a></li><li><a href="../ch14/6.html">Work with LINQ</a></li><li><a class="active" href="../ch14/7.html">Build file-based apps</a></li><li><a href="../ch14/8.html">How to display command-line arguments</a></li><li><a href="../ch14/9.html">Build a command-line app with System.CommandLine</a></li><li><a href="../ch14/10.html">Express your design intent with nullable reference types</a></li><li><a href="../ch14/11.html">Introduction to classes</a></li><li><a href="../ch14/12.html">Object-oriented C#</a></li><li><a href="../ch14/13.html">Inheritance in C# and .NET</a></li><li><a href="../ch14/14.html">Generate API documentation with XML comments</a></li></ul></section></nav><p class="side-note">Built from the official Microsoft documentation<br><span class="mono">dotnet/docs &middot; CC BY 4.0</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../ch14/6.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../ch14/8.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>14. Guided tutorials</span><b>/</b><span class="here">Tutorial: Build file-based C# programs</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">14. GUIDED TUTORIALS</p><h1>Tutorial: Build file-based C# programs</h1><p class="dek">File-based apps are command line utilities that are built and execute without a project file. The build and run commands are implicit. New syntax supports project settings in source.</p><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#prerequisites">Prerequisites</a></li><li class="lvl2"><a href="#create-a-file-based-app">Create a file-based app</a></li><li class="lvl2"><a href="#unix-shebang-support">Unix shebang (#!) support</a></li><li class="lvl2"><a href="#read-command-line-arguments">Read command line arguments</a></li><li class="lvl2"><a href="#handle-standard-input">Handle standard input</a></li><li class="lvl2"><a href="#write-ascii-art-output">Write ASCII art output</a></li><li class="lvl2"><a href="#process-command-options">Process command options</a></li><li class="lvl2"><a href="#use-parsed-command-line-results">Use parsed command line results</a></li><li class="lvl2"><a href="#test-the-final-application">Test the final application</a></li><li class="lvl2"><a href="#related-content">Related content</a></li></ul></nav><p><em>File-based apps</em> are programs contained within a single <code>*.cs</code> file that you build and run without a corresponding project (<code>*.csproj</code>) file. File-based apps are ideal for learning C# because they have less complexity: The entire program is stored in a single file. File-based apps are also useful for building command line utilities. On Unix platforms, you can run file-based apps by using <code>#!</code> (shebang) <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/preprocessor-directives" target="_blank" rel="noopener">directives</a>.</p>
+<p>In this tutorial, you:</p>
+<blockquote>
+<ul>
+<li>Create a file-based app.</li>
+<li>Add Unix shebang (<code>#!</code>) support.</li>
+<li>Read command line arguments.</li>
+<li>Handle standard input.</li>
+<li>Write ASCII art output.</li>
+<li>Process command line arguments.</li>
+<li>Use parsed command line results.</li>
+<li>Test the final application.</li>
+</ul>
+</blockquote>
+<p>You build a file-based app that writes text as ASCII art. The app is contained in a single file, uses NuGet packages, and implements core features.</p>
+<h2>Prerequisites <a class="anchor" href="#prerequisites" id="prerequisites">#</a></h2>
+<ul>
+<li>The .NET 10 SDK. Download it from the <a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank" rel="noopener">.NET download site</a>.</li>
+<li>Visual Studio Code. Download it from the <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">Visual Studio Code homepage</a>.</li>
+<li>(Optional) The C# DevKit extension for Visual Studio Code. Download it from the <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit" target="_blank" rel="noopener">Visual Studio Code marketplace</a>.</li>
+</ul>
+<h2>Create a file-based app <a class="anchor" href="#create-a-file-based-app" id="create-a-file-based-app">#</a></h2>
+<ol>
+<li>
+<p>Open Visual Studio Code and create a new file named <code>AsciiArt.cs</code>. Enter the following text:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Save the file. Then, open the integrated terminal in Visual Studio Code and type:</p>
+<div class="codeblock"><span class="lang">cli</span><div class="hl"><pre><span></span><code>dotnet AsciiArt.cs
+</code></pre></div></div>
+</li>
+</ol>
+<p>The first time you run this program, the <code>dotnet</code> host builds the executable from your source file, stores build artifacts in a temporary folder, and then runs the created executable. You can verify this experience by typing <code>dotnet AsciiArt.cs</code> again. This time, the <code>dotnet</code> host determines that the executable is current and runs the executable without building it again. You don't see any build output.</p>
+<p>The preceding steps demonstrate that file-based apps aren't script files. They're C# source files that the <code>dotnet</code> host builds by using a generated project file in a temporary folder. One of the lines of output displayed when you build the program should look something like this (on Windows):</p>
+<div class="codeblock"><span class="lang">dotnetcli</span><div class="hl"><pre><span></span><code>AsciiArt succeeded (7.3s) → AppData\Local\Temp\dotnet\runfile\AsciiArt-85c58ae0cd68371711f06f297fa0d7891d0de82afde04d8c64d5f910ddc04ddc\bin\debug\AsciiArt.dll
+</code></pre></div></div>
+
+<p>On Unix platforms, the output folder is something similar to:</p>
+<div class="codeblock"><span class="lang">dotnetcli</span><div class="hl"><pre><span></span><code>AsciiArt succeeded (7.3s) → Library/Application Support/dotnet/runfile/AsciiArt-85c58ae0cd68371711f06f297fa0d7891d0de82afde04d8c64d5f910ddc04ddc/bin/debug/AsciiArt.dll
+</code></pre></div></div>
+
+<p>That output tells you where the temporary files and build outputs are placed. Throughout this tutorial, anytime you edit the source file, the <code>dotnet</code> host updates the executable before it runs.</p>
+<p>File-based apps are regular C# programs. The only limitation is that you must write them in one source file. You can use top-level statements or a classic <code>Main</code> method as an entry point. You can declare any types: classes, interfaces, and structs. You can structure the algorithms in a file-based app the same as you would in any C# program. You can even declare multiple namespaces to organize your code. If you find a file-based app is growing too large for a single file, you can convert it to a project-based program and split the source into multiple files. File-based apps are a great prototyping tool. You can start experimenting with minimal overhead to prove concepts and build algorithms.</p>
+<h2>Unix shebang (<code>#!</code>) support <a class="anchor" href="#unix-shebang-support" id="unix-shebang-support">#</a></h2>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Note</span></p>
+<p>Support for <code>#!</code> directives applies on Unix platforms only. There's no similar directive for Windows to directly execute a C# program. On Windows, you must use <code>dotnet</code> on the command line.</p>
+</blockquote>
+<p>On Unix, you can execute file-based apps directly using just the source file name. You need to make two changes:</p>
+<ol>
+<li>
+<p>Set <em>execute</em> permissions on the source file:</p>
+<div class="codeblock"><span class="lang">bash</span><div class="hl"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>AsciiArt.cs
+</code></pre></div></div>
+</li>
+<li>
+<p>Add a shebang (<code>#!</code>) directive as the first line of the <code>AsciiArt.cs</code> file:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="err">#</span><span class="o">!/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">env</span><span class="w"> </span><span class="o">-</span><span class="n">S</span><span class="w"> </span><span class="n">dotnet</span><span class="w"> </span><span class="o">--</span>
+</code></pre></div></div>
+<p>This shebang uses <code>env</code> to find <code>dotnet</code> in the PATH environment. The <code>-S</code> parameter enables <code>env</code> to pass <code>dotnet</code> and <code>--</code> as separate arguments. The <code>--</code> ensures that any arguments a user provides are passed directly to your app, preventing <code>dotnet</code> from consuming them by mistake.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p>If the previous shebang doesn't work, try <code>#!/usr/bin/env dotnet</code> or the exact location of <code>dotnet</code>, for example <code>#!/usr/local/share/dotnet/dotnet --</code>.</p>
+</blockquote>
+</li>
+</ol>
+<p>After making these two changes, you can run the program directly:</p>
+<div class="codeblock"><span class="lang">bash</span><div class="hl"><pre><span></span><code>./AsciiArt.cs
+</code></pre></div></div>
+
+<p>If you prefer, you can remove the extension so you can type <code>./AsciiArt</code> instead. You can add the <code>#!</code> to your source file even if you use Windows. Windows doesn't support <code>#!</code>, but the C# compiler allows that directive in file-based apps on all platforms.</p>
+<h2>Read command line arguments <a class="anchor" href="#read-command-line-arguments" id="read-command-line-arguments">#</a></h2>
+<p>Now, write all arguments on the command line to the output.</p>
+<ol>
+<li>
+<p>Replace the current contents of <code>AsciiArt.cs</code> with the following code:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>You can run this version by typing the following command:</p>
+<div class="codeblock"><span class="lang">cli</span><div class="hl"><pre><span></span><code>dotnet AsciiArt.cs -- This is the command line.
+</code></pre></div></div>
+<p>The <code>--</code> option indicates that all following command arguments should be passed to the AsciiArt program. The arguments <code>This is the command line.</code> are passed as an array of strings, where each string is one word: <code>This</code>, <code>is</code>, <code>the</code>, <code>command</code>, and <code>line.</code>.</p>
+</li>
+</ol>
+<p>This version demonstrates these new concepts:</p>
+<ul>
+<li>The predefined variable <code>args</code> passes the command line arguments to the program. The <code>args</code> variable is an array of strings: <code>string[]</code>. If the length of <code>args</code> is 0, no arguments were provided. Otherwise, each word on the argument list is stored in the corresponding entry in the array.</li>
+<li>The <a href="https://learn.microsoft.com/dotnet/api/system.string.join" target="_blank" rel="noopener"><code>string.Join</code></a> method joins multiple strings into a single string, with the specified separator. In this case, the separator is a single space.</li>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.console.writeline" target="_blank" rel="noopener"><code>System.Console.WriteLine</code></a> writes the string to the standard output console, followed by a new line.</li>
+</ul>
+<h2>Handle standard input <a class="anchor" href="#handle-standard-input" id="handle-standard-input">#</a></h2>
+<p>The preceding code handles command line arguments correctly. Now, add the code to handle reading input from standard input (<code>stdin</code>) instead of command line arguments.</p>
+<ol>
+<li>
+<p>Add the following <code>else</code> clause to the <code>if</code> statement you added in the preceding code:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">else</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">()</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The preceding code reads the console input until either a blank line or a <code>null</code> is read. (The <a href="https://learn.microsoft.com/dotnet/api/system.console.readline" target="_blank" rel="noopener"><code>System.Console.ReadLine</code></a> method returns <code>null</code> if the input stream is closed by typing <kbd>ctrl+C</kbd>.)</p>
+</li>
+<li>
+<p>Test reading standard input by creating a new text file in the same folder. Name the file <code>input.txt</code> and add the following lines:</p>
+<div class="codeblock"><span class="lang">text</span><div class="hl"><pre><span></span><code>Hello from ...
+dotnet!
+
+You can create
+file-based apps
+in .NET 10 and
+C# 14
+
+Have fun writing
+useful utilities
+</code></pre></div></div>
+<p>Keep the lines short so they format correctly when you add the feature to use ASCII art.</p>
+</li>
+<li>
+<p>Run the program again.</p>
+<p>By using bash:</p>
+<div class="codeblock"><span class="lang">bash</span><div class="hl"><pre><span></span><code>cat<span class="w"> </span>input.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>dotnet<span class="w"> </span>AsciiArt.cs
+</code></pre></div></div>
+<p>Or, by using PowerShell:</p>
+<div class="codeblock"><span class="lang">powershell</span><div class="hl"><pre><span></span><code><span class="nb">Get-Content</span> <span class="n">input</span><span class="p">.</span><span class="n">txt</span> <span class="p">|</span> <span class="n">dotnet</span> <span class="n">AsciiArt</span><span class="p">.</span><span class="n">cs</span>
+</code></pre></div></div>
+</li>
+</ol>
+<p>Now your program can accept either command line arguments or standard input.</p>
+<h2>Write ASCII art output <a class="anchor" href="#write-ascii-art-output" id="write-ascii-art-output">#</a></h2>
+<p>Next, add a package that supports ASCII art, <a href="https://www.nuget.org/packages/Colorful.Console" target="_blank" rel="noopener">Colorful.Console</a>. To add a package to a file-based app, use the <code>#:package</code> directive.</p>
+<ol>
+<li>
+<p>Add the following directive after the <code>#!</code> directive in your <code>AsciiArt.cs</code> file:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="err">#</span><span class="p">:</span><span class="n">package</span><span class="w"> </span><span class="n">Colorful</span><span class="p">.</span><span class="n">Console</span><span class="err">@</span><span class="mf">1.2.15</span>
+</code></pre></div></div>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Important</span></p>
+<p>The version <code>1.2.15</code> was the latest version of the <code>Colorful.Console</code> package when this tutorial was last updated. Check the package's <a href="https://www.nuget.org/packages/Colorful.Console" target="_blank" rel="noopener">NuGet page</a> for the latest version to ensure you use a package version with the latest security fixes.</p>
+</blockquote>
+</li>
+<li>
+<p>Change the lines that call <code>Console.WriteLine</code> to use the <code>Colorful.Console.WriteAscii</code> method instead:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">Colorful</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteAscii</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Run the program. You see ASCII art output instead of echoed text.</p>
+</li>
+</ol>
+<h2>Process command options <a class="anchor" href="#process-command-options" id="process-command-options">#</a></h2>
+<p>Next, add command line parsing. The current version writes each word as a different line of output. The command line arguments you add support two features:</p>
+<ol>
+<li>
+<p>Quote multiple words that should be written on one line:</p>
+<div class="codeblock"><span class="lang">cli</span><div class="hl"><pre><span></span><code>AsciiArt.cs &quot;This is line one&quot; &quot;This is another line&quot; &quot;This is the last line&quot;
+</code></pre></div></div>
+</li>
+<li>
+<p>Add a <code>--delay</code> option to pause between each line:</p>
+<div class="codeblock"><span class="lang">cli</span><div class="hl"><pre><span></span><code>AsciiArt.cs --delay 1000
+</code></pre></div></div>
+</li>
+</ol>
+<p>Users can use both arguments together.</p>
+<p>Most command line applications need to parse command line arguments to handle options, commands, and user input effectively. The <a href="https://learn.microsoft.com/dotnet/standard/commandline/index" target="_blank" rel="noopener"><code>System.CommandLine</code> library</a> provides comprehensive capabilities to handle commands, subcommands, options, and arguments. You can concentrate on what your application does rather than the mechanics of parsing command line input.</p>
+<p>The <code>System.CommandLine</code> library offers several key benefits:</p>
+<ul>
+<li>Automatic help text generation and validation.</li>
+<li>Support for POSIX and Windows command-line conventions.</li>
+<li>Built-in tab completion capabilities.</li>
+<li>Consistent parsing behavior across applications.</li>
+</ul>
+<ol>
+<li>
+<p>Add the <code>System.CommandLine</code> package. Add this directive after the existing package directive:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="err">#</span><span class="p">:</span><span class="n">package</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">CommandLine</span><span class="err">@</span><span class="mf">2.0.0</span>
+</code></pre></div></div>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Important</span></p>
+<p>The version <code>2.0.0</code> was the latest version when this tutorial was last updated. If there's a newer version available, use the latest version to ensure you have the latest security packages. Check the package's <a href="https://www.nuget.org/packages/System.CommandLine" target="_blank" rel="noopener">NuGet page</a> for the latest version to ensure you use a package version with the latest security fixes.</p>
+</blockquote>
+</li>
+<li>
+<p>Add the necessary using statements at the top of your file (after the <code>#!</code> and <code>#:package</code> directives):</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System.CommandLine</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="nn">System.CommandLine.Parsing</span><span class="p">;</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Define the delay option and messages argument. Add the following code to create the <code>CommandLine.Option</code> and <code>CommandLine.Argument</code> objects to represent the command line option and argument:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">Option</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">delayOption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">(</span><span class="s">&quot;--delay&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Delay between lines, specified as milliseconds.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DefaultValueFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parseResult</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">100</span>
+<span class="p">};</span>
+
+<span class="n">Argument</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messagesArgument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">(</span><span class="s">&quot;Messages&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Text to render.&quot;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>In command-line applications, options typically begin with <code>--</code> (double dash) and can accept arguments. The <code>--delay</code> option accepts an integer argument that specifies the delay in milliseconds. The <code>messagesArgument</code> defines how any remaining tokens after options are parsed as text. Each token becomes a separate string in the array, but text can be quoted to include multiple words in one token. For example, <code>"This is one message"</code> becomes a single token, while <code>This is four tokens</code> becomes four separate tokens.</p>
+<p>The preceding code defines the argument type for the <code>--delay</code> option, and that the arguments are an array of <code>string</code> values. This application has only one command, so you use the <em>root command</em>.</p>
+</li>
+<li>
+<p>Create a root command and configure it with the option and argument. Add the argument and option to the root command:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">RootCommand</span><span class="w"> </span><span class="n">rootCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">(</span><span class="s">&quot;Ascii Art file-based app sample&quot;</span><span class="p">);</span>
+
+<span class="n">rootCommand</span><span class="p">.</span><span class="n">Options</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">delayOption</span><span class="p">);</span>
+<span class="n">rootCommand</span><span class="p">.</span><span class="n">Arguments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">messagesArgument</span><span class="p">);</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Add the code to parse the command line arguments and handle any errors. This code validates the command line arguments and stores parsed arguments in the <a href="https://learn.microsoft.com/dotnet/api/system.commandline.parseresult" target="_blank" rel="noopener"><code>System.CommandLine.ParseResult</code></a> object:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">ParseResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rootCommand</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">ParseError</span><span class="w"> </span><span class="n">parseError</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">Errors</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">Error</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">parseError</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">Errors</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</li>
+</ol>
+<p>The preceding code validates all command line arguments. If the validation fails, the app writes errors to the console and exits.</p>
+<h2>Use parsed command line results <a class="anchor" href="#use-parsed-command-line-results" id="use-parsed-command-line-results">#</a></h2>
+<p>Now, finish the app to use the parsed options and write the output. First, define a record to hold the parsed options. File-based apps can include type declarations, like records and classes. They must be after all top-level statements and local functions.</p>
+<ol>
+<li>
+<p>Add a <a href="../ch2/11.html"><code>record</code></a> declaration to store the messages and the delay option value:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">record</span><span class="w"> </span><span class="nf">AsciiMessageOptions</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">Messages</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Delay</span><span class="p">);</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Add the following local function before the record declaration. This method handles both command line arguments and standard input, and returns a new record instance:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">AsciiMessageOptions</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ProcessParseResults</span><span class="p">(</span><span class="n">ParseResult</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">delayOption</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[..</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">messagesArgument</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()];</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messages</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">()</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Colorful</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteAscii</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="n">delay</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nf">new</span><span class="p">([..</span><span class="w"> </span><span class="n">messages</span><span class="p">],</span><span class="w"> </span><span class="n">delay</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Create a local function to write the ASCII art with the specified delay. This function writes each message in the record with the specified delay between each message:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">WriteAsciiArt</span><span class="p">(</span><span class="n">AsciiMessageOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">options</span><span class="p">.</span><span class="n">Messages</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Colorful</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteAscii</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="n">options</span><span class="p">.</span><span class="n">Delay</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</li>
+<li>
+<p>Replace the <code>if</code> clause you wrote earlier with the following code that processes the command line arguments and writes the output:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">parsedArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">ProcessParseResults</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+
+<span class="k">await</span><span class="w"> </span><span class="nf">WriteAsciiArt</span><span class="p">(</span><span class="n">parsedArgs</span><span class="p">);</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+</li>
+</ol>
+<p>You created a <code>record</code> type that provides structure to the parsed command line options and arguments. New local functions create an instance of the record, and use the record to write the ASCII art output.</p>
+<h2>Test the final application <a class="anchor" href="#test-the-final-application" id="test-the-final-application">#</a></h2>
+<p>Test the application by running several different commands. If you have trouble, here's the finished sample to compare with what you built:</p>
+<p>In this tutorial, you learned to build a file-based app, where you build the program in a single C# file. These programs don't use a project file, and can use the <code>#!</code> directive on Unix systems. Learners can create these programs after trying our <a href="../ch1/3.html">online tutorials</a> and before building larger project-based apps. File-based apps are also a great platform for command line utilities.</p>
+<h2>Related content <a class="anchor" href="#related-content" id="related-content">#</a></h2>
+<ul>
+<li><a href="https://learn.microsoft.com/dotnet/core/sdk/file-based-apps" target="_blank" rel="noopener">File-based apps reference</a></li>
+<li><a href="../ch2/5.html">Top level statement</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/preprocessor-directives#file-based-apps" target="_blank" rel="noopener">Preprocessor directives</a></li>
+<li><a href="../ch13/2.html">What's new in C# 14</a></li>
+</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../ch14/6.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Work with LINQ</span></a><a class="next" href="../ch14/8.html"><span><em>Next</em>How to display command-line arguments</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div><p class="sources"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5a4 4 0 006 .5l2.5-2.5a4 4 0 00-5.7-5.7L12 7.2"/><path d="M13.5 10.5a4 4 0 00-6-.5L5 12.5a4 4 0 005.7 5.7L12 16.8"/></svg><a href="https://learn.microsoft.com/dotnet/csharp/fundamentals/tutorials/file-based-programs" target="_blank" rel="noopener">Read this article on learn.microsoft.com</a></p></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the book" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="dotnet">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+</body>
+</html>

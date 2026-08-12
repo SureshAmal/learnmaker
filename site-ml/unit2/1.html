@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gradient Descent for Convex Functions &middot; Machine Learning</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a class="active" href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a href="../unit2/10.html">VC Dimension</a></li><li><a href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit1/14.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit2/2.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit II — Supervised &amp; Unsupervised Learning</span><b>/</b><span class="here">Gradient Descent for Convex Functions</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT II — SUPERVISED &amp; UNSUPERVISED LEARNING</p><h1>Gradient Descent for Convex Functions</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#types-of-gradient-descents">Types of Gradient Descents</a></li><li class="lvl2"><a href="#what-is-convex-function">What is Convex Function?</a></li><li class="lvl2"><a href="#properties-of-convex-functions">Properties of Convex Functions</a></li><li class="lvl2"><a href="#why-are-convex-functions-important-in-ml">Why Are Convex Functions Important in ML?</a></li><li class="lvl2"><a href="#real-world-applications-of-convex-cost-functions">Real-World Applications of Convex Cost Functions</a></li><li class="lvl2"><a href="#real-time-example">Real Time Example</a></li></ul></nav><ul>
+<li>Gradient Descent is an optimization algorithm used to minimize a function by updating parameters in the opposite direction of the gradient of the loss function.</li>
+<li>Gradient Descent is an optimization algorithm that is used to minimize a function by slowly moving in the direction of steepest descent, which is defined by the negative of the gradient.</li>
+</ul>
+<p>The gradient-descent update rule:</p>
+<p>$$\theta := \theta - \alpha \nabla_\theta J(\theta)$$</p>
+<h2>Types of Gradient Descents <a class="anchor" href="#types-of-gradient-descents" id="types-of-gradient-descents">#</a></h2>
+<p>3 types of gradient descent:</p>
+<ol>
+<li>Stochastic Gradient Descent</li>
+<li>Batch Gradient Descent</li>
+<li>Mini-Batch Gradient Descent</li>
+</ol>
+<ul>
+<li><strong>Stochastic Gradient Descent</strong> — in extreme cases, gradient descent picks one instance of training data at every step and update based on that one instance of data point</li>
+<li><strong>Batch Gradient Descent</strong> — in batch gradient descent, the algorithm uses whole data-set to update the values of coefficients.</li>
+<li><strong>Mini-Batch Gradient Descent</strong> — in mini-batch gradient descent, algorithm picks a mini batch from the whole data-set at every step and update the values of coefficients. This method has the advantages of both stochastic and batch gradient descent.</li>
+</ul>
+<p>Different Types of Gradient Descent:</p>
+<pre class="mermaid">flowchart TD
+    A[&quot;Gradient Descent&quot;] --&gt; B[&quot;Stochastic Gradient Descent&quot;]
+    A --&gt; C[&quot;Batch Gradient Descent&quot;]
+    A --&gt; D[&quot;Mini-Batch Gradient Descent&quot;]</pre>
+<h2>What is Convex Function? <a class="anchor" href="#what-is-convex-function" id="what-is-convex-function">#</a></h2>
+<ul>
+<li>A convex function is a function where the line segment between any two points on the graph lies above or on the graph itself.</li>
+</ul>
+<h2>Properties of Convex Functions <a class="anchor" href="#properties-of-convex-functions" id="properties-of-convex-functions">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single global minimum</td>
+<td>Only one lowest point; no local minima</td>
+</tr>
+<tr>
+<td>Second derivative ≥ 0</td>
+<td>$f''(x) \geq 0$ for all $x$</td>
+</tr>
+<tr>
+<td>Gradient always increasing</td>
+<td>Slope gets steeper as $x$ increases</td>
+</tr>
+<tr>
+<td>Easy to optimize</td>
+<td>Gradient descent always converges to the global minimum</td>
+</tr>
+</tbody>
+</table>
+<h2>Why Are Convex Functions Important in ML? <a class="anchor" href="#why-are-convex-functions-important-in-ml" id="why-are-convex-functions-important-in-ml">#</a></h2>
+<ul>
+<li>Most machine learning algorithms (like linear regression, logistic regression) use convex cost functions.</li>
+<li>Convexity ensures easy optimization with algorithms like gradient descent.</li>
+<li>It don't get stuck in local minima.</li>
+</ul>
+<h2>Real-World Applications of Convex Cost Functions <a class="anchor" href="#real-world-applications-of-convex-cost-functions" id="real-world-applications-of-convex-cost-functions">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Convex Function Used</th>
+<th>Algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>House price prediction</td>
+<td>MSE</td>
+<td>Linear Regression</td>
+</tr>
+<tr>
+<td>Spam classification</td>
+<td>Log Loss (cross-entropy)</td>
+<td>Logistic Regression</td>
+</tr>
+<tr>
+<td>Face recognition</td>
+<td>Hinge Loss</td>
+<td>SVM</td>
+</tr>
+<tr>
+<td>Resource allocation in cloud</td>
+<td>Quadratic Cost Functions</td>
+<td>Optimization Systems</td>
+</tr>
+</tbody>
+</table>
+<h2>Real Time Example <a class="anchor" href="#real-time-example" id="real-time-example">#</a></h2>
+<p>Let's say we want to predict the price of a house based on its size (in square feet). We can use Linear Regression, where the cost function used is a convex function.</p>
+<ol>
+<li>Predict house price using:</li>
+<li>Model (Hypothesis Function):</li>
+</ol>
+<p>$$\hat{y} = w_0 + w_1 x$$</p>
+<p>This is a convex function. Its plot looks like a bowl-shaped curve, and it has only one global minimum. Since, the MSE is convex, algorithms like gradient descent can find the best $w_0$, $w_1$ easily.</p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit1/14.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Learning Theory</span></a><a class="next" href="../unit2/2.html"><span><em>Next</em>Logistic Regression</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the book" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="ml">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+const mtheme = () => dark() ? 'dark' : 'neutral';
+mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+const paper = () => document.querySelector('.paper') || document.body;
+function math(el) {
+  if (!window.renderMathInElement) return;
+  try { renderMathInElement(el, { delimiters: [
+    { left: '$$', right: '$$', display: true },
+    { left: '$', right: '$', display: false },
+    { left: '\\(', right: '\\)', display: false },
+    { left: '\\[', right: '\\]', display: true } ],
+    ignoredTags: ['script','noscript','style','textarea','pre','code'],
+    throwOnError: false }); } catch (e) {}
+}
+async function diagrams(el) {
+  const nodes = [...el.querySelectorAll('pre.mermaid:not([data-done])')];
+  nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
+  if (!nodes.length) return;
+  try { await mermaid.run({ nodes }); } catch (e) {}
+  nodes.forEach(n => n.dataset.done = '1');
+}
+let raf = 0;
+function renderAll() {
+  cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+}
+if (document.readyState !== 'loading') renderAll();
+window.addEventListener('load', renderAll);
+const p = document.querySelector('.paper');
+if (p) new MutationObserver(renderAll).observe(p, { childList: true });
+new MutationObserver(() => {
+  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
+    n.removeAttribute('data-done'); n.removeAttribute('data-processed');
+    n.innerHTML = ''; n.textContent = n.dataset.src || '';
+  });
+  diagrams(paper());
+}).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+
+</body>
+</html>

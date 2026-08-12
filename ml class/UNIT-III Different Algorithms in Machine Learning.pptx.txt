@@ -1,0 +1,152 @@
+Unit-III: Different Algorithms in Machine Learning 	
+
+3.1 Evaluating Machine Learning algorithms and Model Selection 	
+
+Introduction 
+Why evaluation is important in ML?
+Difference between training performance and real-world performance
+Bias–variance tradeoff
+
+2. Performance Metrics
+For Classification
+Accuracy, Precision, Recall, F1-score
+Confusion matrix
+ROC curve, AUC
+For Regression
+Mean Squared Error (MSE), Root Mean Squared Error (RMSE)
+Mean Absolute Error (MAE)
+R² score (coefficient of determination)
+For Ranking/Recommendation
+Precision@k, Recall@k, MAP, NDCG
+
+3. Validation Techniques
+Hold-out method (train/test split)
+k-Fold Cross-Validation
+Leave-One-Out Cross-Validation (LOOCV)
+Stratified sampling (for imbalanced datasets)
+
+4. Model Selection Strategies
+Comparing multiple algorithms
+Hyperparameter tuning
+Grid Search
+Random Search
+Bayesian Optimization
+Automated Machine Learning (AutoML)
+
+5. Overfitting and Underfitting
+Causes and detection
+Regularization (L1, L2, dropout)
+Early stopping
+
+6. Model Complexity and Generalization
+Bias–variance tradeoff revisited
+Model capacity vs dataset size
+Occam’s razor principle in ML
+
+
+3.2Introduction to Statistical Learning Theory 	
+
+Statistical Learning Theory (SLT) is a theoretical framework for understanding 
+      how machines learn from data and make predictions. 
+It provides the mathematical foundations behind many modern machine learning algorithms and helps explain their performance, limitations, and generalization ability.
+
+
+
+Learning Problem
+Input: A dataset consisting of feature vectors and corresponding labels.
+Goal: Learn a function (hypothesis) that maps inputs to outputs with minimal error.
+Hypothesis Space (H)
+The set of all possible models the learning algorithm can choose from.
+Example: In linear regression, the hypothesis space is the set of all linear functions.
+
+
+Risk and Loss Functions
+Loss function: Measures the error of predictions (e.g., squared error, hinge loss, cross-entropy).
+Expected Risk (True Risk): Average loss over the entire data distribution (unknown in practice).
+Empirical Risk: Average loss over the training dataset (known).
+Empirical Risk Minimization (ERM)
+  A principle where the learner chooses the hypothesis     that minimizes the training error.
+Problem: ERM may lead to overfitting if the hypothesis is too complex.
+
+
+Generalization
+The ability of a model to perform well on unseen data.
+Statistical Learning Theory provides tools (like VC dimension, bounds, and
+regularization) to study generalization
+
+VC Dimension and Capacity Control
+Vapnik–Chervonenkis (VC) dimension: A measure of the complexity or capacity of a hypothesis space.
+Models with very high VC dimension can overfit; too low VC dimension may underfit.
+
+
+Structural Risk Minimization (SRM)
+An approach that balances model complexity and training error.
+Introduces regularization to avoid overfitting and improve generalization.
+PAC Learning (Probably Approximately Correct)
+Framework that defines conditions under which a learning algorithm can guarantee
+that the learned hypothesis is close to the true function, with high probability.
+
+
+3.3Ensemble Methods (Boosting, Bagging, Random Forests) 	
+
+Ensemble learning
+Ensemble learning is a technique in machine learning where multiple models (often called "weak learners") are trained and combined to solve the same problem. 
+The idea is that a group of models working together can outperform a single strong model.
+
+When to Use Ensemble Learning?
+You have high variance or high bias in your model.
+Your base models are diverse and complementary.
+You want to increase model performance in competitions (e.g., Kaggle).
+Real-Life Example
+ Imagine trying to guess a movie’s rating:
+     One friend uses past ratings
+     Another reads online reviews
+     A third watches the trailer    Each has weaknesses alone, but combining their opinions    gives a better estimate. That’s ensemble learning!
+
+
+
+
+
+Accuracy: Highest
+
+Types of Ensemble learning
+
+Bagging (Bootstrap Aggregating):Models are trained independently on different random subsets of the training data. 
+Their results are then combined—usually by averaging (for regression) or voting (for classification). 
+This helps reduce variance and prevents over fitting.
+Example Algorithms:
+Random Forest (uses decision trees + bagging)
+
+
+
+
+How Bagging Learning model works:
+
+Boosting:Models are trained one after another. Each new model focuses on fixing the errors made by the previous ones. 
+The final prediction is a weighted combination of all models, which helps reduce bias and improve accuracy.
+
+Models are trained sequentially, each new model focusing on correcting the errors of the previous ones.
+Final prediction is a weighted sum of all models.
+Reduces bias and variance
+Popular Boosting Algorithms:
+AdaBoost (Adaptive Boosting)
+Gradient Boosting (GBM)
+XGBoost
+LightGBM
+CatBoost
+
+Stacking (Stacked Generalization)
+Multiple different models (often of different types) are trained, and their predictions are used as inputs to a final model, called a meta-model. 
+The meta-model learns how to best combine the predictions of the base models, aiming for better performance than any individual model.
+The predictions of base models are fed to a meta-model (e.g., logistic regression) that learns how to best combine them.
+Leverages strengths of different models
+ Useful when base learners are diverse.
+
+
+
+
+Real-Life Example
+Imagine trying to guess a movie’s rating:
+One friend uses past ratings
+Another reads online reviews
+A third watches the trailerEach has weaknesses alone, but combining their opinions gives a better estimate. That’s ensemble learning!

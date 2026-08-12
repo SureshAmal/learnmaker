@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Training a causal language model from scratch &middot; Hugging Face LLM Course</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">LLM COURSE</a><nav><section><h2>0. Setup</h2><ul><li><a href="../chapter0/1.html">Introduction</a></li></ul></section><section><h2>1. Transformer models</h2><ul><li><a href="../chapter1/1.html">Introduction</a></li><li><a href="../chapter1/2.html">Natural Language Processing and Large Language Models</a></li><li><a href="../chapter1/3.html">Transformers, what can they do?</a></li><li><a href="../chapter1/4.html">How do Transformers work?</a></li><li><a href="../chapter1/5.html">How Hugging Face Transformers solve tasks</a></li><li><a href="../chapter1/6.html">Transformer Architectures</a></li><li><a href="../chapter1/7.html">Quick quiz</a></li><li><a href="../chapter1/8.html">Inference with LLMs</a></li><li><a href="../chapter1/9.html">Bias and limitations</a></li><li><a href="../chapter1/10.html">Summary</a></li><li><a href="../chapter1/11.html">Certification exam</a></li></ul></section><section><h2>2. Using Hugging Face Transformers</h2><ul><li><a href="../chapter2/1.html">Introduction</a></li><li><a href="../chapter2/2.html">Behind the pipeline</a></li><li><a href="../chapter2/3.html">Models</a></li><li><a href="../chapter2/4.html">Tokenizers</a></li><li><a href="../chapter2/5.html">Handling multiple sequences</a></li><li><a href="../chapter2/6.html">Putting it all together</a></li><li><a href="../chapter2/7.html">Basic usage completed!</a></li><li><a href="../chapter2/8.html">Optimized Inference Deployment</a></li><li><a href="../chapter2/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>3. Fine-tuning a pretrained model</h2><ul><li><a href="../chapter3/1.html">Introduction</a></li><li><a href="../chapter3/2.html">Processing the data</a></li><li><a href="../chapter3/3.html">Fine-tuning a model with the Trainer API</a></li><li><a href="../chapter3/4.html">A full training loop</a></li><li><a href="../chapter3/5.html">Understanding Learning Curves</a></li><li><a href="../chapter3/6.html">Fine-tuning, Check!</a></li><li><a href="../chapter3/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>4. Sharing models and tokenizers</h2><ul><li><a href="../chapter4/1.html">The Hugging Face Hub</a></li><li><a href="../chapter4/2.html">Using pretrained models</a></li><li><a href="../chapter4/3.html">Sharing pretrained models</a></li><li><a href="../chapter4/4.html">Building a model card</a></li><li><a href="../chapter4/5.html">Part 1 completed!</a></li><li><a href="../chapter4/6.html">End-of-chapter quiz</a></li></ul></section><section><h2>5. The Hugging Face Datasets library</h2><ul><li><a href="../chapter5/1.html">Introduction</a></li><li><a href="../chapter5/2.html">What if my dataset isn&#x27;t on the Hub?</a></li><li><a href="../chapter5/3.html">Time to slice and dice</a></li><li><a href="../chapter5/4.html">Big data? Hugging Face Datasets to the rescue!</a></li><li><a href="../chapter5/5.html">Creating your own dataset</a></li><li><a href="../chapter5/6.html">Semantic search with FAISS</a></li><li><a href="../chapter5/7.html">Hugging Face Datasets, check!</a></li><li><a href="../chapter5/8.html">End-of-chapter quiz</a></li></ul></section><section><h2>6. The Hugging Face Tokenizers library</h2><ul><li><a href="../chapter6/1.html">Introduction</a></li><li><a href="../chapter6/2.html">Training a new tokenizer from an old one</a></li><li><a href="../chapter6/3.html">Fast tokenizers&#x27; special powers</a></li><li><a href="../chapter6/3b.html">Fast tokenizers in the QA pipeline</a></li><li><a href="../chapter6/4.html">Normalization and pre-tokenization</a></li><li><a href="../chapter6/5.html">Byte-Pair Encoding tokenization</a></li><li><a href="../chapter6/6.html">WordPiece tokenization</a></li><li><a href="../chapter6/7.html">Unigram tokenization</a></li><li><a href="../chapter6/8.html">Building a tokenizer, block by block</a></li><li><a href="../chapter6/9.html">Tokenizers, check!</a></li><li><a href="../chapter6/10.html">End-of-chapter quiz</a></li></ul></section><section><h2>7. Classical NLP tasks</h2><ul><li><a href="../chapter7/1.html">Introduction</a></li><li><a href="../chapter7/2.html">Token classification</a></li><li><a href="../chapter7/3.html">Fine-tuning a masked language model</a></li><li><a href="../chapter7/4.html">Translation</a></li><li><a href="../chapter7/5.html">Summarization</a></li><li><a class="active" href="../chapter7/6.html">Training a causal language model from scratch</a></li><li><a href="../chapter7/7.html">Question answering</a></li><li><a href="../chapter7/8.html">Mastering LLMs</a></li><li><a href="../chapter7/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>8. How to ask for help</h2><ul><li><a href="../chapter8/1.html">Introduction</a></li><li><a href="../chapter8/2.html">What to do when you get an error</a></li><li><a href="../chapter8/3.html">Asking for help on the forums</a></li><li><a href="../chapter8/4.html">Debugging the training pipeline</a></li><li><a href="../chapter8/5.html">How to write a good issue</a></li><li><a href="../chapter8/6.html">Part 2 completed!</a></li><li><a href="../chapter8/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>9. Building and sharing demos</h2><ul><li><a href="../chapter9/1.html">Introduction to Gradio</a></li><li><a href="../chapter9/2.html">Building your first demo</a></li><li><a href="../chapter9/3.html">Understanding the Interface class</a></li><li><a href="../chapter9/4.html">Sharing demos with others</a></li><li><a href="../chapter9/5.html">Integrations with the Hugging Face Hub</a></li><li><a href="../chapter9/6.html">Advanced Interface features</a></li><li><a href="../chapter9/7.html">Introduction to Blocks</a></li><li><a href="../chapter9/8.html">Gradio, check!</a></li><li><a href="../chapter9/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>10. Curate high-quality datasets</h2><ul><li><a href="../chapter10/1.html">Introduction to Argilla</a></li><li><a href="../chapter10/2.html">Set up your Argilla instance</a></li><li><a href="../chapter10/3.html">Load your dataset to Argilla</a></li><li><a href="../chapter10/4.html">Annotate your dataset</a></li><li><a href="../chapter10/5.html">Use your annotated dataset</a></li><li><a href="../chapter10/6.html">Argilla, check!</a></li><li><a href="../chapter10/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>11. Fine-tune Large Language Models</h2><ul><li><a href="../chapter11/1.html">Introduction</a></li><li><a href="../chapter11/2.html">Chat Templates</a></li><li><a href="../chapter11/3.html">Fine-Tuning with SFTTrainer</a></li><li><a href="../chapter11/4.html">LoRA (Low-Rank Adaptation)</a></li><li><a href="../chapter11/5.html">Evaluation</a></li><li><a href="../chapter11/6.html">Conclusion</a></li><li><a href="../chapter11/7.html">Exam Time!</a></li></ul></section><section><h2>12. Build Reasoning Models</h2><ul><li><a href="../chapter12/1.html">Introduction</a></li><li><a href="../chapter12/2.html">Reinforcement Learning on LLMs</a></li><li><a href="../chapter12/3.html">The Aha Moment in the DeepSeek R1 Paper</a></li><li><a href="../chapter12/3b.html">Advanced Understanding of GRPO in DeepSeekMath</a></li><li><a href="../chapter12/4.html">Implementing GRPO in TRL</a></li><li><a href="../chapter12/5.html">Practical Exercise to Fine-tune a model with GRPO</a></li><li><a href="../chapter12/6.html">Practical Exercise with Unsloth</a></li><li><a href="../chapter12/7.html">Coming soon...</a></li></ul></section></nav><p class="side-note">Built from the official course sources <br><span class="mono">huggingface/course @ 5805d51</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../chapter7/5.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../chapter7/7.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>7. Classical NLP tasks</span><b>/</b><span class="here">Training a causal language model from scratch</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the course (Ctrl K)" aria-label="Search the course"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">CHAPTER 7, SECTION 6</p><h1>Training a causal language model from scratch</h1><p class="dek">7. Classical NLP tasks, section 6</p><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#gathering-the-data">Gathering the data</a></li><li class="lvl2"><a href="#preparing-the-dataset">Preparing the dataset</a></li><li class="lvl2"><a href="#initializing-a-new-model">Initializing a new model</a></li><li class="lvl2"><a href="#code-generation-with-a-pipeline">Code generation with a pipeline</a></li><li class="lvl2"><a href="#training-with-accelerate">Training with Hugging Face Accelerate</a></li></ul></nav><p>{#if fw === 'pt'}</p>
+<p>{:else}</p>
+<p>{/if}</p>
+<p>Up until now, we've mostly been using pretrained models and fine-tuning them for new use cases by reusing the weights from pretraining. As we saw in <a href="../chapter1/1.html">Chapter 1</a>, this is commonly referred to as <em>transfer learning</em>, and it's a very successful strategy for applying Transformer models to most real-world use cases where labeled data is sparse. In this chapter, we'll take a different approach and train a completely new model from scratch. This is a good approach to take if you have a lot of data and it is very different from the pretraining data used for the available models. However, it also requires considerably more compute resources to pretrain a language model than just to fine-tune an existing one. Examples where it can make sense to train a new model include for datasets consisting of musical notes, molecular sequences such as DNA, or programming languages. The latter have recently gained traction thanks to tools such as TabNine and GitHub's Copilot, powered by OpenAI's Codex model, that can generate long sequences of code. This task of text generation is best addressed with auto-regressive or causal language models such as GPT-2.</p>
+<p>In this section we will build a scaled-down version of a code generation model: we'll focus on one-line completions instead of full functions or classes, using a subset of Python code. When working with data in Python you are in frequent contact with the Python data science stack, consisting of the <code>matplotlib</code>, <code>seaborn</code>, <code>pandas</code>, and <code>scikit-learn</code> libraries. When using those frameworks it's common to need to look up specific commands, so it would be nice if we could use a model to complete these calls for us.</p>
+<p class="video"><a href="https://www.youtube.com/watch?v=Vpjb1lu0MDk" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="M16.5 10.5l5-3v9l-5-3z"/></svg><span>Companion video &middot; youtu.be/Vpjb1lu0MDk</span></a></p>
+
+<p>In <a href="../chapter6/1.html">Chapter 6</a> we created an efficient tokenizer to process Python source code, but what we still need is a large-scale dataset to pretrain a model on. Here, we'll apply our tokenizer to a corpus of Python code derived from GitHub repositories. We will then use the <code>Trainer</code> API and Hugging Face Accelerate to train the model. Let's get to it!</p>
+<p class="demo"><a href="https://course-demos-codeparrot-ds.hf.space" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg><span>Live demo &middot; course-demos-codeparrot-ds.hf.space</span></a></p>
+
+<p>This is actually showcasing the model that was trained and uploaded to the Hub using the code shown in this section. You can find it <a href="https://huggingface.co/huggingface-course/codeparrot-ds?text=plt.imshow%28" target="_blank" rel="noopener">here</a>. Note that since there is some randomization happening in the text generation, you will probably get a slightly different result.</p>
+<h2>Gathering the data <a class="anchor" href="#gathering-the-data" id="gathering-the-data">#</a></h2>
+<p>Python code is abundantly available from code repositories such as GitHub, which we can use to create a dataset by scraping for every Python repository. This was the approach taken in the <a href="https://learning.oreilly.com/library/view/natural-language-processing/9781098136789/" target="_blank" rel="noopener">Transformers textbook</a> to pretrain a large GPT-2 model. Using a GitHub dump of about 180 GB containing roughly 20 million Python files called <code>codeparrot</code>, the authors built a dataset that they then shared on the <a href="https://huggingface.co/datasets/transformersbook/codeparrot" target="_blank" rel="noopener">Hugging Face Hub</a>.</p>
+<p>However, training on the full corpus is time- and compute-consuming, and we only need the subset of the dataset concerned with the Python data science stack. So, let's start by filtering the <code>codeparrot</code> dataset for all files that include any of the libraries in this stack. Because of the dataset's size, we want to avoid downloading it; instead, we'll use the streaming feature to filter it on the fly. To help us filter the code samples using the libraries we mentioned earlier, we'll use the following function:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">any_keyword_in_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">keywords</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div></div>
+
+<p>Let's test it on two examples:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="s2">&quot;sklearn&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;seaborn&quot;</span><span class="p">]</span>
+<span class="n">example_1</span> <span class="o">=</span> <span class="s2">&quot;import numpy as np&quot;</span>
+<span class="n">example_2</span> <span class="o">=</span> <span class="s2">&quot;import pandas as pd&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">any_keyword_in_string</span><span class="p">(</span><span class="n">example_1</span><span class="p">,</span> <span class="n">filters</span><span class="p">),</span> <span class="n">any_keyword_in_string</span><span class="p">(</span><span class="n">example_2</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>False True
+</code></pre></div></div>
+
+<p>We can use this to create a function that will stream the dataset and filter the elements we want:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_streaming_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">filters</span><span class="p">):</span>
+    <span class="n">filtered_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dataset</span><span class="p">)):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">any_keyword_in_string</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">],</span> <span class="n">filters</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sample</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">filtered_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_dict</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">total</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2"> of data after filtering.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">filtered_dict</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Then we can simply apply this function to the streaming dataset:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="c1"># This cell will take a very long time to execute, so you should skip it and go to</span>
+<span class="c1"># the next one!</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;train&quot;</span>  <span class="c1"># &quot;valid&quot;</span>
+<span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="s2">&quot;sklearn&quot;</span><span class="p">,</span> <span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span> <span class="s2">&quot;seaborn&quot;</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;transformersbook/codeparrot-</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">,</span> <span class="n">streaming</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">filtered_data</span> <span class="o">=</span> <span class="n">filter_streaming_dataset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>3.26% of data after filtering.
+</code></pre></div></div>
+
+<p>This leaves us with about 3% of the original dataset, which is still quite sizable -- the resulting dataset is 6 GB and consists of 600,000 Python scripts!</p>
+<p>Filtering the full dataset can take 2-3h depending on your machine and bandwidth. If you don't want to go through this lengthy process yourself, we provide the filtered dataset on the Hub for you to download:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span><span class="p">,</span> <span class="n">DatasetDict</span>
+
+<span class="n">ds_train</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;huggingface-course/codeparrot-ds-train&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+<span class="n">ds_valid</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;huggingface-course/codeparrot-ds-valid&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">)</span>
+
+<span class="n">raw_datasets</span> <span class="o">=</span> <span class="n">DatasetDict</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;train&quot;</span><span class="p">:</span> <span class="n">ds_train</span><span class="p">,</span>  <span class="c1"># .shuffle().select(range(50000)),</span>
+        <span class="s2">&quot;valid&quot;</span><span class="p">:</span> <span class="n">ds_valid</span><span class="p">,</span>  <span class="c1"># .shuffle().select(range(500))</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">raw_datasets</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>DatasetDict({
+    train: Dataset({
+        features: [&#39;repo_name&#39;, &#39;path&#39;, &#39;copies&#39;, &#39;size&#39;, &#39;content&#39;, &#39;license&#39;],
+        num_rows: 606720
+    })
+    valid: Dataset({
+        features: [&#39;repo_name&#39;, &#39;path&#39;, &#39;copies&#39;, &#39;size&#39;, &#39;content&#39;, &#39;license&#39;],
+        num_rows: 3322
+    })
+})
+</code></pre></div></div>
+
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p>Pretraining the language model will take a while. We suggest that you first run the training loop on a sample of the data by uncommenting the two partial lines above, and make sure that the training successfully completes and the models are stored. Nothing is more frustrating than a training run failing at the last step because you forgot to create a folder or because there's a typo at the end of the training loop!</p>
+</blockquote>
+<p>Let's look at an example from the dataset. We'll just show the first 200 characters of each field:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">raw_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">raw_datasets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">key</span><span class="p">][:</span><span class="mi">200</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>&#39;REPO_NAME: kmike/scikit-learn&#39;
+&#39;PATH: sklearn/utils/__init__.py&#39;
+&#39;COPIES: 3&#39;
+&#39;SIZE: 10094&#39;
+&#39;&#39;&#39;CONTENT: &quot;&quot;&quot;
+The :mod:`sklearn.utils` module includes various utilites.
+&quot;&quot;&quot;
+
+from collections import Sequence
+
+import numpy as np
+from scipy.sparse import issparse
+import warnings
+
+from .murmurhash import murm
+LICENSE: bsd-3-clause&#39;&#39;&#39;
+</code></pre></div></div>
+
+<p>We can see that the <code>content</code> field contains the code that we want our model to train on. Now that we have a dataset, we need to prepare the texts so they're in a format suitable for pretraining.</p>
+<h2>Preparing the dataset <a class="anchor" href="#preparing-the-dataset" id="preparing-the-dataset">#</a></h2>
+<p class="video"><a href="https://www.youtube.com/watch?v=ma1TrR7gE7I" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="M16.5 10.5l5-3v9l-5-3z"/></svg><span>Companion video &middot; youtu.be/ma1TrR7gE7I</span></a></p>
+
+<p>The first step will be to tokenize the data, so we can use it for training. Since our goal is to mainly autocomplete short function calls, we can keep the context size relatively small. This has the benefit that we can train the model much faster and it requires significantly less memory. If it is important for your application to have more context (for example, if you want the model to write unit tests based on a file with the function definition), make sure you increase that number, but also keep in mind that this comes with a greater GPU memory footprint. For now, let's fix the context size at 128 tokens, as opposed to the 1,024 or 2,048 used in GPT-2 or GPT-3, respectively.</p>
+<p>Most documents contain many more than 128 tokens, so simply truncating the inputs to the maximum length would eliminate a large fraction of our dataset. Instead, we'll use the <code>return_overflowing_tokens</code> option to tokenize the whole input and split it into several chunks, as we did in <a href="../chapter6/4.html">Chapter 6</a>. We'll also use the <code>return_length</code> option to return the length of each created chunk automatically. Often the last chunk will be smaller than the context size, and we'll get rid of these pieces to avoid padding issues; we don't really need them as we have plenty of data anyway.</p>
+<div class="flex justify-center">
+<img class="block dark:hidden" src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter7/chunking_texts.svg" alt="Chunking a large texts in several pieces."/>
+<img class="hidden dark:block" src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter7/chunking_texts-dark.svg" alt="Chunking a large texts in several pieces."/>
+</div>
+
+<p>Let's see exactly how this works by looking at the first two examples:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">context_length</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;huggingface-course/code-search-net-tokenizer&quot;</span><span class="p">)</span>
+
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+    <span class="n">raw_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][:</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">],</span>
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">context_length</span><span class="p">,</span>
+    <span class="n">return_overflowing_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_length</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input IDs length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input chunk lengths: </span><span class="si">{</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chunk mapping: </span><span class="si">{</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;overflow_to_sample_mapping&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>Input IDs length: 34
+Input chunk lengths: [128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 117, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 41]
+Chunk mapping: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+</code></pre></div></div>
+
+<p>We can see that we get 34 segments in total from those two examples. Looking at the chunk lengths, we can see that the chunks at the ends of both documents have less than 128 tokens (117 and 41, respectively). These represent just a small fraction of the total chunks that we have, so we can safely throw them away. With the <code>overflow_to_sample_mapping</code> field, we can also reconstruct which chunks belonged to which input samples.</p>
+<p>With this operation we're using a handy feature of the <code>Dataset.map()</code> function in Hugging Face Datasets, which is that it does not require one-to-one maps; as we saw in <a href="../chapter7/3.html">section 3</a>, we can create batches with more or fewer elements than the input batch. This is useful when doing operations like data augmentation or data filtering that change the number of elements. In our case, when tokenizing each element into chunks of the specified context size, we create many samples from each document. We just need to make sure to delete the existing columns, since they have a conflicting size. If we wanted to keep them, we could repeat them appropriately and return them within the <code>Dataset.map()</code> call:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="n">element</span><span class="p">):</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span>
+        <span class="n">element</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">],</span>
+        <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="n">context_length</span><span class="p">,</span>
+        <span class="n">return_overflowing_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_length</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">input_batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">length</span><span class="p">,</span> <span class="n">input_ids</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;length&quot;</span><span class="p">],</span> <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="n">context_length</span><span class="p">:</span>
+            <span class="n">input_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;input_ids&quot;</span><span class="p">:</span> <span class="n">input_batch</span><span class="p">}</span>
+
+
+<span class="n">tokenized_datasets</span> <span class="o">=</span> <span class="n">raw_datasets</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="n">tokenize</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_columns</span><span class="o">=</span><span class="n">raw_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">column_names</span>
+<span class="p">)</span>
+<span class="n">tokenized_datasets</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>DatasetDict({
+    train: Dataset({
+        features: [&#39;input_ids&#39;],
+        num_rows: 16702061
+    })
+    valid: Dataset({
+        features: [&#39;input_ids&#39;],
+        num_rows: 93164
+    })
+})
+</code></pre></div></div>
+
+<p>We now have 16.7 million examples with 128 tokens each, which corresponds to about 2.1 billion tokens in total. For reference, OpenAI's GPT-3 and Codex models are trained on 300 and 100 billion tokens, respectively, where the Codex models are initialized from the GPT-3 checkpoints. Our goal in this section is not to compete with these models, which can generate long, coherent texts, but to create a scaled-down version providing a quick autocomplete function for data scientists.</p>
+<p>Now that we have the dataset ready, let's set up the model!</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> Getting rid of all the chunks that are smaller than the context size wasn't a big issue here because we're using small context windows. As you increase the context size (or if you have a corpus of short documents), the fraction of chunks that are thrown away will also grow. A more efficient way to prepare the data is to join all the tokenized samples in a batch with an <code>eos_token_id</code> token in between, and then perform the chunking on the concatenated sequences. As an exercise, modify the <code>tokenize()</code> function to make use of that approach. Note that you'll want to set <code>truncation=False</code> and remove the other arguments from the tokenizer to get the full sequence of token IDs.</span></p>
+</blockquote>
+<h2>Initializing a new model <a class="anchor" href="#initializing-a-new-model" id="initializing-a-new-model">#</a></h2>
+<p>Our first step is to freshly initialize a GPT-2 model. We'll use the same configuration for our model as for the small GPT-2 model, so we load the pretrained configuration, make sure that the tokenizer size matches the model vocabulary size and pass the <code>bos</code> and <code>eos</code> (beginning and end of sequence) token IDs:</p>
+<p>{#if fw === 'pt'}</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">GPT2LMHeadModel</span><span class="p">,</span> <span class="n">AutoConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">AutoConfig</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;gpt2&quot;</span><span class="p">,</span>
+    <span class="n">vocab_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">),</span>
+    <span class="n">n_ctx</span><span class="o">=</span><span class="n">context_length</span><span class="p">,</span>
+    <span class="n">bos_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">,</span>
+    <span class="n">eos_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>With that configuration, we can load a new model. Note that this is the first time we don't use the <code>from_pretrained()</code> function, since we're actually initializing a model ourself:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">model_size</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;GPT-2 size: </span><span class="si">{</span><span class="n">model_size</span><span class="o">/</span><span class="mi">1000</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">M parameters&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>GPT-2 size: 124.2M parameters
+</code></pre></div></div>
+
+<p>{:else}</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">TFGPT2LMHeadModel</span><span class="p">,</span> <span class="n">AutoConfig</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">AutoConfig</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="s2">&quot;gpt2&quot;</span><span class="p">,</span>
+    <span class="n">vocab_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">),</span>
+    <span class="n">n_ctx</span><span class="o">=</span><span class="n">context_length</span><span class="p">,</span>
+    <span class="n">bos_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">bos_token_id</span><span class="p">,</span>
+    <span class="n">eos_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>With that configuration, we can load a new model. Note that this is the first time we don't use the <code>from_pretrained()</code> function, since we're actually initializing a model ourself:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">TFGPT2LMHeadModel</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">dummy_inputs</span><span class="p">)</span>  <span class="c1"># Builds the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+transformer (TFGPT2MainLayer multiple                  124242432 
+=================================================================
+Total params: 124,242,432
+Trainable params: 124,242,432
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div></div>
+
+<p>{/if}</p>
+<p>Our model has 124M parameters that we'll have to tune. Before we can start training, we need to set up a data collator that will take care of creating the batches. We can use the <code>DataCollatorForLanguageModeling</code> collator, which is designed specifically for language modeling (as the name subtly suggests). Besides stacking and padding batches, it also takes care of creating the language model labels -- in causal language modeling the inputs serve as labels too (just shifted by one element), and this data collator creates them on the fly during training so we don't need to duplicate the <code>input_ids</code>.</p>
+<p>Note that <code>DataCollatorForLanguageModeling</code> supports both masked language modeling (MLM) and causal language modeling (CLM). By default it prepares data for MLM, but we can switch to CLM by setting the argument <code>mlm=False</code>:</p>
+<p>{#if fw === 'pt'}</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataCollatorForLanguageModeling</span>
+
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+<span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForLanguageModeling</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">mlm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>{:else}</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataCollatorForLanguageModeling</span>
+
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token</span>
+<span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForLanguageModeling</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">mlm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;tf&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>{/if}</p>
+<p>Let's have a look at an example:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">out</span> <span class="o">=</span> <span class="n">data_collator</span><span class="p">([</span><span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> shape: </span><span class="si">{</span><span class="n">out</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>{#if fw === 'pt'}</p>
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>input_ids shape: torch.Size([5, 128])
+attention_mask shape: torch.Size([5, 128])
+labels shape: torch.Size([5, 128])
+</code></pre></div></div>
+
+<p>{:else}</p>
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>input_ids shape: (5, 128)
+attention_mask shape: (5, 128)
+labels shape: (5, 128)
+</code></pre></div></div>
+
+<p>{/if}</p>
+<p>We can see that the examples have been stacked and all the tensors have the same shape.</p>
+<p>{#if fw === 'tf'}</p>
+<p>Now we can use the <code>prepare_tf_dataset()</code> method to convert our datasets to TensorFlow datasets with the data collator we created above:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">tf_train_dataset</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">prepare_tf_dataset</span><span class="p">(</span>
+    <span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">],</span>
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">tf_eval_dataset</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">prepare_tf_dataset</span><span class="p">(</span>
+    <span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">],</span>
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>{/if}</p>
+<blockquote class="callout warn"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5L2.9 20h18.2L12 4.5z"/><path d="M12 10v4.5M12 17.4v.3"/></svg><span>Watch out</span></p>
+<p>Shifting the inputs and labels to align them happens inside the model, so the data collator just copies the inputs to create the labels.</p>
+</blockquote>
+<p>Now we have everything in place to actually train our model -- that wasn't so much work after all! Before we start training we should log in to Hugging Face. If you're working in a notebook, you can do so with the following utility function:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">notebook_login</span>
+
+<span class="n">notebook_login</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>This will display a widget where you can enter your Hugging Face login credentials.</p>
+<p>If you aren't working in a notebook, just type the following line in your terminal:</p>
+<div class="codeblock"><span class="lang">bash</span><div class="hl"><pre><span></span><code>huggingface-cli<span class="w"> </span>login
+</code></pre></div></div>
+
+<p>{#if fw === 'pt'}</p>
+<p>All that's left to do is configure the training arguments and fire up the <code>Trainer</code>. We'll use a cosine learning rate schedule with some warmup and an effective batch size of 256 (<code>per_device_train_batch_size</code> * <code>gradient_accumulation_steps</code>). Gradient accumulation is used when a single batch does not fit into memory, and incrementally builds up the gradient through several forward/backward passes. We'll see this in action when we create the training loop with Hugging Face Accelerate.</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">TrainingArguments</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">TrainingArguments</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;codeparrot-ds&quot;</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">evaluation_strategy</span><span class="o">=</span><span class="s2">&quot;steps&quot;</span><span class="p">,</span>
+    <span class="n">eval_steps</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span>
+    <span class="n">logging_steps</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span>
+    <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">warmup_steps</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span>
+    <span class="n">lr_scheduler_type</span><span class="o">=</span><span class="s2">&quot;cosine&quot;</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">,</span>
+    <span class="n">save_steps</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span>
+    <span class="n">fp16</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">push_to_hub</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">],</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now we can just start the <code>Trainer</code> and wait for training to finish. Depending on whether you run it on the full or a subset of the training set this will take 20 or 2 hours, respectively, so grab a few coffees and a good book to read!</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>After training completes, we can push the model and tokenizer to the Hub:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">trainer</span><span class="o">.</span><span class="n">push_to_hub</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>{:else}</p>
+<p>All that's left to do is configure the training hyperparameters and call <code>compile()</code> and <code>fit()</code>. We'll use a learning rate schedule with some warmup to improve the stability of training:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_optimizer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+
+<span class="n">num_train_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tf_train_dataset</span><span class="p">)</span>
+<span class="n">optimizer</span><span class="p">,</span> <span class="n">schedule</span> <span class="o">=</span> <span class="n">create_optimizer</span><span class="p">(</span>
+    <span class="n">init_lr</span><span class="o">=</span><span class="mf">5e-5</span><span class="p">,</span>
+    <span class="n">num_warmup_steps</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span>
+    <span class="n">num_train_steps</span><span class="o">=</span><span class="n">num_train_steps</span><span class="p">,</span>
+    <span class="n">weight_decay_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+
+<span class="c1"># Train in mixed-precision float16</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">mixed_precision</span><span class="o">.</span><span class="n">set_global_policy</span><span class="p">(</span><span class="s2">&quot;mixed_float16&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now we can just call <code>model.fit()</code> and wait for training to finish. Depending on whether you run it on the full or a subset of the training set this will take 20 or 2 hours, respectively, so grab a few coffees and a good book to read! After training completes we can push the model and tokenizer to the Hub:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers.keras_callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">PushToHubCallback</span>
+
+<span class="n">callback</span> <span class="o">=</span> <span class="n">PushToHubCallback</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;codeparrot-ds&quot;</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tf_train_dataset</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="n">tf_eval_dataset</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">callback</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>{/if}</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> It only took us about 30 lines of code in addition to the <code>TrainingArguments</code> to get from raw texts to training GPT-2. Try it out with your own dataset and see if you can get good results!</span></p>
+<p>noteTip</p>
+<p>{#if fw === 'pt'}</p>
+<p>If you have access to a machine with multiple GPUs, try to run the code there. The <code>Trainer</code> automatically manages multiple machines, and this can speed up training tremendously.</p>
+<p>{:else}</p>
+<p>If you have access to a machine with multiple GPUs, you can try using a <code>MirroredStrategy</code> context to substantially speed up training. You'll need to create a <code>tf.distribute.MirroredStrategy</code> object, and make sure that any <code>to_tf_dataset()</code> or <code>prepare_tf_dataset()</code> methods as well as model creation and the call to <code>fit()</code> are all run in its <code>scope()</code> context. You can see documentation on this <a href="https://www.tensorflow.org/guide/distributed_training#use_tfdistributestrategy_with_keras_modelfit" target="_blank" rel="noopener">here</a>.</p>
+<p>{/if}</p>
+</blockquote>
+<h2>Code generation with a pipeline <a class="anchor" href="#code-generation-with-a-pipeline" id="code-generation-with-a-pipeline">#</a></h2>
+<p>Now is the moment of truth: let's see how well the trained model actually works! We can see in the logs that the loss went down steadily, but to put the model to the test let's take a look at how well it works on some prompts. To do that we'll wrap the model in a text generation <code>pipeline</code>, and we'll put it on the GPU for fast generations if there is one available:</p>
+<p>{#if fw === 'pt'}</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+    <span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;huggingface-course/codeparrot-ds&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>{:else}</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">course_model</span> <span class="o">=</span> <span class="n">TFGPT2LMHeadModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;huggingface-course/codeparrot-ds&quot;</span><span class="p">)</span>
+<span class="n">course_tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;huggingface-course/codeparrot-ds&quot;</span><span class="p">)</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+    <span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">course_model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">course_tokenizer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>{/if}</p>
+<p>Let's start with the simple task of creating a scatter plot:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"># create some data</span>
+<span class="s2">x = np.random.randn(100)</span>
+<span class="s2">y = np.random.randn(100)</span>
+
+<span class="s2"># create scatter plot with x, y</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code># create some data
+x = np.random.randn(100)
+y = np.random.randn(100)
+
+# create scatter plot with x, y
+plt.scatter(x, y)
+
+# create scatter
+</code></pre></div></div>
+
+<p>The result looks correct. Does it also work for a <code>pandas</code> operation? Let's see if we can create a <code>DataFrame</code> from two arrays:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"># create some data</span>
+<span class="s2">x = np.random.randn(100)</span>
+<span class="s2">y = np.random.randn(100)</span>
+
+<span class="s2"># create dataframe from x and y</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code># create some data
+x = np.random.randn(100)
+y = np.random.randn(100)
+
+# create dataframe from x and y
+df = pd.DataFrame({&#39;x&#39;: x, &#39;y&#39;: y})
+df.insert(0,&#39;x&#39;, x)
+for
+</code></pre></div></div>
+
+<p>Nice, that's the correct answer -- although it then inserts the column <code>x</code> again. Since the number of generated tokens is limited, the following <code>for</code> loop is cut off. Let's see if we can do something a bit more complex and have the model help us use the <code>groupby</code> operation: </p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"># dataframe with profession, income and name</span>
+<span class="s2">df = pd.DataFrame({&#39;profession&#39;: x, &#39;income&#39;:y, &#39;name&#39;: z})</span>
+
+<span class="s2"># calculate the mean income per profession</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code># dataframe with profession, income and name
+df = pd.DataFrame({&#39;profession&#39;: x, &#39;income&#39;:y, &#39;name&#39;: z})
+
+# calculate the mean income per profession
+profession = df.groupby([&#39;profession&#39;]).mean()
+
+# compute the
+</code></pre></div></div>
+
+<p>Not bad; that's the right way to do it. Finally, let's see if we can also use it for <code>scikit-learn</code> and set up a Random Forest model:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># import random forest regressor from scikit-learn</span>
+<span class="s2">from sklearn.ensemble import RandomForestRegressor</span>
+
+<span class="s2"># fit random forest model with 300 estimators on X, y:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipe</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code># import random forest regressor from scikit-learn
+from sklearn.ensemble import RandomForestRegressor
+
+# fit random forest model with 300 estimators on X, y:
+rf = RandomForestRegressor(n_estimators=300, random_state=random_state, max_depth=3)
+rf.fit(X, y)
+rf
+</code></pre></div></div>
+
+<p>{#if fw === 'tf'}</p>
+<p>Looking at these few examples, it seems that the model has learned some of the syntax of the Python data science stack. Of course, we would need to evaluate the model more thoroughly before deploying it in the real world, but this is still an impressive prototype.</p>
+<p>{:else}</p>
+<p>Looking at these few examples, it seems that the model has learned some of the syntax of the Python data science stack (of course, we would need to evaluate it more thoroughly before deploying the model in the real world). Sometimes it requires more customization of the model training to achieve the necessary performance for a given use case, however. For example, what if we would like to dynamically update the batch size or have a conditional training loop that skips bad examples on the fly? One option would be to subclass the <code>Trainer</code> and add the necessary changes, but sometimes it's simpler to write the training loop from scratch. That's where Hugging Face Accelerate comes in.</p>
+<p>{/if}</p>
+<p>{#if fw === 'pt'}</p>
+<h2>Training with Hugging Face Accelerate <a class="anchor" href="#training-with-accelerate" id="training-with-accelerate">#</a></h2>
+<p>We've seen how to train a model with the <code>Trainer</code>, which can allow for some customization. However, sometimes we want full control over the training loop, or we want to make some exotic changes. In this case Hugging Face Accelerate is a great choice, and in this section we'll go through the steps to use it to train our model. To make things more interesting, we'll also add a twist to the training loop.</p>
+<p class="video"><a href="https://www.youtube.com/watch?v=Hm8_PgVTFuc" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="M16.5 10.5l5-3v9l-5-3z"/></svg><span>Companion video &middot; youtu.be/Hm8_PgVTFuc</span></a></p>
+
+<p>Since we are mainly interested in sensible autocompletion for the the data science libraries, it makes sense to give more weight to training samples that make more use of these libraries. We can easily identify these examples through the use of keywords such as <code>plt</code>, <code>pd</code>, <code>sk</code>, <code>fit</code>, and <code>predict</code>, which are the most frequent import names for <code>matplotlib.pyplot</code>, <code>pandas</code>, and <code>sklearn</code> as well as the fit/predict pattern of the latter. If these are each represented as a single token, we can easily check if they occur in the input sequence. Tokens can have a whitespace prefix, so we'll also check for those versions in the tokenizer vocabulary. To verify that it works, we'll add one test token which should be split into multiple tokens:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">keytoken_ids</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="s2">&quot;plt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;predict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot; plt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot; pd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot; sk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot; fit&quot;</span><span class="p">,</span>
+    <span class="s2">&quot; predict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;testtest&quot;</span><span class="p">,</span>
+<span class="p">]:</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">([</span><span class="n">keyword</span><span class="p">])</span><span class="o">.</span><span class="n">input_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">keytoken_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keyword has not single token: </span><span class="si">{</span><span class="n">keyword</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>&#39;Keyword has not single token: testtest&#39;
+</code></pre></div></div>
+
+<p>Great, that seems to work nicely! We can now write a custom loss function that takes the input sequence, the logits, and the key tokens we just selected as inputs. First we need to align the logits and inputs: the input sequence shifted by one to the right forms the labels, since the next token is the label for the current token. We can achieve this by starting the labels from the second token of the input sequence, since the model does not make a prediction for the first token anyway. Then we cut off the last logit, as we don't have a label for the token that follows the full input sequence. With that we can compute the loss per sample and count the occurrences of all keywords in each sample. Finally, we calculate the weighted average over all samples using the occurrences as weights. Since we don't want to throw away all the samples that have no keywords, we add 1 to the weights:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">CrossEntropyLoss</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">keytoken_weighted_loss</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">keytoken_ids</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="c1"># Shift so that tokens &lt; n predict n</span>
+    <span class="n">shift_labels</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+    <span class="n">shift_logits</span> <span class="o">=</span> <span class="n">logits</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+    <span class="c1"># Calculate per-token loss</span>
+    <span class="n">loss_fct</span> <span class="o">=</span> <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">reduce</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fct</span><span class="p">(</span><span class="n">shift_logits</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">shift_logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="n">shift_labels</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># Resize and average loss per sample</span>
+    <span class="n">loss_per_sample</span> <span class="o">=</span> <span class="n">loss</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">shift_logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">shift_logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Calculate and scale weighting</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([(</span><span class="n">inputs</span> <span class="o">==</span> <span class="n">kt</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="k">for</span> <span class="n">kt</span> <span class="ow">in</span> <span class="n">keytoken_ids</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">axis</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="c1"># Calculate weighted average</span>
+    <span class="n">weighted_loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss_per_sample</span> <span class="o">*</span> <span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">weighted_loss</span>
+</code></pre></div></div>
+
+<p>Before we can start training with this awesome new loss function, we need to prepare a few things:</p>
+<ul>
+<li>We need dataloaders to load the data in batches.</li>
+<li>We need to set up weight decay parameters.</li>
+<li>From time to time we want to evaluate, so it makes sense to wrap the evaluation code in a function.</li>
+</ul>
+<p>Let's start with the dataloaders. We only need to set the dataset's format to <code>"torch"</code>, and then we can pass it to a PyTorch <code>DataLoader</code> with the appropriate batch size:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data.dataloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">tokenized_datasets</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">)</span>
+<span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">eval_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">tokenized_datasets</span><span class="p">[</span><span class="s2">&quot;valid&quot;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Next, we group the parameters so that the optimizer knows which ones will get an additional weight decay. Usually, all bias and LayerNorm weights terms are exempt from this; here's how we can do this:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_grouped_params</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">no_decay</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bias&quot;</span><span class="p">,</span> <span class="s2">&quot;LayerNorm.weight&quot;</span><span class="p">]):</span>
+    <span class="n">params_with_wd</span><span class="p">,</span> <span class="n">params_without_wd</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">nd</span> <span class="ow">in</span> <span class="n">n</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">no_decay</span><span class="p">):</span>
+            <span class="n">params_without_wd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">params_with_wd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params_with_wd</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="n">weight_decay</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params_without_wd</span><span class="p">,</span> <span class="s2">&quot;weight_decay&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="p">]</span>
+</code></pre></div></div>
+
+<p>Since we want to evaluate the model regularly on the validation set during training, let's write a function for that as well. It just runs through the evaluation dataloader and gathers all the losses across processes:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">():</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">eval_dataloader</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">])</span>
+
+        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accelerator</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">loss</span><span class="p">))</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">losses</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">perplexity</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OverflowError</span><span class="p">:</span>
+        <span class="n">perplexity</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">perplexity</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>With the <code>evaluate()</code> function we can report loss and <a href="../chapter7/3.html">perplexity</a> at regular intervals. Next, we redefine our model to make sure we train from scratch again:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">GPT2LMHeadModel</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can then define our optimizer, using the function from before to split the parameters for weight decay:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdamW</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">AdamW</span><span class="p">(</span><span class="n">get_grouped_params</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now let's prepare the model, optimizer, and dataloaders so we can start training:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">accelerate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Accelerator</span>
+
+<span class="n">accelerator</span> <span class="o">=</span> <span class="n">Accelerator</span><span class="p">(</span><span class="n">fp16</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="p">,</span> <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="n">accelerator</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train_dataloader</span><span class="p">,</span> <span class="n">eval_dataloader</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p>If you're training on a TPU, you'll need to move all the code starting at the cell above into a dedicated training function. See <a href="../chapter3/1.html">Chapter 3</a> for more details.</p>
+</blockquote>
+<p>Now that we have sent our <code>train_dataloader</code> to <code>accelerator.prepare()</code>, we can use its length to compute the number of training steps. Remember that we should always do this after preparing the dataloader, as that method will change its length. We use a classic linear schedule from the learning rate to 0:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_scheduler</span>
+
+<span class="n">num_train_epochs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">num_update_steps_per_epoch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)</span>
+<span class="n">num_training_steps</span> <span class="o">=</span> <span class="n">num_train_epochs</span> <span class="o">*</span> <span class="n">num_update_steps_per_epoch</span>
+
+<span class="n">lr_scheduler</span> <span class="o">=</span> <span class="n">get_scheduler</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">num_warmup_steps</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span>
+    <span class="n">num_training_steps</span><span class="o">=</span><span class="n">num_training_steps</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Lastly, to push our model to the Hub, we will need to create a <code>Repository</code> object in a working folder. First log in to the Hugging Face Hub, if you aren't logged in already. We'll determine the repository name from the model ID we want to give our model (feel free to replace the <code>repo_name</code> with your own choice; it just needs to contain your username, which is what the function <code>get_full_repo_name()</code> does):</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">Repository</span><span class="p">,</span> <span class="n">get_full_repo_name</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;codeparrot-ds-accelerate&quot;</span>
+<span class="n">repo_name</span> <span class="o">=</span> <span class="n">get_full_repo_name</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">repo_name</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>&#39;sgugger/codeparrot-ds-accelerate&#39;
+</code></pre></div></div>
+
+<p>Then we can clone that repository in a local folder. If it already exists, this local folder should be an existing clone of the repository we are working with:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;codeparrot-ds-accelerate&quot;</span>
+<span class="n">repo</span> <span class="o">=</span> <span class="n">Repository</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">clone_from</span><span class="o">=</span><span class="n">repo_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can now upload anything we save in <code>output_dir</code> by calling the <code>repo.push_to_hub()</code> method. This will help us upload the intermediate models at the end of each epoch.</p>
+<p>Before we train, let's run a quick test to see if the evaluation function works properly:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">evaluate</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>(10.934126853942871, 56057.14453125)
+</code></pre></div></div>
+
+<p>Those are very high values for loss and perplexity, but that's not surprising as we haven't trained the model yet. With that, we have everything prepared to write the core part of the training script: the training loop. In the training loop we iterate over the dataloader and pass the batches to the model. With the logits, we can then evaluate our custom loss function. We scale the loss by the number of gradient accumulation steps so as not to create larger losses when aggregating more steps. Before we optimize, we also clip the gradients for better convergence. Finally, every few steps we evaluate the model on the evaluation set with our new <code>evaluate()</code> function:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.notebook</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">gradient_accumulation_steps</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">eval_steps</span> <span class="o">=</span> <span class="mi">5_000</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="n">completed_steps</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_train_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="n">num_training_steps</span>
+    <span class="p">):</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">logits</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">keytoken_weighted_loss</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">],</span> <span class="n">logits</span><span class="p">,</span> <span class="n">keytoken_ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">accelerator</span><span class="o">.</span><span class="n">print</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="n">step</span> <span class="o">*</span> <span class="n">samples_per_step</span><span class="p">,</span>
+                    <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="n">completed_steps</span><span class="p">,</span>
+                    <span class="s2">&quot;loss/train&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">*</span> <span class="n">gradient_accumulation_steps</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">/</span> <span class="n">gradient_accumulation_steps</span>
+        <span class="n">accelerator</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">gradient_accumulation_steps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">accelerator</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">lr_scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">completed_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">step</span> <span class="o">%</span> <span class="p">(</span><span class="n">eval_steps</span> <span class="o">*</span> <span class="n">gradient_accumulation_steps</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">eval_loss</span><span class="p">,</span> <span class="n">perplexity</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">()</span>
+            <span class="n">accelerator</span><span class="o">.</span><span class="n">print</span><span class="p">({</span><span class="s2">&quot;loss/eval&quot;</span><span class="p">:</span> <span class="n">eval_loss</span><span class="p">,</span> <span class="s2">&quot;perplexity&quot;</span><span class="p">:</span> <span class="n">perplexity</span><span class="p">})</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+            <span class="n">accelerator</span><span class="o">.</span><span class="n">wait_for_everyone</span><span class="p">()</span>
+            <span class="n">unwrapped_model</span> <span class="o">=</span> <span class="n">accelerator</span><span class="o">.</span><span class="n">unwrap_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+            <span class="n">unwrapped_model</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">save_function</span><span class="o">=</span><span class="n">accelerator</span><span class="o">.</span><span class="n">save</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">accelerator</span><span class="o">.</span><span class="n">is_main_process</span><span class="p">:</span>
+                <span class="n">tokenizer</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+                <span class="n">repo</span><span class="o">.</span><span class="n">push_to_hub</span><span class="p">(</span>
+                    <span class="n">commit_message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Training in progress step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">blocking</span><span class="o">=</span><span class="kc">False</span>
+                <span class="p">)</span>
+</code></pre></div></div>
+
+<p>And that's it -- you now have your own custom training loop for causal language models such as GPT-2 that you can further customize to your needs. </p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> Either create your own custom loss function tailored to your use case, or add another custom step into the training loop.</span></p>
+<p>noteTip</p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> When running long training experiments it's a good idea to log important metrics using tools such as TensorBoard or Weights &amp; Biases. Add proper logging to the training loop so you can always check how the training is going.</span></p>
+</blockquote>
+<p>{/if}</p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../chapter7/5.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Summarization</span></a><a class="next" href="../chapter7/7.html"><span><em>Next</em>Question answering</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div><p class="sources"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5a4 4 0 006 .5l2.5-2.5a4 4 0 00-5.7-5.7L12 7.2"/><path d="M13.5 10.5a4 4 0 00-6-.5L5 12.5a4 4 0 005.7 5.7L12 16.8"/></svg><a href="https://huggingface.co/learn/llm-course/en/chapter7/6" target="_blank" rel="noopener">Read this section on huggingface.co</a></p></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the course" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the course" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="llm">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+</body>
+</html>

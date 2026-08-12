@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Major Categories of ML Techniques &middot; Machine Learning</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">ML Course</a><nav><section><h2>Unit I — Introduction to Machine Learning</h2><ul><li><a href="../unit1/1.html">What Is Machine Learning?</a></li><li><a href="../unit1/2.html">ML Applications</a></li><li><a class="active" href="../unit1/3.html">Major Categories of ML Techniques</a></li><li><a href="../unit1/4.html">The Machine Learning Pipeline</a></li><li><a href="../unit1/5.html">Data Preprocessing</a></li><li><a href="../unit1/6.html">Pattern Recognition</a></li><li><a href="../unit1/7.html">Pattern Representation</a></li><li><a href="../unit1/8.html">Basics of Probability and Bayes&#x27; Theorem</a></li><li><a href="../unit1/9.html">Maximum Likelihood Estimation</a></li><li><a href="../unit1/10.html">Modeling</a></li><li><a href="../unit1/11.html">Regression</a></li><li><a href="../unit1/12.html">Discriminant Functions</a></li><li><a href="../unit1/13.html">Fisher&#x27;s Linear Discriminant</a></li><li><a href="../unit1/14.html">Learning Theory</a></li></ul></section><section><h2>Unit II — Supervised &amp; Unsupervised Learning</h2><ul><li><a href="../unit2/1.html">Gradient Descent for Convex Functions</a></li><li><a href="../unit2/2.html">Logistic Regression</a></li><li><a href="../unit2/3.html">Decision Tree</a></li><li><a href="../unit2/4.html">Random Forest</a></li><li><a href="../unit2/5.html">Neural Networks</a></li><li><a href="../unit2/6.html">Ensemble Learning</a></li><li><a href="../unit2/7.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit2/8.html">Empirical Risk Minimization</a></li><li><a href="../unit2/9.html">Loss Functions</a></li><li><a href="../unit2/10.html">VC Dimension</a></li><li><a href="../unit2/11.html">Data Partitioning</a></li><li><a href="../unit2/12.html">Cross-Validation</a></li><li><a href="../unit2/13.html">Regularization</a></li><li><a href="../unit2/14.html">Clustering: K-Means and Kernel K-Means</a></li><li><a href="../unit2/15.html">Dimensionality Reduction: PCA and Kernel PCA</a></li><li><a href="../unit2/16.html">Matrix Factorization</a></li><li><a href="../unit2/17.html">Matrix Completion</a></li><li><a href="../unit2/18.html">Generative Models</a></li><li><a href="../unit2/19.html">Latent Factor Models</a></li></ul></section><section><h2>Unit III — Unsupervised Learning &amp; Algorithms</h2><ul><li><a href="../unit3/1.html">3.1 Evaluating Machine Learning Algorithms and Model Selection</a></li><li><a href="../unit3/2.html">Performance Metrics</a></li><li><a href="../unit3/3.html">Validation Techniques</a></li><li><a href="../unit3/4.html">Model Selection Strategies</a></li><li><a href="../unit3/5.html">Overfitting and Underfitting</a></li><li><a href="../unit3/6.html">Model Complexity and Generalization</a></li><li><a href="../unit3/7.html">3.2 Introduction to Statistical Learning Theory</a></li><li><a href="../unit3/8.html">Hierarchical Clustering</a></li><li><a href="../unit3/9.html">Dendrograms</a></li><li><a href="../unit3/10.html">Apriori Algorithm for Association Rules</a></li><li><a href="../unit3/11.html">Discriminant Functions</a></li><li><a href="../unit3/12.html">Hypothesis Space</a></li><li><a href="../unit3/13.html">VC Dimension</a></li><li><a href="../unit3/14.html">3.3 Ensemble Methods</a></li></ul></section></nav><p class="side-note">A course reader on machine learning<br><span class="mono">diagrams &amp; math via CDN</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../unit1/2.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../unit1/4.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>Unit I — Introduction to Machine Learning</span><b>/</b><span class="here">Major Categories of ML Techniques</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">UNIT I — INTRODUCTION TO MACHINE LEARNING</p><h1>Major Categories of ML Techniques</h1><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#1-supervised-learning">1. Supervised Learning</a></li><li class="lvl3"><a href="#application-of-supervised-learning">Application of Supervised Learning</a></li><li class="lvl2"><a href="#2-unsupervised-learning">2. Unsupervised Learning</a></li><li class="lvl3"><a href="#most-commonly-used-unsupervised-algorithms-in-machine-learning-practicals">Most Commonly Used Unsupervised Algorithms in Machine Learning Practical&#x27;s</a></li><li class="lvl3"><a href="#characteristics">Characteristics</a></li><li class="lvl2"><a href="#3-semi-supervised-learning">3. Semi-supervised Learning</a></li><li class="lvl3"><a href="#why-use-semi-supervised-learning">Why Use Semi-Supervised Learning?</a></li><li class="lvl3"><a href="#applications">Applications</a></li><li class="lvl2"><a href="#4-reinforcement-learning">4. Reinforcement Learning</a></li><li class="lvl3"><a href="#basic-components">Basic Components</a></li><li class="lvl3"><a href="#working-process">Working Process</a></li><li class="lvl3"><a href="#example-maze-game">Example: Maze Game</a></li><li class="lvl3"><a href="#common-reinforcement-learning-algorithms">Common Reinforcement Learning Algorithms</a></li><li class="lvl3"><a href="#applications">Applications</a></li><li class="lvl2"><a href="#comparison-of-all-learning-types">Comparison of all Learning Types</a></li></ul></nav><ul>
+<li>Supervised Learning</li>
+<li>Unsupervised Learning</li>
+<li>Semi-supervised Learning</li>
+<li>Reinforcement Learning</li>
+</ul>
+<h2>1. Supervised Learning <a class="anchor" href="#1-supervised-learning" id="1-supervised-learning">#</a></h2>
+<p>Definition: The algorithm learns from labeled data, where the input comes with a known output.</p>
+<p>Algorithm Used:</p>
+<ol>
+<li>Linear Regression</li>
+<li>Logistic Regression</li>
+<li>Decision Trees</li>
+<li>Support Vector Machines (SVM)</li>
+<li>Neural Networks</li>
+</ol>
+<p>Linear Regression: A 2D scatter plot of data points. A straight line ($y = mx + c$) fitted through the points, minimizing residuals (errors).</p>
+<p>Logistic Regression: Logistic Regression is a supervised machine learning algorithm used for classification problems. It predicts the probability that an input belongs to a particular class, such as Yes/No, Pass/Fail, Spam/Not Spam, or Disease/No Disease.</p>
+<h3>Application of Supervised Learning <a class="anchor" href="#application-of-supervised-learning" id="application-of-supervised-learning">#</a></h3>
+<ul>
+<li>Spam detection in emails</li>
+<li>Credit scoring</li>
+<li>Disease diagnosis</li>
+<li>Customer churn Prediction</li>
+</ul>
+<h2>2. Unsupervised Learning <a class="anchor" href="#2-unsupervised-learning" id="2-unsupervised-learning">#</a></h2>
+<p>Unsupervised learning is a type of machine learning where the model is trained on data without labeled outputs.</p>
+<p>Unlike supervised learning, where the algorithm learns from input-output pairs, in unsupervised learning the model tries to find:</p>
+<ol>
+<li>patterns</li>
+<li>structures</li>
+<li>groupings in the data on its own.</li>
+</ol>
+<p>Unsupervised learning works with unlabeled data, meaning the target/output variable is not provided. The goal is to discover hidden patterns, structures, or relationships in the data.</p>
+<h3>Most Commonly Used Unsupervised Algorithms in Machine Learning Practical's <a class="anchor" href="#most-commonly-used-unsupervised-algorithms-in-machine-learning-practicals" id="most-commonly-used-unsupervised-algorithms-in-machine-learning-practicals">#</a></h3>
+<ul>
+<li>K-Means Clustering</li>
+<li>Hierarchical Clustering</li>
+<li>DBSCAN</li>
+<li>PCA (Principal Component Analysis)</li>
+<li>Apriori Algorithm</li>
+</ul>
+<h3>Characteristics <a class="anchor" href="#characteristics" id="characteristics">#</a></h3>
+<ul>
+<li>No labels: The algorithm only sees input features.</li>
+<li>Goal: Discover hidden patterns or intrinsic structures in the data.</li>
+<li>Common tasks:</li>
+<li>Clustering (e.g., grouping similar customers)</li>
+<li>Dimensionality reduction (e.g., reducing the number of features while preserving information)</li>
+<li>Anomaly detection</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Technique</th>
+<th>Main Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K-Means</td>
+<td>Clustering</td>
+<td>Group similar data</td>
+</tr>
+<tr>
+<td>Hierarchical Clustering</td>
+<td>Clustering</td>
+<td>Build cluster hierarchy</td>
+</tr>
+<tr>
+<td>DBSCAN</td>
+<td>Clustering</td>
+<td>Density-based clustering &amp; outlier detection</td>
+</tr>
+<tr>
+<td>PCA</td>
+<td>Dimensionality Reduction</td>
+<td>Reduce features</td>
+</tr>
+<tr>
+<td>Apriori</td>
+<td>Association</td>
+<td>Find item relationships</td>
+</tr>
+<tr>
+<td>FP-Growth</td>
+<td>Association</td>
+<td>Efficient rule mining</td>
+</tr>
+<tr>
+<td>GMM</td>
+<td>Clustering</td>
+<td>Probabilistic clustering</td>
+</tr>
+<tr>
+<td>Autoencoder</td>
+<td>Representation Learning</td>
+<td>Feature extraction</td>
+</tr>
+<tr>
+<td>SOM</td>
+<td>Visualization</td>
+<td>Pattern discovery</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Semi-supervised Learning <a class="anchor" href="#3-semi-supervised-learning" id="3-semi-supervised-learning">#</a></h2>
+<p>Semi-Supervised Learning is a machine learning approach that uses both labeled and unlabeled data for training. Typically, a small portion of the dataset is labeled, while a large portion is unlabeled.</p>
+<h3>Why Use Semi-Supervised Learning? <a class="anchor" href="#why-use-semi-supervised-learning" id="why-use-semi-supervised-learning">#</a></h3>
+<p>Labeling data is often expensive and time-consuming, while unlabeled data is abundant. Semi-supervised learning leverages both to improve model performance.</p>
+<p>Example:</p>
+<ul>
+<li>1000 student records available</li>
+<li>Only 100 records have labels (Pass/Fail)</li>
+<li>Remaining 900 records are unlabeled</li>
+<li>A semi-supervised algorithm learns from both datasets to make better predictions.</li>
+</ul>
+<h3>Applications <a class="anchor" href="#applications" id="applications">#</a></h3>
+<ul>
+<li>Email Spam Detection</li>
+<li>Image Classification</li>
+<li>Speech Recognition</li>
+<li>Medical Diagnosis</li>
+<li>Text Classification</li>
+<li>Fraud Detection</li>
+</ul>
+<h2>4. Reinforcement Learning <a class="anchor" href="#4-reinforcement-learning" id="4-reinforcement-learning">#</a></h2>
+<p>Reinforcement Learning is a type of machine learning where an agent learns by interacting with an environment and receives rewards or penalties based on its actions. The goal is to maximize the total reward over time.</p>
+<h3>Basic Components <a class="anchor" href="#basic-components" id="basic-components">#</a></h3>
+<ul>
+<li>Agent – The learner or decision-maker.</li>
+<li>Environment – The world in which the agent operates.</li>
+<li>Action – A move made by the agent.</li>
+<li>State – The current situation of the environment.</li>
+<li>Reward – Feedback received after an action.</li>
+<li>Policy – Strategy used by the agent to choose actions.</li>
+</ul>
+<h3>Working Process <a class="anchor" href="#working-process" id="working-process">#</a></h3>
+<ul>
+<li>Agent observes the current state.</li>
+<li>Agent takes an action.</li>
+<li>Environment responds with a new state.</li>
+<li>Agent receives a reward or penalty.</li>
+<li>Agent learns from the feedback and improves future decisions.</li>
+</ul>
+<h3>Example: Maze Game <a class="anchor" href="#example-maze-game" id="example-maze-game">#</a></h3>
+<ul>
+<li>Agent: Robot</li>
+<li>Environment: Maze</li>
+<li>Action: Move Up, Down, Left, Right</li>
+<li>Reward: +10 for reaching the goal</li>
+<li>Penalty: -1 for hitting a wall</li>
+<li>The robot learns the shortest path by maximizing rewards.</li>
+</ul>
+<h3>Common Reinforcement Learning Algorithms <a class="anchor" href="#common-reinforcement-learning-algorithms" id="common-reinforcement-learning-algorithms">#</a></h3>
+<ul>
+<li>Q-Learning</li>
+<li>Model-free RL algorithm.</li>
+<li>Learns the value of actions in each state.</li>
+<li>SARSA (State-Action-Reward-State-Action)</li>
+<li>Updates values based on the action actually taken.</li>
+<li>Deep Q-Network (DQN)</li>
+<li>Combines Q-Learning with neural networks.</li>
+<li>Used in game-playing AI.</li>
+<li>Policy Gradient Methods</li>
+<li>Directly learn the policy function.</li>
+<li>Actor-Critic Methods</li>
+<li>Combine value-based and policy-based learning.</li>
+</ul>
+<h3>Applications <a class="anchor" href="#applications" id="applications">#</a></h3>
+<ul>
+<li>Game Playing (e.g., Chess AI)</li>
+<li>Robotics</li>
+<li>Self-Driving Cars</li>
+<li>Traffic Signal Control</li>
+<li>Recommendation Systems</li>
+<li>Resource Management</li>
+</ul>
+<h2>Comparison of all Learning Types <a class="anchor" href="#comparison-of-all-learning-types" id="comparison-of-all-learning-types">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Learning Type</th>
+<th>Data Used</th>
+<th>Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supervised Learning</td>
+<td>Labelled Data</td>
+<td>Predict outputs</td>
+</tr>
+<tr>
+<td>Unsupervised Learning</td>
+<td>Unlabelled Data</td>
+<td>Find patterns</td>
+</tr>
+<tr>
+<td>Semi-Supervised Learning</td>
+<td>Both labelled &amp; unlabelled data</td>
+<td>Improve learning</td>
+</tr>
+<tr>
+<td>Reinforcement Learning</td>
+<td>Rewards &amp; Penalties</td>
+<td>Learn optimal actions</td>
+</tr>
+</tbody>
+</table><footer class="lesson-foot"><div class="pager"><a class="prev" href="../unit1/2.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>ML Applications</span></a><a class="next" href="../unit1/4.html"><span><em>Next</em>The Machine Learning Pipeline</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the book" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="ml">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+const mtheme = () => dark() ? 'dark' : 'neutral';
+mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+  fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+const paper = () => document.querySelector('.paper') || document.body;
+function math(el) {
+  if (!window.renderMathInElement) return;
+  try { renderMathInElement(el, { delimiters: [
+    { left: '$$', right: '$$', display: true },
+    { left: '$', right: '$', display: false },
+    { left: '\\(', right: '\\)', display: false },
+    { left: '\\[', right: '\\]', display: true } ],
+    ignoredTags: ['script','noscript','style','textarea','pre','code'],
+    throwOnError: false }); } catch (e) {}
+}
+async function diagrams(el) {
+  const nodes = [...el.querySelectorAll('pre.mermaid:not([data-done])')];
+  nodes.forEach(n => { if (!n.dataset.src) n.dataset.src = n.textContent; });
+  if (!nodes.length) return;
+  try { await mermaid.run({ nodes }); } catch (e) {}
+  nodes.forEach(n => n.dataset.done = '1');
+}
+let raf = 0;
+function renderAll() {
+  cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => { const el = paper(); diagrams(el); math(el); });
+}
+if (document.readyState !== 'loading') renderAll();
+window.addEventListener('load', renderAll);
+const p = document.querySelector('.paper');
+if (p) new MutationObserver(renderAll).observe(p, { childList: true });
+new MutationObserver(() => {
+  mermaid.initialize({ startOnLoad: false, theme: mtheme(), securityLevel: 'loose',
+    fontFamily: 'inherit', flowchart: { curve: 'basis' } });
+  paper().querySelectorAll('pre.mermaid[data-done]').forEach(n => {
+    n.removeAttribute('data-done'); n.removeAttribute('data-processed');
+    n.innerHTML = ''; n.textContent = n.dataset.src || '';
+  });
+  diagrams(paper());
+}).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+
+</body>
+</html>

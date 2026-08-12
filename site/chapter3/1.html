@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Introduction &middot; Hugging Face LLM Course</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">LLM COURSE</a><nav><section><h2>0. Setup</h2><ul><li><a href="../chapter0/1.html">Introduction</a></li></ul></section><section><h2>1. Transformer models</h2><ul><li><a href="../chapter1/1.html">Introduction</a></li><li><a href="../chapter1/2.html">Natural Language Processing and Large Language Models</a></li><li><a href="../chapter1/3.html">Transformers, what can they do?</a></li><li><a href="../chapter1/4.html">How do Transformers work?</a></li><li><a href="../chapter1/5.html">How Hugging Face Transformers solve tasks</a></li><li><a href="../chapter1/6.html">Transformer Architectures</a></li><li><a href="../chapter1/7.html">Quick quiz</a></li><li><a href="../chapter1/8.html">Inference with LLMs</a></li><li><a href="../chapter1/9.html">Bias and limitations</a></li><li><a href="../chapter1/10.html">Summary</a></li><li><a href="../chapter1/11.html">Certification exam</a></li></ul></section><section><h2>2. Using Hugging Face Transformers</h2><ul><li><a href="../chapter2/1.html">Introduction</a></li><li><a href="../chapter2/2.html">Behind the pipeline</a></li><li><a href="../chapter2/3.html">Models</a></li><li><a href="../chapter2/4.html">Tokenizers</a></li><li><a href="../chapter2/5.html">Handling multiple sequences</a></li><li><a href="../chapter2/6.html">Putting it all together</a></li><li><a href="../chapter2/7.html">Basic usage completed!</a></li><li><a href="../chapter2/8.html">Optimized Inference Deployment</a></li><li><a href="../chapter2/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>3. Fine-tuning a pretrained model</h2><ul><li><a class="active" href="../chapter3/1.html">Introduction</a></li><li><a href="../chapter3/2.html">Processing the data</a></li><li><a href="../chapter3/3.html">Fine-tuning a model with the Trainer API</a></li><li><a href="../chapter3/4.html">A full training loop</a></li><li><a href="../chapter3/5.html">Understanding Learning Curves</a></li><li><a href="../chapter3/6.html">Fine-tuning, Check!</a></li><li><a href="../chapter3/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>4. Sharing models and tokenizers</h2><ul><li><a href="../chapter4/1.html">The Hugging Face Hub</a></li><li><a href="../chapter4/2.html">Using pretrained models</a></li><li><a href="../chapter4/3.html">Sharing pretrained models</a></li><li><a href="../chapter4/4.html">Building a model card</a></li><li><a href="../chapter4/5.html">Part 1 completed!</a></li><li><a href="../chapter4/6.html">End-of-chapter quiz</a></li></ul></section><section><h2>5. The Hugging Face Datasets library</h2><ul><li><a href="../chapter5/1.html">Introduction</a></li><li><a href="../chapter5/2.html">What if my dataset isn&#x27;t on the Hub?</a></li><li><a href="../chapter5/3.html">Time to slice and dice</a></li><li><a href="../chapter5/4.html">Big data? Hugging Face Datasets to the rescue!</a></li><li><a href="../chapter5/5.html">Creating your own dataset</a></li><li><a href="../chapter5/6.html">Semantic search with FAISS</a></li><li><a href="../chapter5/7.html">Hugging Face Datasets, check!</a></li><li><a href="../chapter5/8.html">End-of-chapter quiz</a></li></ul></section><section><h2>6. The Hugging Face Tokenizers library</h2><ul><li><a href="../chapter6/1.html">Introduction</a></li><li><a href="../chapter6/2.html">Training a new tokenizer from an old one</a></li><li><a href="../chapter6/3.html">Fast tokenizers&#x27; special powers</a></li><li><a href="../chapter6/3b.html">Fast tokenizers in the QA pipeline</a></li><li><a href="../chapter6/4.html">Normalization and pre-tokenization</a></li><li><a href="../chapter6/5.html">Byte-Pair Encoding tokenization</a></li><li><a href="../chapter6/6.html">WordPiece tokenization</a></li><li><a href="../chapter6/7.html">Unigram tokenization</a></li><li><a href="../chapter6/8.html">Building a tokenizer, block by block</a></li><li><a href="../chapter6/9.html">Tokenizers, check!</a></li><li><a href="../chapter6/10.html">End-of-chapter quiz</a></li></ul></section><section><h2>7. Classical NLP tasks</h2><ul><li><a href="../chapter7/1.html">Introduction</a></li><li><a href="../chapter7/2.html">Token classification</a></li><li><a href="../chapter7/3.html">Fine-tuning a masked language model</a></li><li><a href="../chapter7/4.html">Translation</a></li><li><a href="../chapter7/5.html">Summarization</a></li><li><a href="../chapter7/6.html">Training a causal language model from scratch</a></li><li><a href="../chapter7/7.html">Question answering</a></li><li><a href="../chapter7/8.html">Mastering LLMs</a></li><li><a href="../chapter7/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>8. How to ask for help</h2><ul><li><a href="../chapter8/1.html">Introduction</a></li><li><a href="../chapter8/2.html">What to do when you get an error</a></li><li><a href="../chapter8/3.html">Asking for help on the forums</a></li><li><a href="../chapter8/4.html">Debugging the training pipeline</a></li><li><a href="../chapter8/5.html">How to write a good issue</a></li><li><a href="../chapter8/6.html">Part 2 completed!</a></li><li><a href="../chapter8/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>9. Building and sharing demos</h2><ul><li><a href="../chapter9/1.html">Introduction to Gradio</a></li><li><a href="../chapter9/2.html">Building your first demo</a></li><li><a href="../chapter9/3.html">Understanding the Interface class</a></li><li><a href="../chapter9/4.html">Sharing demos with others</a></li><li><a href="../chapter9/5.html">Integrations with the Hugging Face Hub</a></li><li><a href="../chapter9/6.html">Advanced Interface features</a></li><li><a href="../chapter9/7.html">Introduction to Blocks</a></li><li><a href="../chapter9/8.html">Gradio, check!</a></li><li><a href="../chapter9/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>10. Curate high-quality datasets</h2><ul><li><a href="../chapter10/1.html">Introduction to Argilla</a></li><li><a href="../chapter10/2.html">Set up your Argilla instance</a></li><li><a href="../chapter10/3.html">Load your dataset to Argilla</a></li><li><a href="../chapter10/4.html">Annotate your dataset</a></li><li><a href="../chapter10/5.html">Use your annotated dataset</a></li><li><a href="../chapter10/6.html">Argilla, check!</a></li><li><a href="../chapter10/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>11. Fine-tune Large Language Models</h2><ul><li><a href="../chapter11/1.html">Introduction</a></li><li><a href="../chapter11/2.html">Chat Templates</a></li><li><a href="../chapter11/3.html">Fine-Tuning with SFTTrainer</a></li><li><a href="../chapter11/4.html">LoRA (Low-Rank Adaptation)</a></li><li><a href="../chapter11/5.html">Evaluation</a></li><li><a href="../chapter11/6.html">Conclusion</a></li><li><a href="../chapter11/7.html">Exam Time!</a></li></ul></section><section><h2>12. Build Reasoning Models</h2><ul><li><a href="../chapter12/1.html">Introduction</a></li><li><a href="../chapter12/2.html">Reinforcement Learning on LLMs</a></li><li><a href="../chapter12/3.html">The Aha Moment in the DeepSeek R1 Paper</a></li><li><a href="../chapter12/3b.html">Advanced Understanding of GRPO in DeepSeekMath</a></li><li><a href="../chapter12/4.html">Implementing GRPO in TRL</a></li><li><a href="../chapter12/5.html">Practical Exercise to Fine-tune a model with GRPO</a></li><li><a href="../chapter12/6.html">Practical Exercise with Unsloth</a></li><li><a href="../chapter12/7.html">Coming soon...</a></li></ul></section></nav><p class="side-note">Built from the official course sources <br><span class="mono">huggingface/course @ 5805d51</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../chapter2/9.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../chapter3/2.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>3. Fine-tuning a pretrained model</span><b>/</b><span class="here">Introduction</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the course (Ctrl K)" aria-label="Search the course"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">CHAPTER 3, SECTION 1</p><h1>Introduction</h1><p class="dek">3. Fine-tuning a pretrained model, section 1</p><p class="rule">-----</p></header><p>In <a href="../chapter2/1.html">Chapter 2</a> we explored how to use tokenizers and pretrained models to make predictions. But what if you want to fine-tune a pretrained model to solve a specific task? That's the topic of this chapter! You will learn:</p>
+<ul>
+<li>How to prepare a large dataset from the Hub using the latest Hugging Face Datasets features</li>
+<li>How to use the high-level <code>Trainer</code> API to fine-tune a model with modern best practices</li>
+<li>How to implement a custom training loop with optimization techniques</li>
+<li>How to leverage the Hugging Face Accelerate library to easily run distributed training on any setup</li>
+<li>How to apply current fine-tuning best practices for maximum performance</li>
+</ul>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p><strong>Essential Resources</strong>: Before starting, you might want to review the <a href="https://huggingface.co/docs/datasets/" target="_blank" rel="noopener">Hugging Face Datasets documentation</a> for data processing.</p>
+</blockquote>
+<p>This chapter will also serve as an introduction to some Hugging Face libraries beyond the Hugging Face Transformers library! We'll see how libraries like Hugging Face Datasets, Hugging Face Tokenizers, Hugging Face Accelerate, and Hugging Face Evaluate can help you train models more efficiently and effectively.</p>
+<p>Each of the main sections in this chapter will teach you something different:
+- <strong>Section 2</strong>: Learn modern data preprocessing techniques and efficient dataset handling
+- <strong>Section 3</strong>: Master the powerful Trainer API with all its latest features
+- <strong>Section 4</strong>: Implement training loops from scratch and understand distributed training with Accelerate</p>
+<p>By the end of this chapter, you'll be able to fine-tune models on your own datasets using both high-level APIs and custom training loops, applying the latest best practices in the field.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p><strong>What You'll Build</strong>: By the end of this chapter, you'll have fine-tuned a BERT model for text classification and understand how to adapt the techniques to your own datasets and tasks.</p>
+</blockquote>
+<p>This chapter focuses exclusively on <strong>PyTorch</strong>, as it has become the standard framework for modern deep learning research and production. We'll use the latest APIs and best practices from the Hugging Face ecosystem.</p>
+<p>To upload your trained models to the Hugging Face Hub, you will need a Hugging Face account: <a href="https://huggingface.co/join" target="_blank" rel="noopener">create an account</a></p><footer class="lesson-foot"><div class="pager"><a class="prev" href="../chapter2/9.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>End-of-chapter quiz</span></a><a class="next" href="../chapter3/2.html"><span><em>Next</em>Processing the data</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div><p class="sources"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5a4 4 0 006 .5l2.5-2.5a4 4 0 00-5.7-5.7L12 7.2"/><path d="M13.5 10.5a4 4 0 00-6-.5L5 12.5a4 4 0 005.7 5.7L12 16.8"/></svg><a href="https://huggingface.co/learn/llm-course/en/chapter3/1" target="_blank" rel="noopener">Read this section on huggingface.co</a></p></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the course" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the course" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="llm">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+</body>
+</html>

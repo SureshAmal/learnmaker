@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Introduction to LINQ Queries in C# &middot; C# and .NET</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">C# / .NET</a><nav><section><h2>0. Setup and the .NET CLI</h2><ul><li><a href="../ch0/1.html">Introduction to .NET</a></li><li><a href="../ch0/2.html">What you can build with .NET</a></li><li><a href="../ch0/3.html">Get started with .NET</a></li><li><a href="../ch0/4.html">The .NET SDK</a></li><li><a href="../ch0/5.html">Releases, patches, and support</a></li><li><a href="../ch0/6.html">The dotnet command</a></li><li><a href="../ch0/7.html">dotnet new: create a project</a></li><li><a href="../ch0/8.html">dotnet build: compile</a></li><li><a href="../ch0/9.html">dotnet run: build and run</a></li><li><a href="../ch0/10.html">dotnet test: run tests</a></li><li><a href="../ch0/11.html">dotnet publish: ship it</a></li><li><a href="../ch0/12.html">dotnet package add: use a library</a></li><li><a href="../ch0/13.html">dotnet format: fix style</a></li><li><a href="../ch0/14.html">Global, tool-path, and local tools</a></li></ul></section><section><h2>1. A tour of C#</h2><ul><li><a href="../ch1/1.html">Tour of C#</a></li><li><a href="../ch1/2.html">What you can build</a></li><li><a href="../ch1/3.html">Hello world and text</a></li><li><a href="../ch1/4.html">Numbers in C#</a></li><li><a href="../ch1/5.html">Tuples and types</a></li><li><a href="../ch1/6.html">Branches and loops</a></li><li><a href="../ch1/7.html">List collections</a></li><li><a href="../ch1/8.html">Pattern matching</a></li><li><a href="../ch1/9.html">C# language strategy</a></li><li><a href="../ch1/10.html">Learn C# for Java developers</a></li><li><a href="../ch1/11.html">Learn C# for JavaScript developers</a></li><li><a href="../ch1/12.html">Learn C# for Python developers</a></li></ul></section><section><h2>2. Program structure and types</h2><ul><li><a href="../ch2/1.html">Overview</a></li><li><a href="../ch2/2.html">Namespaces and using directives</a></li><li><a href="../ch2/3.html">Preprocessor directives</a></li><li><a href="../ch2/4.html">Program organization</a></li><li><a href="../ch2/5.html">Top-level statements</a></li><li><a href="../ch2/6.html">Main method</a></li><li><a href="../ch2/7.html">Overview</a></li><li><a href="../ch2/8.html">Built-in types and literals</a></li><li><a href="../ch2/9.html">Classes</a></li><li><a href="../ch2/10.html">Structs</a></li><li><a href="../ch2/11.html">Records</a></li><li><a href="../ch2/12.html">Interfaces</a></li><li><a href="../ch2/13.html">Enumerations</a></li><li><a href="../ch2/14.html">Generics</a></li><li><a href="../ch2/15.html">Tuples and deconstruction</a></li><li><a href="../ch2/16.html">Type conversions, casting, and boxing</a></li><li><a href="../ch2/17.html">Lambda expressions, delegates, and events</a></li><li><a href="../ch2/18.html">Anonymous types</a></li></ul></section><section><h2>3. Values, nulls, and strings</h2><ul><li><a href="../ch3/1.html">Overview</a></li><li><a href="../ch3/2.html">Nullable value types</a></li><li><a href="../ch3/3.html">Nullable reference types</a></li><li><a href="../ch3/4.html">Null operators</a></li><li><a href="../ch3/5.html">Resolve nullable warnings</a></li><li><a href="../ch3/6.html">Overview</a></li><li><a href="../ch3/7.html">Raw string literals</a></li><li><a href="../ch3/8.html">String interpolation</a></li><li><a href="../ch3/9.html">nameof operator</a></li><li><a href="../ch3/10.html">Concatenate strings</a></li><li><a href="../ch3/11.html">Modify string contents</a></li><li><a href="../ch3/12.html">Compare strings</a></li><li><a href="../ch3/13.html">Search strings</a></li><li><a href="../ch3/14.html">Split strings into substrings</a></li><li><a href="../ch3/15.html">Use string interpolation</a></li></ul></section><section><h2>4. Expressions, statements, and control flow</h2><ul><li><a href="../ch4/1.html">Equality</a></li><li><a href="../ch4/2.html">Selection statements</a></li><li><a href="../ch4/3.html">Iteration statements</a></li><li><a href="../ch4/4.html">Collections</a></li><li><a href="../ch4/5.html">LINQ</a></li><li><a href="../ch4/6.html">Statements</a></li><li><a href="../ch4/7.html">Expression-bodied members</a></li><li><a href="../ch4/8.html">Equality comparisons</a></li><li><a href="../ch4/9.html">How to define value equality for a type</a></li><li><a href="../ch4/10.html">How to test for reference equality (identity)</a></li></ul></section><section><h2>5. Object-oriented C#</h2><ul><li><a href="../ch5/1.html">Classes, structs, and records</a></li><li><a href="../ch5/2.html">Objects</a></li><li><a href="../ch5/3.html">Inheritance</a></li><li><a href="../ch5/4.html">Polymorphism</a></li><li><a href="../ch5/5.html">Versioning with the Override and New Keywords</a></li><li><a href="../ch5/6.html">Knowing When to Use Override and New Keywords</a></li><li><a href="../ch5/7.html">How to override the ToString method</a></li><li><a href="../ch5/8.html">Members overview</a></li><li><a href="../ch5/9.html">Abstract and Sealed Classes and Class Members</a></li><li><a href="../ch5/10.html">Static Classes and Static Class Members</a></li><li><a href="../ch5/11.html">Access Modifiers</a></li><li><a href="../ch5/12.html">Fields</a></li><li><a href="../ch5/13.html">Constants</a></li><li><a href="../ch5/14.html">How to define abstract properties</a></li><li><a href="../ch5/15.html">How to define constants in C#</a></li><li><a href="../ch5/16.html">Properties overview</a></li><li><a href="../ch5/17.html">Using Properties</a></li><li><a href="../ch5/18.html">Interface Properties</a></li><li><a href="../ch5/19.html">Restricting Accessor Accessibility</a></li><li><a href="../ch5/20.html">How to declare and use read write properties</a></li><li><a href="../ch5/21.html">Automatically implemented properties</a></li><li><a href="../ch5/22.html">How to implement a lightweight class with automatically implemented properties</a></li><li><a href="../ch5/23.html">Explicit Interface Implementation</a></li><li><a href="../ch5/24.html">How to explicitly implement interface members</a></li><li><a href="../ch5/25.html">How to explicitly implement members of two interfaces</a></li></ul></section><section><h2>6. Methods, delegates, and events</h2><ul><li><a href="../ch6/1.html">Methods</a></li><li><a href="../ch6/2.html">Iterators</a></li><li><a href="../ch6/3.html">Introduction to delegates</a></li><li><a href="../ch6/4.html">System.Delegate and the delegate keyword</a></li><li><a href="../ch6/5.html">Strongly typed delegates</a></li><li><a href="../ch6/6.html">Common patterns for delegates</a></li><li><a href="../ch6/7.html">Introduction to events</a></li><li><a href="../ch6/8.html">Standard .NET event patterns</a></li><li><a href="../ch6/9.html">The updated .NET event pattern</a></li><li><a href="../ch6/10.html">Distinguish delegates and events</a></li><li><a href="../ch6/11.html">Versioning</a></li><li><a href="../ch6/12.html">Overview</a></li><li><a href="../ch6/13.html">Using Delegates</a></li><li><a href="../ch6/14.html">Delegates with Named vs. Anonymous Methods</a></li><li><a href="../ch6/15.html">How to combine delegates (Multicast Delegates) (C# Programming Guide)</a></li><li><a href="../ch6/16.html">How to declare, instantiate, and use a delegate</a></li><li><a href="../ch6/17.html">Overview</a></li><li><a href="../ch6/18.html">How to subscribe to and unsubscribe from events</a></li><li><a href="../ch6/19.html">How to raise base class events in derived classes</a></li><li><a href="../ch6/20.html">How to implement interface events</a></li><li><a href="../ch6/21.html">How to implement custom event accessors</a></li><li><a href="../ch6/22.html">Overview</a></li><li><a href="../ch6/23.html">Using Indexers</a></li><li><a href="../ch6/24.html">Indexers in Interfaces</a></li><li><a href="../ch6/25.html">Comparison Between Properties and Indexers</a></li></ul></section><section><h2>7. Generics and collections</h2><ul><li><a href="../ch7/1.html">Generic Type Parameters</a></li><li><a href="../ch7/2.html">Constraints on Type Parameters</a></li><li><a href="../ch7/3.html">Generic Classes</a></li><li><a href="../ch7/4.html">Generic Interfaces</a></li><li><a href="../ch7/5.html">Generic Methods</a></li><li><a href="../ch7/6.html">Generics and Arrays</a></li><li><a href="../ch7/7.html">Generic Delegates</a></li><li><a href="../ch7/8.html">Differences Between C++ Templates and C# Generics</a></li><li><a href="../ch7/9.html">Generics in the Run Time</a></li><li><a href="../ch7/10.html">Collections and data structures</a></li><li><a href="../ch7/11.html">Commonly used collection types</a></li><li><a href="../ch7/12.html">Selecting a collection class</a></li><li><a href="../ch7/13.html">Comparisons and sorts within collections</a></li><li><a href="../ch7/14.html">Sorted collection types</a></li><li><a href="../ch7/15.html">Hashtable and dictionary types</a></li><li><a href="../ch7/16.html">Thread-safe collections</a></li><li><a href="../ch7/17.html">When to use a thread-safe collection</a></li><li><a href="../ch7/18.html">Generic types in .NET</a></li><li><a href="../ch7/19.html">Generic collections in .NET</a></li><li><a href="../ch7/20.html">Generic delegates for manipulating arrays and lists</a></li><li><a href="../ch7/21.html">Generic interfaces</a></li><li><a href="../ch7/22.html">Covariance and contravariance</a></li></ul></section><section><h2>8. LINQ</h2><ul><li><a href="../ch8/1.html">Overview of LINQ</a></li><li><a class="active" href="../ch8/2.html">Introduction to LINQ queries</a></li><li><a href="../ch8/3.html">Query expression basics</a></li><li><a href="../ch8/4.html">Write LINQ queries</a></li><li><a href="../ch8/5.html">Type relationships in LINQ query operations</a></li><li><a href="../ch8/6.html">C# features that support LINQ</a></li><li><a href="../ch8/7.html">Tutorial: Writing queries in C#</a></li><li><a href="../ch8/8.html">Overview</a></li><li><a href="../ch8/9.html">Filter data</a></li><li><a href="../ch8/10.html">Projection operations</a></li><li><a href="../ch8/11.html">Set operations</a></li><li><a href="../ch8/12.html">Sort data</a></li><li><a href="../ch8/13.html">Quantifier operations</a></li><li><a href="../ch8/14.html">Partition data</a></li><li><a href="../ch8/15.html">Convert data types</a></li><li><a href="../ch8/16.html">Join operations</a></li><li><a href="../ch8/17.html">Group data</a></li><li><a href="../ch8/18.html">How to: LINQ and file directories</a></li><li><a href="../ch8/19.html">How to: LINQ and strings</a></li><li><a href="../ch8/20.html">How to: LINQ and collections</a></li></ul></section><section><h2>9. Asynchronous programming</h2><ul><li><a href="../ch9/1.html">Overview</a></li><li><a href="../ch9/2.html">Asynchronous programming scenarios</a></li><li><a href="../ch9/3.html">Task asynchronous programming model</a></li><li><a href="../ch9/4.html">Async return types</a></li><li><a href="../ch9/5.html">Process asynchronous tasks as they complete</a></li><li><a href="../ch9/6.html">Asynchronous file access</a></li><li><a href="../ch9/7.html">Cancel a list of tasks</a></li><li><a href="../ch9/8.html">Cancel tasks after a period of time</a></li><li><a href="../ch9/9.html">Generate and consume asynchronous streams</a></li><li><a href="../ch9/10.html">The task asynchronous programming model</a></li><li><a href="../ch9/11.html">Consuming the task-based pattern</a></li><li><a href="../ch9/12.html">Parallel programming in .NET</a></li><li><a href="../ch9/13.html">Task parallel library (TPL)</a></li><li><a href="../ch9/14.html">Data parallelism</a></li><li><a href="../ch9/15.html">Cancellation in managed threads</a></li></ul></section><section><h2>10. Exceptions and functional techniques</h2><ul><li><a href="../ch10/1.html">Overview</a></li><li><a href="../ch10/2.html">Using exceptions</a></li><li><a href="../ch10/3.html">Exception handling</a></li><li><a href="../ch10/4.html">Creating and throwing exceptions</a></li><li><a href="../ch10/5.html">Compiler-generated exceptions</a></li><li><a href="../ch10/6.html">Pattern matching</a></li><li><a href="../ch10/7.html">Discards</a></li><li><a href="../ch10/8.html">Deconstructing tuples and other types</a></li><li><a href="../ch10/9.html">Handling and throwing exceptions in .NET</a></li><li><a href="../ch10/10.html">Best practices for exceptions</a></li><li><a href="../ch10/11.html">Create user-defined exceptions</a></li></ul></section><section><h2>11. Advanced C#</h2><ul><li><a href="../ch11/1.html">Overview</a></li><li><a href="../ch11/2.html">Create custom attributes</a></li><li><a href="../ch11/3.html">Access attributes using reflection</a></li><li><a href="../ch11/4.html">How to create a C/C++ union by using attributes</a></li><li><a href="../ch11/5.html">Generics and attributes</a></li><li><a href="../ch11/6.html">How to query an assembly&#x27;s metadata with reflection and LINQ</a></li><li><a href="../ch11/7.html">Generics and reflection</a></li><li><a href="../ch11/8.html">Tutorial: Define and use attributes</a></li><li><a href="../ch11/9.html">Overview</a></li><li><a href="../ch11/10.html">Expression Trees Explained</a></li><li><a href="../ch11/11.html">Framework Types Supporting Expression Trees</a></li><li><a href="../ch11/12.html">Execute expressions</a></li><li><a href="../ch11/13.html">Interpret expressions</a></li><li><a href="../ch11/14.html">Build expressions</a></li><li><a href="../ch11/15.html">Overview</a></li><li><a href="../ch11/16.html">Tutorial - reduce allocations</a></li><li><a href="../ch11/17.html">Tutorial - Write a custom string interpolation handler</a></li><li><a href="../ch11/18.html">Safely update interfaces with default interface methods</a></li><li><a href="../ch11/19.html">Create mixin functionality with default interface methods</a></li><li><a href="../ch11/20.html">Explore static interface members</a></li><li><a href="../ch11/21.html">Overview</a></li><li><a href="../ch11/22.html">Example COM class</a></li><li><a href="../ch11/23.html">Walkthrough: Office programming</a></li><li><a href="../ch11/24.html">Use platform invoke to play a WAV file</a></li><li><a href="../ch11/25.html">Use indexed properties in COM interop programming</a></li></ul></section><section><h2>12. The .NET runtime</h2><ul><li><a href="../ch12/1.html">Common Language Runtime (CLR)</a></li><li><a href="../ch12/2.html">The managed execution process</a></li><li><a href="../ch12/3.html">Automatic memory management</a></li><li><a href="../ch12/4.html">Garbage collection fundamentals</a></li><li><a href="../ch12/5.html">Memory management and garbage collection</a></li><li><a href="../ch12/6.html">Workstation and server garbage collection</a></li><li><a href="../ch12/7.html">Cleaning up unmanaged resources</a></li><li><a href="../ch12/8.html">Implementing a Dispose method</a></li><li><a href="../ch12/9.html">Using objects that implement IDisposable</a></li><li><a href="../ch12/10.html">Memory and spans</a></li><li><a href="../ch12/11.html">Memory-related types</a></li><li><a href="../ch12/12.html">Assemblies in .NET</a></li><li><a href="../ch12/13.html">Reflection in .NET</a></li><li><a href="../ch12/14.html">The .NET class libraries</a></li><li><a href="../ch12/15.html">Framework libraries overview</a></li><li><a href="../ch12/16.html">Serialization in .NET</a></li><li><a href="../ch12/17.html">JSON serialization with System.Text.Json</a></li><li><a href="../ch12/18.html">How to serialize and deserialize JSON</a></li><li><a href="../ch12/19.html">File and stream I/O</a></li><li><a href="../ch12/20.html">Regular expressions in .NET</a></li><li><a href="../ch12/21.html">Dates, times, and time zones</a></li><li><a href="../ch12/22.html">Framework design guidelines</a></li><li><a href="../ch12/23.html">Naming guidelines</a></li><li><a href="../ch12/24.html">Member design guidelines</a></li></ul></section><section><h2>13. What&#x27;s new in C#</h2><ul><li><a href="../ch13/1.html">C# 15</a></li><li><a href="../ch13/2.html">C# 14</a></li><li><a href="../ch13/3.html">C# 13</a></li><li><a href="../ch13/4.html">C# 12</a></li><li><a href="../ch13/5.html">C# version history</a></li><li><a href="../ch13/6.html">Relationships to .NET library</a></li><li><a href="../ch13/7.html">Version compatibility</a></li></ul></section><section><h2>14. Guided tutorials</h2><ul><li><a href="../ch14/1.html">Explore top-level statements</a></li><li><a href="../ch14/2.html">Explore indexes and ranges</a></li><li><a href="../ch14/3.html">Explore patterns in objects</a></li><li><a href="../ch14/4.html">Console Application</a></li><li><a href="../ch14/5.html">REST Client</a></li><li><a href="../ch14/6.html">Work with LINQ</a></li><li><a href="../ch14/7.html">Build file-based apps</a></li><li><a href="../ch14/8.html">How to display command-line arguments</a></li><li><a href="../ch14/9.html">Build a command-line app with System.CommandLine</a></li><li><a href="../ch14/10.html">Express your design intent with nullable reference types</a></li><li><a href="../ch14/11.html">Introduction to classes</a></li><li><a href="../ch14/12.html">Object-oriented C#</a></li><li><a href="../ch14/13.html">Inheritance in C# and .NET</a></li><li><a href="../ch14/14.html">Generate API documentation with XML comments</a></li></ul></section></nav><p class="side-note">Built from the official Microsoft documentation<br><span class="mono">dotnet/docs &middot; CC BY 4.0</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../ch8/1.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../ch8/3.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>8. LINQ</span><b>/</b><span class="here">Introduction to LINQ Queries in C#</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">8. LINQ</p><h1>Introduction to LINQ Queries in C#</h1><p class="dek">LINQ offers a consistent model for queries on data across various kinds of data sources and formats. In a LINQ query, you&#x27;re always working with objects.</p><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#three-parts-of-a-query-operation">Three Parts of a Query Operation</a></li><li class="lvl2"><a href="#the-data-source">The Data Source</a></li><li class="lvl2"><a href="#the-query">The Query</a></li><li class="lvl2"><a href="#classification-of-standard-query-operators-by-manner-of-execution">Classification of standard query operators by manner of execution</a></li><li class="lvl3"><a href="#immediate">Immediate</a></li><li class="lvl3"><a href="#deferred">Deferred</a></li><li class="lvl3"><a href="#streaming">Streaming</a></li><li class="lvl3"><a href="#nonstreaming">Nonstreaming</a></li><li class="lvl2"><a href="#classification-table">Classification table</a></li><li class="lvl2"><a href="#linq-to-objects">LINQ to objects</a></li><li class="lvl2"><a href="#store-the-results-of-a-query-in-memory">Store the results of a query in memory</a></li><li class="lvl2"><a href="#see-also">See also</a></li></ul></nav><p>A <em>query</em> is an expression that retrieves data from a data source. Different data sources have different native query languages, for example SQL for relational databases and XQuery for XML. Developers must learn a new query language for each type of data source or data format that they must support. LINQ simplifies this situation by offering a consistent C# language model for kinds of data sources and formats. In a LINQ query, you always work with C# objects. You use the same basic coding patterns to query and transform data in XML documents, SQL databases, .NET collections, and any other format when a LINQ provider is available.</p>
+<h2>Three Parts of a Query Operation <a class="anchor" href="#three-parts-of-a-query-operation" id="three-parts-of-a-query-operation">#</a></h2>
+<p>All LINQ query operations consist of three distinct actions:</p>
+<ol>
+<li>Obtain the data source.</li>
+<li>Create the query.</li>
+<li>Execute the query.</li>
+</ol>
+<p>The following example shows how the three parts of a query operation are expressed in source code. The example uses an integer array as a data source for convenience; however, the same concepts apply to other data sources also. This example is referred to throughout the rest of this article.</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="c1">// The Three Parts of a LINQ Query:</span>
+<span class="c1">// 1. Data source.</span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">];</span>
+
+<span class="c1">// 2. Query creation.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">numQuery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span>
+<span class="w">               </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">               </span><span class="k">select</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+
+<span class="c1">// 3. Query execution.</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numQuery</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;{0,1} &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The following illustration shows the complete query operation. In LINQ, the execution of the query is distinct from the query itself. In other words, you don't retrieve any data by creating a query variable.</p>
+<p><img alt="Diagram of the complete LINQ query operation." src="./media/introduction-to-linq-queries/linq-query-complete-operation.png" /></p>
+<h2>The Data Source <a class="anchor" href="#the-data-source" id="the-data-source">#</a></h2>
+<p>The data source in the preceding example is an array, which supports the generic <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> interface. This fact means it can be queried with LINQ. A query is executed in a <code>foreach</code> statement, and <code>foreach</code> requires <a href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> or <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a>. Types that support <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> or a derived interface such as the generic <a href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable" target="_blank" rel="noopener"><code>IQueryable</code></a> are called <em>queryable types</em>.</p>
+<p>A queryable type requires no modification or special treatment to serve as a LINQ data source. If the source data isn't already in memory as a queryable type, the LINQ provider must represent it as such. For example, LINQ to XML loads an XML document into a queryable <a href="https://learn.microsoft.com/dotnet/api/system.xml.linq.xelement" target="_blank" rel="noopener"><code>XElement</code></a> type:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="c1">// Create a data source from an XML document.</span>
+<span class="c1">// using System.Xml.Linq;</span>
+<span class="n">XElement</span><span class="w"> </span><span class="n">contacts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XElement</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">@&quot;c:\myContactList.xml&quot;</span><span class="p">);</span>
+</code></pre></div></div>
+<p>With <a href="https://learn.microsoft.com/ef/core/" target="_blank" rel="noopener">EntityFramework</a>, you create an object-relational mapping between C# classes and your database schema. You write your queries against the objects, and at run-time EntityFramework handles the communication with the database. In the following example, <code>Customers</code> represents a specific table in the database, and the type of the query result, <a href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable" target="_blank" rel="noopener"><code>IQueryable</code></a>, derives from <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a>.</p>
+<div class="codeblock"><span class="lang">csharp</span><div class="hl"><pre><span></span><code><span class="n">Northwnd</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Northwnd</span><span class="p">(</span><span class="s">@&quot;c:\northwnd.mdf&quot;</span><span class="p">);</span>
+
+<span class="c1">// Query for customers in London.</span>
+<span class="n">IQueryable</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">custQuery</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">from</span><span class="w"> </span><span class="n">cust</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">Customers</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">cust</span><span class="p">.</span><span class="n">City</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;London&quot;</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">cust</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>For more information about how to create specific types of data sources, see the documentation for the various LINQ providers. However, the basic rule is simple: a LINQ data source is any object that supports the generic <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> interface, or an interface that inherits from it, typically <a href="https://learn.microsoft.com/dotnet/api/system.linq.iqueryable" target="_blank" rel="noopener"><code>IQueryable</code></a>.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Note</span></p>
+<p>Types such as <a href="https://learn.microsoft.com/dotnet/api/system.collections.arraylist" target="_blank" rel="noopener"><code>ArrayList</code></a> that support the non-generic <a href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> interface can also be used as a LINQ data source. For more information, see <a href="../ch8/20.html">How to query an ArrayList with LINQ (C#)</a>.</p>
+</blockquote>
+<h2>The Query <a class="anchor" href="#the-query" id="the-query">#</a></h2>
+<p>The query specifies what information to retrieve from the data source or sources. Optionally, a query also specifies how that information should be sorted, grouped, and shaped before being returned. A query is stored in a query variable and initialized with a query expression. You use <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/query-keywords" target="_blank" rel="noopener">C# query syntax</a> to write queries.</p>
+<p>The query in the previous example returns all the even numbers from the integer array. The query expression contains three clauses: <code>from</code>, <code>where</code>, and <code>select</code>. (If you're familiar with SQL, you noticed that the ordering of the clauses is reversed from the order in SQL.) The <code>from</code> clause specifies the data source, the <code>where</code> clause applies the filter, and the <code>select</code> clause specifies the type of the returned elements. All the query clauses are discussed in detail in this section. For now, the important point is that in LINQ, the query variable itself takes no action and returns no data. It just stores the information that is required to produce the results when the query is executed at some later point. For more information about how queries are constructed, see <a href="../ch8/8.html">Standard Query Operators Overview (C#)</a>.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Note</span></p>
+<p>Queries can also be expressed by using method syntax. For more information, see <a href="../ch8/4.html">Query Syntax and Method Syntax in LINQ</a>.</p>
+</blockquote>
+<h2>Classification of standard query operators by manner of execution <a class="anchor" href="#classification-of-standard-query-operators-by-manner-of-execution" id="classification-of-standard-query-operators-by-manner-of-execution">#</a></h2>
+<p>The LINQ to Objects implementations of the standard query operator methods execute in one of two main ways: <em>immediate</em> or <em>deferred</em>. The query operators that use deferred execution can be additionally divided into two categories: <em>streaming</em> and <em>nonstreaming</em>.</p>
+<h3>Immediate <a class="anchor" href="#immediate" id="immediate">#</a></h3>
+<p>Immediate execution means that the data source is read and the operation is performed once. All the standard query operators that return a scalar result execute immediately. Examples of such queries are <code>Count</code>, <code>Max</code>, <code>Average</code>, and <code>First</code>. These methods execute without an explicit <code>foreach</code> statement because the query itself must use <code>foreach</code> in order to return a result. These queries return a single value, not an <code>IEnumerable</code> collection. You can force <em>any</em> query to execute immediately using the <a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.tolist" target="_blank" rel="noopener"><code>System.Linq.Enumerable.ToList</code></a> or <a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.toarray" target="_blank" rel="noopener"><code>System.Linq.Enumerable.ToArray</code></a> methods. Immediate execution provides reuse of query results, not query declaration. The results are retrieved once, then stored for future use. The following query returns a count of the even numbers in the source array:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">evenNumQuery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span>
+<span class="w">                   </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                   </span><span class="k">select</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">evenNumCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evenNumQuery</span><span class="p">.</span><span class="n">Count</span><span class="p">();</span>
+</code></pre></div></div>
+<p>To force immediate execution of any query and cache its results, you can call the <a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.tolist" target="_blank" rel="noopener"><code>ToList</code></a> or <a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.toarray" target="_blank" rel="noopener"><code>ToArray</code></a> methods.</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numQuery2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span>
+<span class="w">                       </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                       </span><span class="k">select</span><span class="w"> </span><span class="n">num</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span>
+
+<span class="c1">// or like this:</span>
+<span class="c1">// numQuery3 is still an int[]</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">numQuery3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span>
+<span class="w">                 </span><span class="k">where</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                 </span><span class="k">select</span><span class="w"> </span><span class="n">num</span><span class="p">).</span><span class="n">ToArray</span><span class="p">();</span>
+</code></pre></div></div>
+<p>You can also force execution by putting the <code>foreach</code> loop immediately after the query expression. However, by calling <code>ToList</code> or <code>ToArray</code> you also cache all the data in a single collection object.</p>
+<h3>Deferred <a class="anchor" href="#deferred" id="deferred">#</a></h3>
+<p>Deferred execution means that the operation isn't performed at the point in the code where the query is declared. The operation is performed only when the query variable is enumerated, for example by using a <code>foreach</code> statement. The results of executing the query depend on the contents of the data source when the query is executed rather than when the query is defined. If the query variable is enumerated multiple times, the results might differ every time. Almost all the standard query operators whose return type is <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> or <a href="https://learn.microsoft.com/dotnet/api/system.linq.iorderedenumerable" target="_blank" rel="noopener"><code>IOrderedEnumerable</code></a> execute in a deferred manner. Deferred execution provides the facility of query reuse since the query fetches the updated data from the data source each time query results are iterated. The following code shows an example of deferred execution:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numQuery</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;{0,1} &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The <code>foreach</code> statement is also where the query results are retrieved. For example, in the previous query, the iteration variable <code>num</code> holds each value (one at a time) in the returned sequence.</p>
+<p>Because the query variable itself never holds the query results, you can execute it repeatedly to retrieve updated data. For example, a separate application might update a database continually. In <em>your</em> application, you could create one query that retrieves the latest data, and you could execute it at intervals to retrieve updated results.</p>
+<p>Query operators that use deferred execution can be additionally classified as streaming or nonstreaming.</p>
+<h3>Streaming <a class="anchor" href="#streaming" id="streaming">#</a></h3>
+<p>Streaming operators don't have to read all the source data before they yield elements. At the time of execution, a streaming operator performs its operation on each source element as it is read and yields the element if appropriate. A streaming operator continues to read source elements until a result element can be produced. This means that more than one source element might be read to produce one result element.</p>
+<h3>Nonstreaming <a class="anchor" href="#nonstreaming" id="nonstreaming">#</a></h3>
+<p>Nonstreaming operators must read all the source data before they can yield a result element. Operations such as sorting or grouping fall into this category. At the time of execution, nonstreaming query operators read all the source data, put it into a data structure, perform the operation, and yield the resulting elements.</p>
+<h2>Classification table <a class="anchor" href="#classification-table" id="classification-table">#</a></h2>
+<p>The following table classifies each standard query operator method according to its method of execution.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Note</span></p>
+<p>If an operator is marked in two columns, two input sequences are involved in the operation, and each sequence is evaluated differently. In these cases, it is always the first sequence in the parameter list that is evaluated in a deferred, streaming manner.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Standard query operator</th>
+<th>Return type</th>
+<th>Immediate execution</th>
+<th>Deferred streaming execution</th>
+<th>Deferred nonstreaming execution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.aggregate" target="_blank" rel="noopener"><code>Aggregate</code></a></td>
+<td><code>TSource</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.all" target="_blank" rel="noopener"><code>All</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener"><code>Boolean</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.any" target="_blank" rel="noopener"><code>Any</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener"><code>Boolean</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.asenumerable" target="_blank" rel="noopener"><code>AsEnumerable</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.average" target="_blank" rel="noopener"><code>Average</code></a></td>
+<td>Single numeric value</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.cast" target="_blank" rel="noopener"><code>Cast</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.concat" target="_blank" rel="noopener"><code>Concat</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.contains" target="_blank" rel="noopener"><code>Contains</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener"><code>Boolean</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.count" target="_blank" rel="noopener"><code>Count</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.int32" target="_blank" rel="noopener"><code>Int32</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.defaultifempty" target="_blank" rel="noopener"><code>DefaultIfEmpty</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.distinct" target="_blank" rel="noopener"><code>Distinct</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.elementat" target="_blank" rel="noopener"><code>ElementAt</code></a></td>
+<td><code>TSource</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.elementatordefault" target="_blank" rel="noopener"><code>ElementAtOrDefault</code></a></td>
+<td><code>TSource?</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.empty" target="_blank" rel="noopener"><code>Empty</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.except" target="_blank" rel="noopener"><code>Except</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.first" target="_blank" rel="noopener"><code>First</code></a></td>
+<td><code>TSource</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.firstordefault" target="_blank" rel="noopener"><code>FirstOrDefault</code></a></td>
+<td><code>TSource?</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.groupby" target="_blank" rel="noopener"><code>GroupBy</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.groupjoin" target="_blank" rel="noopener"><code>GroupJoin</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.intersect" target="_blank" rel="noopener"><code>Intersect</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.join" target="_blank" rel="noopener"><code>Join</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.last" target="_blank" rel="noopener"><code>Last</code></a></td>
+<td><code>TSource</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.lastordefault" target="_blank" rel="noopener"><code>LastOrDefault</code></a></td>
+<td><code>TSource?</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.longcount" target="_blank" rel="noopener"><code>LongCount</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.int64" target="_blank" rel="noopener"><code>Int64</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.max" target="_blank" rel="noopener"><code>Max</code></a></td>
+<td>Single numeric value, <code>TSource</code>, or <code>TResult?</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.min" target="_blank" rel="noopener"><code>Min</code></a></td>
+<td>Single numeric value, <code>TSource</code>, or <code>TResult?</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.oftype" target="_blank" rel="noopener"><code>OfType</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderby" target="_blank" rel="noopener"><code>OrderBy</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.iorderedenumerable" target="_blank" rel="noopener"><code>IOrderedEnumerable</code></a></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.orderbydescending" target="_blank" rel="noopener"><code>OrderByDescending</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.iorderedenumerable" target="_blank" rel="noopener"><code>IOrderedEnumerable</code></a></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.range" target="_blank" rel="noopener"><code>Range</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.repeat" target="_blank" rel="noopener"><code>Repeat</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.reverse" target="_blank" rel="noopener"><code>Reverse</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.select" target="_blank" rel="noopener"><code>Select</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.selectmany" target="_blank" rel="noopener"><code>SelectMany</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.sequenceequal" target="_blank" rel="noopener"><code>SequenceEqual</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.boolean" target="_blank" rel="noopener"><code>Boolean</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.single" target="_blank" rel="noopener"><code>Single</code></a></td>
+<td><code>TSource</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.singleordefault" target="_blank" rel="noopener"><code>SingleOrDefault</code></a></td>
+<td><code>TSource?</code></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.skip" target="_blank" rel="noopener"><code>Skip</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.skipwhile" target="_blank" rel="noopener"><code>SkipWhile</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.sum" target="_blank" rel="noopener"><code>Sum</code></a></td>
+<td>Single numeric value</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.take" target="_blank" rel="noopener"><code>Take</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.takewhile" target="_blank" rel="noopener"><code>TakeWhile</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.thenby" target="_blank" rel="noopener"><code>ThenBy</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.iorderedenumerable" target="_blank" rel="noopener"><code>IOrderedEnumerable</code></a></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.thenbydescending" target="_blank" rel="noopener"><code>ThenByDescending</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.iorderedenumerable" target="_blank" rel="noopener"><code>IOrderedEnumerable</code></a></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.toarray" target="_blank" rel="noopener"><code>ToArray</code></a></td>
+<td><code>TSource[]</code> array</td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.todictionary" target="_blank" rel="noopener"><code>ToDictionary</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary" target="_blank" rel="noopener"><code>Dictionary</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.tolist" target="_blank" rel="noopener"><code>ToList</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist" target="_blank" rel="noopener"><code>IList</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.tolookup" target="_blank" rel="noopener"><code>ToLookup</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.ilookup" target="_blank" rel="noopener"><code>ILookup</code></a></td>
+<td>✓</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.union" target="_blank" rel="noopener"><code>Union</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.where" target="_blank" rel="noopener"><code>Where</code></a></td>
+<td><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>LINQ to objects <a class="anchor" href="#linq-to-objects" id="linq-to-objects">#</a></h2>
+<p>"LINQ to Objects" refers to the use of LINQ queries with any <a href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> or <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable" target="_blank" rel="noopener"><code>IEnumerable</code></a> collection directly. You can use LINQ to query any enumerable collections, such as <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list" target="_blank" rel="noopener"><code>List</code></a>, <a href="https://learn.microsoft.com/dotnet/api/system.array" target="_blank" rel="noopener"><code>Array</code></a>, or <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary" target="_blank" rel="noopener"><code>Dictionary</code></a>. The collection can be user-defined or a type returned by a .NET API. In the LINQ approach, you write declarative code that describes what you want to retrieve. LINQ to Objects provides a great introduction to programming with LINQ.</p>
+<p>LINQ queries offer three main advantages over traditional <code>foreach</code> loops:</p>
+<ul>
+<li>They're more concise and readable, especially when filtering multiple conditions.</li>
+<li>They provide powerful filtering, ordering, and grouping capabilities with a minimum of application code.</li>
+<li>They can be ported to other data sources with little or no modification.</li>
+</ul>
+<p>The more complex the operation you want to perform on the data, the more benefit you realize using LINQ instead of traditional iteration techniques.</p>
+<h2>Store the results of a query in memory <a class="anchor" href="#store-the-results-of-a-query-in-memory" id="store-the-results-of-a-query-in-memory">#</a></h2>
+<p>A query is basically a set of instructions for how to retrieve and organize data. Queries are executed lazily, as each subsequent item in the result is requested. When you use <code>foreach</code> to iterate the results, items are returned as accessed. To evaluate a query and store its results without executing a <code>foreach</code> loop, just call one of the following methods on the query variable:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.tolist" target="_blank" rel="noopener"><code>ToList</code></a></li>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.toarray" target="_blank" rel="noopener"><code>ToArray</code></a></li>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.todictionary" target="_blank" rel="noopener"><code>ToDictionary</code></a></li>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.linq.enumerable.tolookup" target="_blank" rel="noopener"><code>ToLookup</code></a></li>
+</ul>
+<p>You should assign the returned collection object to a new variable when you store the query results, as shown in the following example:</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">];</span>
+
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queryFactorsOfFour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span>
+<span class="w">                                      </span><span class="k">where</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                                      </span><span class="k">select</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+
+<span class="c1">// Store the results in a new variable</span>
+<span class="c1">// without executing a foreach loop.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">factorsofFourList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queryFactorsOfFour</span><span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+<span class="c1">// Read and write from the newly created list to demonstrate that it holds data.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">factorsofFourList</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="n">factorsofFourList</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">factorsofFourList</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</code></pre></div></div>
+<h2>See also <a class="anchor" href="#see-also" id="see-also">#</a></h2>
+<ul>
+<li><a href="../ch8/7.html">Walkthrough: Writing Queries in C#</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement" target="_blank" rel="noopener">foreach, in</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/query-keywords" target="_blank" rel="noopener">Query Keywords (LINQ)</a></li>
+</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../ch8/1.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Overview of LINQ</span></a><a class="next" href="../ch8/3.html"><span><em>Next</em>Query expression basics</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div><p class="sources"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5a4 4 0 006 .5l2.5-2.5a4 4 0 00-5.7-5.7L12 7.2"/><path d="M13.5 10.5a4 4 0 00-6-.5L5 12.5a4 4 0 005.7 5.7L12 16.8"/></svg><a href="https://learn.microsoft.com/dotnet/csharp/linq/get-started/introduction-to-linq-queries" target="_blank" rel="noopener">Read this article on learn.microsoft.com</a></p></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the book" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="dotnet">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+</body>
+</html>

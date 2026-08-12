@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cancel async tasks after a period of time &middot; C# and .NET</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">C# / .NET</a><nav><section><h2>0. Setup and the .NET CLI</h2><ul><li><a href="../ch0/1.html">Introduction to .NET</a></li><li><a href="../ch0/2.html">What you can build with .NET</a></li><li><a href="../ch0/3.html">Get started with .NET</a></li><li><a href="../ch0/4.html">The .NET SDK</a></li><li><a href="../ch0/5.html">Releases, patches, and support</a></li><li><a href="../ch0/6.html">The dotnet command</a></li><li><a href="../ch0/7.html">dotnet new: create a project</a></li><li><a href="../ch0/8.html">dotnet build: compile</a></li><li><a href="../ch0/9.html">dotnet run: build and run</a></li><li><a href="../ch0/10.html">dotnet test: run tests</a></li><li><a href="../ch0/11.html">dotnet publish: ship it</a></li><li><a href="../ch0/12.html">dotnet package add: use a library</a></li><li><a href="../ch0/13.html">dotnet format: fix style</a></li><li><a href="../ch0/14.html">Global, tool-path, and local tools</a></li></ul></section><section><h2>1. A tour of C#</h2><ul><li><a href="../ch1/1.html">Tour of C#</a></li><li><a href="../ch1/2.html">What you can build</a></li><li><a href="../ch1/3.html">Hello world and text</a></li><li><a href="../ch1/4.html">Numbers in C#</a></li><li><a href="../ch1/5.html">Tuples and types</a></li><li><a href="../ch1/6.html">Branches and loops</a></li><li><a href="../ch1/7.html">List collections</a></li><li><a href="../ch1/8.html">Pattern matching</a></li><li><a href="../ch1/9.html">C# language strategy</a></li><li><a href="../ch1/10.html">Learn C# for Java developers</a></li><li><a href="../ch1/11.html">Learn C# for JavaScript developers</a></li><li><a href="../ch1/12.html">Learn C# for Python developers</a></li></ul></section><section><h2>2. Program structure and types</h2><ul><li><a href="../ch2/1.html">Overview</a></li><li><a href="../ch2/2.html">Namespaces and using directives</a></li><li><a href="../ch2/3.html">Preprocessor directives</a></li><li><a href="../ch2/4.html">Program organization</a></li><li><a href="../ch2/5.html">Top-level statements</a></li><li><a href="../ch2/6.html">Main method</a></li><li><a href="../ch2/7.html">Overview</a></li><li><a href="../ch2/8.html">Built-in types and literals</a></li><li><a href="../ch2/9.html">Classes</a></li><li><a href="../ch2/10.html">Structs</a></li><li><a href="../ch2/11.html">Records</a></li><li><a href="../ch2/12.html">Interfaces</a></li><li><a href="../ch2/13.html">Enumerations</a></li><li><a href="../ch2/14.html">Generics</a></li><li><a href="../ch2/15.html">Tuples and deconstruction</a></li><li><a href="../ch2/16.html">Type conversions, casting, and boxing</a></li><li><a href="../ch2/17.html">Lambda expressions, delegates, and events</a></li><li><a href="../ch2/18.html">Anonymous types</a></li></ul></section><section><h2>3. Values, nulls, and strings</h2><ul><li><a href="../ch3/1.html">Overview</a></li><li><a href="../ch3/2.html">Nullable value types</a></li><li><a href="../ch3/3.html">Nullable reference types</a></li><li><a href="../ch3/4.html">Null operators</a></li><li><a href="../ch3/5.html">Resolve nullable warnings</a></li><li><a href="../ch3/6.html">Overview</a></li><li><a href="../ch3/7.html">Raw string literals</a></li><li><a href="../ch3/8.html">String interpolation</a></li><li><a href="../ch3/9.html">nameof operator</a></li><li><a href="../ch3/10.html">Concatenate strings</a></li><li><a href="../ch3/11.html">Modify string contents</a></li><li><a href="../ch3/12.html">Compare strings</a></li><li><a href="../ch3/13.html">Search strings</a></li><li><a href="../ch3/14.html">Split strings into substrings</a></li><li><a href="../ch3/15.html">Use string interpolation</a></li></ul></section><section><h2>4. Expressions, statements, and control flow</h2><ul><li><a href="../ch4/1.html">Equality</a></li><li><a href="../ch4/2.html">Selection statements</a></li><li><a href="../ch4/3.html">Iteration statements</a></li><li><a href="../ch4/4.html">Collections</a></li><li><a href="../ch4/5.html">LINQ</a></li><li><a href="../ch4/6.html">Statements</a></li><li><a href="../ch4/7.html">Expression-bodied members</a></li><li><a href="../ch4/8.html">Equality comparisons</a></li><li><a href="../ch4/9.html">How to define value equality for a type</a></li><li><a href="../ch4/10.html">How to test for reference equality (identity)</a></li></ul></section><section><h2>5. Object-oriented C#</h2><ul><li><a href="../ch5/1.html">Classes, structs, and records</a></li><li><a href="../ch5/2.html">Objects</a></li><li><a href="../ch5/3.html">Inheritance</a></li><li><a href="../ch5/4.html">Polymorphism</a></li><li><a href="../ch5/5.html">Versioning with the Override and New Keywords</a></li><li><a href="../ch5/6.html">Knowing When to Use Override and New Keywords</a></li><li><a href="../ch5/7.html">How to override the ToString method</a></li><li><a href="../ch5/8.html">Members overview</a></li><li><a href="../ch5/9.html">Abstract and Sealed Classes and Class Members</a></li><li><a href="../ch5/10.html">Static Classes and Static Class Members</a></li><li><a href="../ch5/11.html">Access Modifiers</a></li><li><a href="../ch5/12.html">Fields</a></li><li><a href="../ch5/13.html">Constants</a></li><li><a href="../ch5/14.html">How to define abstract properties</a></li><li><a href="../ch5/15.html">How to define constants in C#</a></li><li><a href="../ch5/16.html">Properties overview</a></li><li><a href="../ch5/17.html">Using Properties</a></li><li><a href="../ch5/18.html">Interface Properties</a></li><li><a href="../ch5/19.html">Restricting Accessor Accessibility</a></li><li><a href="../ch5/20.html">How to declare and use read write properties</a></li><li><a href="../ch5/21.html">Automatically implemented properties</a></li><li><a href="../ch5/22.html">How to implement a lightweight class with automatically implemented properties</a></li><li><a href="../ch5/23.html">Explicit Interface Implementation</a></li><li><a href="../ch5/24.html">How to explicitly implement interface members</a></li><li><a href="../ch5/25.html">How to explicitly implement members of two interfaces</a></li></ul></section><section><h2>6. Methods, delegates, and events</h2><ul><li><a href="../ch6/1.html">Methods</a></li><li><a href="../ch6/2.html">Iterators</a></li><li><a href="../ch6/3.html">Introduction to delegates</a></li><li><a href="../ch6/4.html">System.Delegate and the delegate keyword</a></li><li><a href="../ch6/5.html">Strongly typed delegates</a></li><li><a href="../ch6/6.html">Common patterns for delegates</a></li><li><a href="../ch6/7.html">Introduction to events</a></li><li><a href="../ch6/8.html">Standard .NET event patterns</a></li><li><a href="../ch6/9.html">The updated .NET event pattern</a></li><li><a href="../ch6/10.html">Distinguish delegates and events</a></li><li><a href="../ch6/11.html">Versioning</a></li><li><a href="../ch6/12.html">Overview</a></li><li><a href="../ch6/13.html">Using Delegates</a></li><li><a href="../ch6/14.html">Delegates with Named vs. Anonymous Methods</a></li><li><a href="../ch6/15.html">How to combine delegates (Multicast Delegates) (C# Programming Guide)</a></li><li><a href="../ch6/16.html">How to declare, instantiate, and use a delegate</a></li><li><a href="../ch6/17.html">Overview</a></li><li><a href="../ch6/18.html">How to subscribe to and unsubscribe from events</a></li><li><a href="../ch6/19.html">How to raise base class events in derived classes</a></li><li><a href="../ch6/20.html">How to implement interface events</a></li><li><a href="../ch6/21.html">How to implement custom event accessors</a></li><li><a href="../ch6/22.html">Overview</a></li><li><a href="../ch6/23.html">Using Indexers</a></li><li><a href="../ch6/24.html">Indexers in Interfaces</a></li><li><a href="../ch6/25.html">Comparison Between Properties and Indexers</a></li></ul></section><section><h2>7. Generics and collections</h2><ul><li><a href="../ch7/1.html">Generic Type Parameters</a></li><li><a href="../ch7/2.html">Constraints on Type Parameters</a></li><li><a href="../ch7/3.html">Generic Classes</a></li><li><a href="../ch7/4.html">Generic Interfaces</a></li><li><a href="../ch7/5.html">Generic Methods</a></li><li><a href="../ch7/6.html">Generics and Arrays</a></li><li><a href="../ch7/7.html">Generic Delegates</a></li><li><a href="../ch7/8.html">Differences Between C++ Templates and C# Generics</a></li><li><a href="../ch7/9.html">Generics in the Run Time</a></li><li><a href="../ch7/10.html">Collections and data structures</a></li><li><a href="../ch7/11.html">Commonly used collection types</a></li><li><a href="../ch7/12.html">Selecting a collection class</a></li><li><a href="../ch7/13.html">Comparisons and sorts within collections</a></li><li><a href="../ch7/14.html">Sorted collection types</a></li><li><a href="../ch7/15.html">Hashtable and dictionary types</a></li><li><a href="../ch7/16.html">Thread-safe collections</a></li><li><a href="../ch7/17.html">When to use a thread-safe collection</a></li><li><a href="../ch7/18.html">Generic types in .NET</a></li><li><a href="../ch7/19.html">Generic collections in .NET</a></li><li><a href="../ch7/20.html">Generic delegates for manipulating arrays and lists</a></li><li><a href="../ch7/21.html">Generic interfaces</a></li><li><a href="../ch7/22.html">Covariance and contravariance</a></li></ul></section><section><h2>8. LINQ</h2><ul><li><a href="../ch8/1.html">Overview of LINQ</a></li><li><a href="../ch8/2.html">Introduction to LINQ queries</a></li><li><a href="../ch8/3.html">Query expression basics</a></li><li><a href="../ch8/4.html">Write LINQ queries</a></li><li><a href="../ch8/5.html">Type relationships in LINQ query operations</a></li><li><a href="../ch8/6.html">C# features that support LINQ</a></li><li><a href="../ch8/7.html">Tutorial: Writing queries in C#</a></li><li><a href="../ch8/8.html">Overview</a></li><li><a href="../ch8/9.html">Filter data</a></li><li><a href="../ch8/10.html">Projection operations</a></li><li><a href="../ch8/11.html">Set operations</a></li><li><a href="../ch8/12.html">Sort data</a></li><li><a href="../ch8/13.html">Quantifier operations</a></li><li><a href="../ch8/14.html">Partition data</a></li><li><a href="../ch8/15.html">Convert data types</a></li><li><a href="../ch8/16.html">Join operations</a></li><li><a href="../ch8/17.html">Group data</a></li><li><a href="../ch8/18.html">How to: LINQ and file directories</a></li><li><a href="../ch8/19.html">How to: LINQ and strings</a></li><li><a href="../ch8/20.html">How to: LINQ and collections</a></li></ul></section><section><h2>9. Asynchronous programming</h2><ul><li><a href="../ch9/1.html">Overview</a></li><li><a href="../ch9/2.html">Asynchronous programming scenarios</a></li><li><a href="../ch9/3.html">Task asynchronous programming model</a></li><li><a href="../ch9/4.html">Async return types</a></li><li><a href="../ch9/5.html">Process asynchronous tasks as they complete</a></li><li><a href="../ch9/6.html">Asynchronous file access</a></li><li><a href="../ch9/7.html">Cancel a list of tasks</a></li><li><a class="active" href="../ch9/8.html">Cancel tasks after a period of time</a></li><li><a href="../ch9/9.html">Generate and consume asynchronous streams</a></li><li><a href="../ch9/10.html">The task asynchronous programming model</a></li><li><a href="../ch9/11.html">Consuming the task-based pattern</a></li><li><a href="../ch9/12.html">Parallel programming in .NET</a></li><li><a href="../ch9/13.html">Task parallel library (TPL)</a></li><li><a href="../ch9/14.html">Data parallelism</a></li><li><a href="../ch9/15.html">Cancellation in managed threads</a></li></ul></section><section><h2>10. Exceptions and functional techniques</h2><ul><li><a href="../ch10/1.html">Overview</a></li><li><a href="../ch10/2.html">Using exceptions</a></li><li><a href="../ch10/3.html">Exception handling</a></li><li><a href="../ch10/4.html">Creating and throwing exceptions</a></li><li><a href="../ch10/5.html">Compiler-generated exceptions</a></li><li><a href="../ch10/6.html">Pattern matching</a></li><li><a href="../ch10/7.html">Discards</a></li><li><a href="../ch10/8.html">Deconstructing tuples and other types</a></li><li><a href="../ch10/9.html">Handling and throwing exceptions in .NET</a></li><li><a href="../ch10/10.html">Best practices for exceptions</a></li><li><a href="../ch10/11.html">Create user-defined exceptions</a></li></ul></section><section><h2>11. Advanced C#</h2><ul><li><a href="../ch11/1.html">Overview</a></li><li><a href="../ch11/2.html">Create custom attributes</a></li><li><a href="../ch11/3.html">Access attributes using reflection</a></li><li><a href="../ch11/4.html">How to create a C/C++ union by using attributes</a></li><li><a href="../ch11/5.html">Generics and attributes</a></li><li><a href="../ch11/6.html">How to query an assembly&#x27;s metadata with reflection and LINQ</a></li><li><a href="../ch11/7.html">Generics and reflection</a></li><li><a href="../ch11/8.html">Tutorial: Define and use attributes</a></li><li><a href="../ch11/9.html">Overview</a></li><li><a href="../ch11/10.html">Expression Trees Explained</a></li><li><a href="../ch11/11.html">Framework Types Supporting Expression Trees</a></li><li><a href="../ch11/12.html">Execute expressions</a></li><li><a href="../ch11/13.html">Interpret expressions</a></li><li><a href="../ch11/14.html">Build expressions</a></li><li><a href="../ch11/15.html">Overview</a></li><li><a href="../ch11/16.html">Tutorial - reduce allocations</a></li><li><a href="../ch11/17.html">Tutorial - Write a custom string interpolation handler</a></li><li><a href="../ch11/18.html">Safely update interfaces with default interface methods</a></li><li><a href="../ch11/19.html">Create mixin functionality with default interface methods</a></li><li><a href="../ch11/20.html">Explore static interface members</a></li><li><a href="../ch11/21.html">Overview</a></li><li><a href="../ch11/22.html">Example COM class</a></li><li><a href="../ch11/23.html">Walkthrough: Office programming</a></li><li><a href="../ch11/24.html">Use platform invoke to play a WAV file</a></li><li><a href="../ch11/25.html">Use indexed properties in COM interop programming</a></li></ul></section><section><h2>12. The .NET runtime</h2><ul><li><a href="../ch12/1.html">Common Language Runtime (CLR)</a></li><li><a href="../ch12/2.html">The managed execution process</a></li><li><a href="../ch12/3.html">Automatic memory management</a></li><li><a href="../ch12/4.html">Garbage collection fundamentals</a></li><li><a href="../ch12/5.html">Memory management and garbage collection</a></li><li><a href="../ch12/6.html">Workstation and server garbage collection</a></li><li><a href="../ch12/7.html">Cleaning up unmanaged resources</a></li><li><a href="../ch12/8.html">Implementing a Dispose method</a></li><li><a href="../ch12/9.html">Using objects that implement IDisposable</a></li><li><a href="../ch12/10.html">Memory and spans</a></li><li><a href="../ch12/11.html">Memory-related types</a></li><li><a href="../ch12/12.html">Assemblies in .NET</a></li><li><a href="../ch12/13.html">Reflection in .NET</a></li><li><a href="../ch12/14.html">The .NET class libraries</a></li><li><a href="../ch12/15.html">Framework libraries overview</a></li><li><a href="../ch12/16.html">Serialization in .NET</a></li><li><a href="../ch12/17.html">JSON serialization with System.Text.Json</a></li><li><a href="../ch12/18.html">How to serialize and deserialize JSON</a></li><li><a href="../ch12/19.html">File and stream I/O</a></li><li><a href="../ch12/20.html">Regular expressions in .NET</a></li><li><a href="../ch12/21.html">Dates, times, and time zones</a></li><li><a href="../ch12/22.html">Framework design guidelines</a></li><li><a href="../ch12/23.html">Naming guidelines</a></li><li><a href="../ch12/24.html">Member design guidelines</a></li></ul></section><section><h2>13. What&#x27;s new in C#</h2><ul><li><a href="../ch13/1.html">C# 15</a></li><li><a href="../ch13/2.html">C# 14</a></li><li><a href="../ch13/3.html">C# 13</a></li><li><a href="../ch13/4.html">C# 12</a></li><li><a href="../ch13/5.html">C# version history</a></li><li><a href="../ch13/6.html">Relationships to .NET library</a></li><li><a href="../ch13/7.html">Version compatibility</a></li></ul></section><section><h2>14. Guided tutorials</h2><ul><li><a href="../ch14/1.html">Explore top-level statements</a></li><li><a href="../ch14/2.html">Explore indexes and ranges</a></li><li><a href="../ch14/3.html">Explore patterns in objects</a></li><li><a href="../ch14/4.html">Console Application</a></li><li><a href="../ch14/5.html">REST Client</a></li><li><a href="../ch14/6.html">Work with LINQ</a></li><li><a href="../ch14/7.html">Build file-based apps</a></li><li><a href="../ch14/8.html">How to display command-line arguments</a></li><li><a href="../ch14/9.html">Build a command-line app with System.CommandLine</a></li><li><a href="../ch14/10.html">Express your design intent with nullable reference types</a></li><li><a href="../ch14/11.html">Introduction to classes</a></li><li><a href="../ch14/12.html">Object-oriented C#</a></li><li><a href="../ch14/13.html">Inheritance in C# and .NET</a></li><li><a href="../ch14/14.html">Generate API documentation with XML comments</a></li></ul></section></nav><p class="side-note">Built from the official Microsoft documentation<br><span class="mono">dotnet/docs &middot; CC BY 4.0</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../ch9/7.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../ch9/9.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>9. Asynchronous programming</span><b>/</b><span class="here">Cancel async tasks after a period of time</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the book (Ctrl K)" aria-label="Search the book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">9. ASYNCHRONOUS PROGRAMMING</p><h1>Cancel async tasks after a period of time</h1><p class="dek">Learn how to schedule cancellation of any associated tasks that are not completed within a period of time.</p><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#prerequisites">Prerequisites</a></li><li class="lvl2"><a href="#update-application-entry-point">Update application entry point</a></li><li class="lvl3"><a href="#example-application-output">Example application output</a></li><li class="lvl2"><a href="#complete-example">Complete example</a></li><li class="lvl2"><a href="#see-also">See also</a></li></ul></nav><p>You can cancel an asynchronous operation after a period of time by using the <a href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource.cancelafter" target="_blank" rel="noopener"><code>System.Threading.CancellationTokenSource.CancelAfter</code></a> method if you don't want to wait for the operation to finish. This method schedules the cancellation of any associated tasks that aren't complete within the period of time that's designated by the <code>CancelAfter</code> expression.</p>
+<p>This example adds to the code that's developed in <a href="../ch9/7.html">Cancel a list of tasks (C#)</a> to download a list of websites and to display the length of the contents of each one.</p>
+<p>This tutorial covers:</p>
+<blockquote>
+<ul>
+<li>Updating an existing .NET console application</li>
+<li>Scheduling a cancellation</li>
+</ul>
+</blockquote>
+<h2>Prerequisites <a class="anchor" href="#prerequisites" id="prerequisites">#</a></h2>
+<p>This tutorial requires the following:</p>
+<ul>
+<li>You're expected to have created an application in the <a href="../ch9/7.html">Cancel a list of tasks (C#)</a> tutorial</li>
+<li><a href="https://dotnet.microsoft.com/download/dotnet/5.0" target="_blank" rel="noopener">.NET 5 or later SDK</a></li>
+<li>Integrated development environment (IDE)<ul>
+<li><a href="https://visualstudio.microsoft.com" target="_blank" rel="noopener">We recommend Visual Studio or Visual Studio Code</a></li>
+</ul>
+</li>
+</ul>
+<h2>Update application entry point <a class="anchor" href="#update-application-entry-point" id="update-application-entry-point">#</a></h2>
+<p>Replace the existing <code>Main</code> method with the following:</p>
+<div class="codeblock"><span class="lang">csharp</span><div class="hl"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Application started.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">try</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">s_cts</span><span class="p">.</span><span class="n">CancelAfter</span><span class="p">(</span><span class="mi">3500</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nf">SumPageSizesAsync</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OperationCanceledException</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;\nTasks cancelled: timed out.\n&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">finally</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">s_cts</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Application ending.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The updated <code>Main</code> method writes a few instructional messages to the console. Within the <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/statements/exception-handling-statements#the-try-catch-statement" target="_blank" rel="noopener"><code>try-catch</code></a>, a call to <a href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource.cancelafter" target="_blank" rel="noopener"><code>System.Threading.CancellationTokenSource.CancelAfter</code></a> schedules a cancellation. This will signal cancellation after a period of time.</p>
+<p>Next, the <code>SumPageSizesAsync</code> method is awaited. If processing all of the URLs occurs faster than the scheduled cancellation, the application ends. However, if the scheduled cancellation is triggered before all of the URLs are processed, a <a href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception" target="_blank" rel="noopener"><code>OperationCanceledException</code></a> is thrown.</p>
+<h3>Example application output <a class="anchor" href="#example-application-output" id="example-application-output">#</a></h3>
+<div class="codeblock"><span class="lang">console</span><div class="hl"><pre><span></span><code><span class="go">Application started.</span>
+
+<span class="go">https://learn.microsoft.com                                       37,357</span>
+<span class="go">https://learn.microsoft.com/aspnet/core                           85,589</span>
+<span class="go">https://learn.microsoft.com/azure                                398,939</span>
+<span class="go">https://learn.microsoft.com/azure/devops                          73,663</span>
+
+<span class="go">Tasks cancelled: timed out.</span>
+
+<span class="go">Application ending.</span>
+</code></pre></div></div>
+
+<h2>Complete example <a class="anchor" href="#complete-example" id="complete-example">#</a></h2>
+<p>The following code is the complete text of the <em>Program.cs</em> file for the example.</p>
+<div class="codeblock"><span class="lang">c#</span><div class="hl"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Diagnostics</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">CancellationTokenSource</span><span class="w"> </span><span class="n">s_cts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CancellationTokenSource</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">HttpClient</span><span class="w"> </span><span class="n">s_client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MaxResponseContentBufferSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">_000_000</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s_urlList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/aspnet/core&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/azure&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/azure/devops&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/dotnet&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/dynamics365&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/education&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/enterprise-mobility-security&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/gaming&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/graph&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/microsoft-365&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/office&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/powershell&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/sql&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/surface&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/system-center&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/visualstudio&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/windows&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;https://learn.microsoft.com/maui&quot;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Application started.&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">s_cts</span><span class="p">.</span><span class="n">CancelAfter</span><span class="p">(</span><span class="mi">3500</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="nf">SumPageSizesAsync</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OperationCanceledException</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;\nTasks cancelled: timed out.\n&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">finally</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">s_cts</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Application ending.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">SumPageSizesAsync</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">stopwatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stopwatch</span><span class="p">.</span><span class="n">StartNew</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">s_urlList</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">contentLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">ProcessUrlAsync</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">s_client</span><span class="p">,</span><span class="w"> </span><span class="n">s_cts</span><span class="p">.</span><span class="n">Token</span><span class="p">);</span>
+<span class="w">            </span><span class="n">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">contentLength</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">stopwatch</span><span class="p">.</span><span class="n">Stop</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;\nTotal bytes returned:  {total:#,#}&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Elapsed time:          {stopwatch.Elapsed}\n&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ProcessUrlAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">HttpClient</span><span class="w"> </span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">token</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">HttpResponseMessage</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsByteArrayAsync</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{url,-60} {content.Length,10:#,#}&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">content</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h2>See also <a class="anchor" href="#see-also" id="see-also">#</a></h2>
+<ul>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken" target="_blank" rel="noopener"><code>CancellationToken</code></a></li>
+<li><a href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtokensource" target="_blank" rel="noopener"><code>CancellationTokenSource</code></a></li>
+<li><a href="../ch9/1.html">Asynchronous programming with async and await (C#)</a></li>
+<li><a href="../ch9/7.html">Cancel a list of tasks (C#)</a></li>
+</ul><footer class="lesson-foot"><div class="pager"><a class="prev" href="../ch9/7.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Cancel a list of tasks</span></a><a class="next" href="../ch9/9.html"><span><em>Next</em>Generate and consume asynchronous streams</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div><p class="sources"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5a4 4 0 006 .5l2.5-2.5a4 4 0 00-5.7-5.7L12 7.2"/><path d="M13.5 10.5a4 4 0 00-6-.5L5 12.5a4 4 0 005.7 5.7L12 16.8"/></svg><a href="https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/cancel-async-tasks-after-a-period-of-time" target="_blank" rel="noopener">Read this article on learn.microsoft.com</a></p></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the book" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the book" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="dotnet">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+</body>
+</html>

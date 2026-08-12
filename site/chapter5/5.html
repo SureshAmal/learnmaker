@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creating your own dataset &middot; Hugging Face LLM Course</title>
+<script>/* set the theme before the first paint, or every page flashes light */
+(function(){var t;try{t=localStorage.getItem('llmcourse-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||(window.matchMedia&&
+window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();</script>
+<link rel="stylesheet" href="../assets/style.css?v=9f75a64a">
+</head>
+<body class="">
+<button class="nav-toggle" type="button" aria-label="Toggle contents"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+<aside class="sidebar"><a class="logo" href="../index.html">LLM COURSE</a><nav><section><h2>0. Setup</h2><ul><li><a href="../chapter0/1.html">Introduction</a></li></ul></section><section><h2>1. Transformer models</h2><ul><li><a href="../chapter1/1.html">Introduction</a></li><li><a href="../chapter1/2.html">Natural Language Processing and Large Language Models</a></li><li><a href="../chapter1/3.html">Transformers, what can they do?</a></li><li><a href="../chapter1/4.html">How do Transformers work?</a></li><li><a href="../chapter1/5.html">How Hugging Face Transformers solve tasks</a></li><li><a href="../chapter1/6.html">Transformer Architectures</a></li><li><a href="../chapter1/7.html">Quick quiz</a></li><li><a href="../chapter1/8.html">Inference with LLMs</a></li><li><a href="../chapter1/9.html">Bias and limitations</a></li><li><a href="../chapter1/10.html">Summary</a></li><li><a href="../chapter1/11.html">Certification exam</a></li></ul></section><section><h2>2. Using Hugging Face Transformers</h2><ul><li><a href="../chapter2/1.html">Introduction</a></li><li><a href="../chapter2/2.html">Behind the pipeline</a></li><li><a href="../chapter2/3.html">Models</a></li><li><a href="../chapter2/4.html">Tokenizers</a></li><li><a href="../chapter2/5.html">Handling multiple sequences</a></li><li><a href="../chapter2/6.html">Putting it all together</a></li><li><a href="../chapter2/7.html">Basic usage completed!</a></li><li><a href="../chapter2/8.html">Optimized Inference Deployment</a></li><li><a href="../chapter2/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>3. Fine-tuning a pretrained model</h2><ul><li><a href="../chapter3/1.html">Introduction</a></li><li><a href="../chapter3/2.html">Processing the data</a></li><li><a href="../chapter3/3.html">Fine-tuning a model with the Trainer API</a></li><li><a href="../chapter3/4.html">A full training loop</a></li><li><a href="../chapter3/5.html">Understanding Learning Curves</a></li><li><a href="../chapter3/6.html">Fine-tuning, Check!</a></li><li><a href="../chapter3/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>4. Sharing models and tokenizers</h2><ul><li><a href="../chapter4/1.html">The Hugging Face Hub</a></li><li><a href="../chapter4/2.html">Using pretrained models</a></li><li><a href="../chapter4/3.html">Sharing pretrained models</a></li><li><a href="../chapter4/4.html">Building a model card</a></li><li><a href="../chapter4/5.html">Part 1 completed!</a></li><li><a href="../chapter4/6.html">End-of-chapter quiz</a></li></ul></section><section><h2>5. The Hugging Face Datasets library</h2><ul><li><a href="../chapter5/1.html">Introduction</a></li><li><a href="../chapter5/2.html">What if my dataset isn&#x27;t on the Hub?</a></li><li><a href="../chapter5/3.html">Time to slice and dice</a></li><li><a href="../chapter5/4.html">Big data? Hugging Face Datasets to the rescue!</a></li><li><a class="active" href="../chapter5/5.html">Creating your own dataset</a></li><li><a href="../chapter5/6.html">Semantic search with FAISS</a></li><li><a href="../chapter5/7.html">Hugging Face Datasets, check!</a></li><li><a href="../chapter5/8.html">End-of-chapter quiz</a></li></ul></section><section><h2>6. The Hugging Face Tokenizers library</h2><ul><li><a href="../chapter6/1.html">Introduction</a></li><li><a href="../chapter6/2.html">Training a new tokenizer from an old one</a></li><li><a href="../chapter6/3.html">Fast tokenizers&#x27; special powers</a></li><li><a href="../chapter6/3b.html">Fast tokenizers in the QA pipeline</a></li><li><a href="../chapter6/4.html">Normalization and pre-tokenization</a></li><li><a href="../chapter6/5.html">Byte-Pair Encoding tokenization</a></li><li><a href="../chapter6/6.html">WordPiece tokenization</a></li><li><a href="../chapter6/7.html">Unigram tokenization</a></li><li><a href="../chapter6/8.html">Building a tokenizer, block by block</a></li><li><a href="../chapter6/9.html">Tokenizers, check!</a></li><li><a href="../chapter6/10.html">End-of-chapter quiz</a></li></ul></section><section><h2>7. Classical NLP tasks</h2><ul><li><a href="../chapter7/1.html">Introduction</a></li><li><a href="../chapter7/2.html">Token classification</a></li><li><a href="../chapter7/3.html">Fine-tuning a masked language model</a></li><li><a href="../chapter7/4.html">Translation</a></li><li><a href="../chapter7/5.html">Summarization</a></li><li><a href="../chapter7/6.html">Training a causal language model from scratch</a></li><li><a href="../chapter7/7.html">Question answering</a></li><li><a href="../chapter7/8.html">Mastering LLMs</a></li><li><a href="../chapter7/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>8. How to ask for help</h2><ul><li><a href="../chapter8/1.html">Introduction</a></li><li><a href="../chapter8/2.html">What to do when you get an error</a></li><li><a href="../chapter8/3.html">Asking for help on the forums</a></li><li><a href="../chapter8/4.html">Debugging the training pipeline</a></li><li><a href="../chapter8/5.html">How to write a good issue</a></li><li><a href="../chapter8/6.html">Part 2 completed!</a></li><li><a href="../chapter8/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>9. Building and sharing demos</h2><ul><li><a href="../chapter9/1.html">Introduction to Gradio</a></li><li><a href="../chapter9/2.html">Building your first demo</a></li><li><a href="../chapter9/3.html">Understanding the Interface class</a></li><li><a href="../chapter9/4.html">Sharing demos with others</a></li><li><a href="../chapter9/5.html">Integrations with the Hugging Face Hub</a></li><li><a href="../chapter9/6.html">Advanced Interface features</a></li><li><a href="../chapter9/7.html">Introduction to Blocks</a></li><li><a href="../chapter9/8.html">Gradio, check!</a></li><li><a href="../chapter9/9.html">End-of-chapter quiz</a></li></ul></section><section><h2>10. Curate high-quality datasets</h2><ul><li><a href="../chapter10/1.html">Introduction to Argilla</a></li><li><a href="../chapter10/2.html">Set up your Argilla instance</a></li><li><a href="../chapter10/3.html">Load your dataset to Argilla</a></li><li><a href="../chapter10/4.html">Annotate your dataset</a></li><li><a href="../chapter10/5.html">Use your annotated dataset</a></li><li><a href="../chapter10/6.html">Argilla, check!</a></li><li><a href="../chapter10/7.html">End-of-chapter quiz</a></li></ul></section><section><h2>11. Fine-tune Large Language Models</h2><ul><li><a href="../chapter11/1.html">Introduction</a></li><li><a href="../chapter11/2.html">Chat Templates</a></li><li><a href="../chapter11/3.html">Fine-Tuning with SFTTrainer</a></li><li><a href="../chapter11/4.html">LoRA (Low-Rank Adaptation)</a></li><li><a href="../chapter11/5.html">Evaluation</a></li><li><a href="../chapter11/6.html">Conclusion</a></li><li><a href="../chapter11/7.html">Exam Time!</a></li></ul></section><section><h2>12. Build Reasoning Models</h2><ul><li><a href="../chapter12/1.html">Introduction</a></li><li><a href="../chapter12/2.html">Reinforcement Learning on LLMs</a></li><li><a href="../chapter12/3.html">The Aha Moment in the DeepSeek R1 Paper</a></li><li><a href="../chapter12/3b.html">Advanced Understanding of GRPO in DeepSeekMath</a></li><li><a href="../chapter12/4.html">Implementing GRPO in TRL</a></li><li><a href="../chapter12/5.html">Practical Exercise to Fine-tune a model with GRPO</a></li><li><a href="../chapter12/6.html">Practical Exercise with Unsloth</a></li><li><a href="../chapter12/7.html">Coming soon...</a></li></ul></section></nav><p class="side-note">Built from the official course sources <br><span class="mono">huggingface/course @ 5805d51</span></p></aside>
+<div class="paper"><div class="topbar"><a href="../chapter5/4.html" class="nudge prev" aria-label="Previous section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><a href="../chapter5/6.html" class="nudge next" aria-label="Next section"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a><div class="crumb"><span>5. The Hugging Face Datasets library</span><b>/</b><span class="here">Creating your own dataset</span></div><button class="ask-open" type="button" title="Ask about this book (Ctrl I)" aria-label="Ask about this book"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><kbd>Ask</kbd></button><button class="find" type="button" title="Search the course (Ctrl K)" aria-label="Search the course"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><kbd>Ctrl K</kbd></button><button class="theme" type="button" aria-label="Toggle theme"><span class="ico-light"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></span><span class="ico-dark"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></span></button></div><article class="lesson"><header class="lesson-head"><p class="meta">CHAPTER 5, SECTION 5</p><h1>Creating your own dataset</h1><p class="dek">5. The Hugging Face Datasets library, section 5</p><p class="rule">-----</p></header><nav class="page-toc"><h2><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h13M5 15h13M10.5 4l-2 16M16 4l-2 16"/></svg><span>In this section</span></h2><ul><li class="lvl2"><a href="#getting-the-data">Getting the data</a></li><li class="lvl2"><a href="#cleaning-up-the-data">Cleaning up the data</a></li><li class="lvl2"><a href="#augmenting-the-dataset">Augmenting the dataset</a></li><li class="lvl2"><a href="#uploading-the-dataset-to-the-hugging-face-hub">Uploading the dataset to the Hugging Face Hub</a></li><li class="lvl2"><a href="#creating-a-dataset-card">Creating a dataset card</a></li></ul></nav><p>Sometimes the dataset that you need to build an NLP application doesn't exist, so you'll need to create it yourself. In this section we'll show you how to create a corpus of <a href="https://github.com/features/issues/" target="_blank" rel="noopener">GitHub issues</a>, which are commonly used to track bugs or features in GitHub repositories. This corpus could be used for various purposes, including:</p>
+<ul>
+<li>Exploring how long it takes to close open issues or pull requests</li>
+<li>Training a <em>multilabel classifier</em> that can tag issues with metadata based on the issue's description (e.g., "bug," "enhancement," or "question")</li>
+<li>Creating a semantic search engine to find which issues match a user's query</li>
+</ul>
+<p>Here we'll focus on creating the corpus, and in the next section we'll tackle the semantic search application. To keep things meta, we'll use the GitHub issues associated with a popular open source project: Hugging Face Datasets! Let's take a look at how to get the data and explore the information contained in these issues.</p>
+<h2>Getting the data <a class="anchor" href="#getting-the-data" id="getting-the-data">#</a></h2>
+<p>You can find all the issues in Hugging Face Datasets by navigating to the repository's <a href="https://github.com/huggingface/datasets/issues" target="_blank" rel="noopener">Issues tab</a>. As shown in the following screenshot, at the time of writing there were 331 open issues and 668 closed ones.</p>
+<div class="flex justify-center">
+<img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter5/datasets-issues.png" alt="The GitHub issues associated with Hugging Face Datasets." width="80%"/>
+</div>
+
+<p>If you click on one of these issues you'll find it contains a title, a description, and a set of labels that characterize the issue. An example is shown in the screenshot below.</p>
+<div class="flex justify-center">
+<img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter5/datasets-issues-single.png" alt="A typical GitHub issue in the Hugging Face Datasets repository." width="80%"/>
+</div>
+
+<p>To download all the repository's issues, we'll use the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener">GitHub REST API</a> to poll the <a href="https://docs.github.com/en/rest/reference/issues#list-repository-issues" target="_blank" rel="noopener"><code>Issues</code> endpoint</a>. This endpoint returns a list of JSON objects, with each object containing a large number of fields that include the title and description as well as metadata about the status of the issue and so on.</p>
+<p>A convenient way to download the issues is via the <code>requests</code> library, which is the standard way for making HTTP requests in Python. You can install the library by running:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
+</code></pre></div></div>
+
+<p>Once the library is installed, you can make GET requests to the <code>Issues</code> endpoint by invoking the <code>requests.get()</code> function. For example, you can run the following command to retrieve the first issue on the first page:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.github.com/repos/huggingface/datasets/issues?page=1&amp;per_page=1&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code>response</code> object contains a lot of useful information about the request, including the HTTP status code:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>200
+</code></pre></div></div>
+
+<p>where a <code>200</code> status means the request was successful (you can find a list of possible HTTP status codes <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank" rel="noopener">here</a>). What we are really interested in, though, is the <em>payload</em>, which can be accessed in various formats like bytes, strings, or JSON. Since we know our issues are in JSON format, let's inspect the payload as follows:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>[{&#39;url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/issues/2792&#39;,
+  &#39;repository_url&#39;: &#39;https://api.github.com/repos/huggingface/datasets&#39;,
+  &#39;labels_url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/issues/2792/labels{/name}&#39;,
+  &#39;comments_url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/issues/2792/comments&#39;,
+  &#39;events_url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/issues/2792/events&#39;,
+  &#39;html_url&#39;: &#39;https://github.com/huggingface/datasets/pull/2792&#39;,
+  &#39;id&#39;: 968650274,
+  &#39;node_id&#39;: &#39;MDExOlB1bGxSZXF1ZXN0NzEwNzUyMjc0&#39;,
+  &#39;number&#39;: 2792,
+  &#39;title&#39;: &#39;Update GooAQ&#39;,
+  &#39;user&#39;: {&#39;login&#39;: &#39;bhavitvyamalik&#39;,
+   &#39;id&#39;: 19718818,
+   &#39;node_id&#39;: &#39;MDQ6VXNlcjE5NzE4ODE4&#39;,
+   &#39;avatar_url&#39;: &#39;https://avatars.githubusercontent.com/u/19718818?v=4&#39;,
+   &#39;gravatar_id&#39;: &#39;&#39;,
+   &#39;url&#39;: &#39;https://api.github.com/users/bhavitvyamalik&#39;,
+   &#39;html_url&#39;: &#39;https://github.com/bhavitvyamalik&#39;,
+   &#39;followers_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/followers&#39;,
+   &#39;following_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/following{/other_user}&#39;,
+   &#39;gists_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/gists{/gist_id}&#39;,
+   &#39;starred_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/starred{/owner}{/repo}&#39;,
+   &#39;subscriptions_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/subscriptions&#39;,
+   &#39;organizations_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/orgs&#39;,
+   &#39;repos_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/repos&#39;,
+   &#39;events_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/events{/privacy}&#39;,
+   &#39;received_events_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/received_events&#39;,
+   &#39;type&#39;: &#39;User&#39;,
+   &#39;site_admin&#39;: False},
+  &#39;labels&#39;: [],
+  &#39;state&#39;: &#39;open&#39;,
+  &#39;locked&#39;: False,
+  &#39;assignee&#39;: None,
+  &#39;assignees&#39;: [],
+  &#39;milestone&#39;: None,
+  &#39;comments&#39;: 1,
+  &#39;created_at&#39;: &#39;2021-08-12T11:40:18Z&#39;,
+  &#39;updated_at&#39;: &#39;2021-08-12T12:31:17Z&#39;,
+  &#39;closed_at&#39;: None,
+  &#39;author_association&#39;: &#39;CONTRIBUTOR&#39;,
+  &#39;active_lock_reason&#39;: None,
+  &#39;pull_request&#39;: {&#39;url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/pulls/2792&#39;,
+   &#39;html_url&#39;: &#39;https://github.com/huggingface/datasets/pull/2792&#39;,
+   &#39;diff_url&#39;: &#39;https://github.com/huggingface/datasets/pull/2792.diff&#39;,
+   &#39;patch_url&#39;: &#39;https://github.com/huggingface/datasets/pull/2792.patch&#39;},
+  &#39;body&#39;: &#39;[GooAQ](https://github.com/allenai/gooaq) dataset was recently updated after splits were added for the same. This PR contains new updated GooAQ with train/val/test splits and updated README as well.&#39;,
+  &#39;performed_via_github_app&#39;: None}]
+</code></pre></div></div>
+
+<p>Whoa, that's a lot of information! We can see useful fields like <code>title</code>, <code>body</code>, and <code>number</code> that describe the issue, as well as information about the GitHub user who opened the issue.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> Click on a few of the URLs in the JSON payload above to get a feel for what type of information each GitHub issue is linked to.</span></p>
+</blockquote>
+<p>As described in the GitHub <a href="https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting" target="_blank" rel="noopener">documentation</a>, unauthenticated requests are limited to 60 requests per hour. Although you can increase the <code>per_page</code> query parameter to reduce the number of requests you make, you will still hit the rate limit on any repository that has more than a few thousand issues. So instead, you should follow GitHub's <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token" target="_blank" rel="noopener">instructions</a> on creating a <em>personal access token</em> so that you can boost the rate limit to 5,000 requests per hour. Once you have your token, you can include it as part of the request header:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">GITHUB_TOKEN</span> <span class="o">=</span> <span class="n">xxx</span>  <span class="c1"># Copy your GitHub token here</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;token </span><span class="si">{</span><span class="n">GITHUB_TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote class="callout warn"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5L2.9 20h18.2L12 4.5z"/><path d="M12 10v4.5M12 17.4v.3"/></svg><span>Watch out</span></p>
+<p>Do not share a notebook with your <code>GITHUB_TOKEN</code> pasted in it. We recommend you delete the last cell once you have executed it to avoid leaking this information accidentally. Even better, store the token in a <em>.env</em> file and use the <a href="https://github.com/theskumar/python-dotenv" target="_blank" rel="noopener"><code>python-dotenv</code> library</a> to load it automatically for you as an environment variable.</p>
+</blockquote>
+<p>Now that we have our access token, let's create a function that can download all the issues from a GitHub repository:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.notebook</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_issues</span><span class="p">(</span>
+    <span class="n">owner</span><span class="o">=</span><span class="s2">&quot;huggingface&quot;</span><span class="p">,</span>
+    <span class="n">repo</span><span class="o">=</span><span class="s2">&quot;datasets&quot;</span><span class="p">,</span>
+    <span class="n">num_issues</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">rate_limit</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span>
+    <span class="n">issues_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">),</span>
+<span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">issues_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="n">issues_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">all_issues</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">per_page</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of issues to return per page</span>
+    <span class="n">num_pages</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">num_issues</span> <span class="o">/</span> <span class="n">per_page</span><span class="p">)</span>
+    <span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://api.github.com/repos&quot;</span>
+
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_pages</span><span class="p">)):</span>
+        <span class="c1"># Query with state=all to get both open and closed issues</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;issues?page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&amp;per_page=</span><span class="si">{</span><span class="n">per_page</span><span class="si">}</span><span class="s2">&amp;state=all&quot;</span>
+        <span class="n">issues</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">owner</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+        <span class="n">batch</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">issues</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">rate_limit</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_issues</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_issues</span><span class="p">:</span>
+            <span class="n">all_issues</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Flush batch for next time period</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reached GitHub rate limit. Sleeping for one hour ...&quot;</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">all_issues</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">all_issues</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">issues_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">-issues.jsonl&quot;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Downloaded all the issues for </span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">! Dataset stored at </span><span class="si">{</span><span class="n">issues_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s2">-issues.jsonl&quot;</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now when we call <code>fetch_issues()</code> it will download all the issues in batches to avoid exceeding GitHub's limit on the number of requests per hour; the result will be stored in a <em>repository_name-issues.jsonl</em> file, where each line is a JSON object the represents an issue. Let's use this function to grab all the issues from Hugging Face Datasets:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="c1"># Depending on your internet connection, this can take several minutes to run...</span>
+<span class="n">fetch_issues</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Once the issues are downloaded we can load them locally using our newfound skills from <a href="../chapter5/2.html">section 2</a>:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">issues_dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="s2">&quot;datasets-issues.jsonl&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+<span class="n">issues_dataset</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>Dataset({
+    features: [&#39;url&#39;, &#39;repository_url&#39;, &#39;labels_url&#39;, &#39;comments_url&#39;, &#39;events_url&#39;, &#39;html_url&#39;, &#39;id&#39;, &#39;node_id&#39;, &#39;number&#39;, &#39;title&#39;, &#39;user&#39;, &#39;labels&#39;, &#39;state&#39;, &#39;locked&#39;, &#39;assignee&#39;, &#39;assignees&#39;, &#39;milestone&#39;, &#39;comments&#39;, &#39;created_at&#39;, &#39;updated_at&#39;, &#39;closed_at&#39;, &#39;author_association&#39;, &#39;active_lock_reason&#39;, &#39;pull_request&#39;, &#39;body&#39;, &#39;timeline_url&#39;, &#39;performed_via_github_app&#39;],
+    num_rows: 3019
+})
+</code></pre></div></div>
+
+<p>Great, we've created our first dataset from scratch! But why are there several thousand issues when the <a href="https://github.com/huggingface/datasets/issues" target="_blank" rel="noopener">Issues tab</a> of the Hugging Face Datasets repository only shows around 1,000 issues in total ? As described in the GitHub <a href="https://docs.github.com/en/rest/reference/issues#list-issues-assigned-to-the-authenticated-user" target="_blank" rel="noopener">documentation</a>, that's because we've downloaded all the pull requests as well:</p>
+<blockquote>
+<p>GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by the <code>pull_request</code> key. Be aware that the <code>id</code> of a pull request returned from "Issues" endpoints will be an issue id.</p>
+</blockquote>
+<p>Since the contents of issues and pull requests are quite different, let's do some minor preprocessing to enable us to distinguish between them.</p>
+<h2>Cleaning up the data <a class="anchor" href="#cleaning-up-the-data" id="cleaning-up-the-data">#</a></h2>
+<p>The above snippet from GitHub's documentation tells us that the <code>pull_request</code> column can be used to differentiate between issues and pull requests. Let's look at a random sample to see what the difference is. As we did in <a href="../chapter5/3.html">section 3</a>, we'll chain <code>Dataset.shuffle()</code> and <code>Dataset.select()</code> to create a random sample and then zip the <code>html_url</code> and <code>pull_request</code> columns so we can compare the various URLs:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">sample</span> <span class="o">=</span> <span class="n">issues_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Print out the URL and pull request entries</span>
+<span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">pr</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;html_url&quot;</span><span class="p">],</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;pull_request&quot;</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt; URL: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt; Pull request: </span><span class="si">{</span><span class="n">pr</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>&gt;&gt; URL: https://github.com/huggingface/datasets/pull/850
+&gt;&gt; Pull request: {&#39;url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/pulls/850&#39;, &#39;html_url&#39;: &#39;https://github.com/huggingface/datasets/pull/850&#39;, &#39;diff_url&#39;: &#39;https://github.com/huggingface/datasets/pull/850.diff&#39;, &#39;patch_url&#39;: &#39;https://github.com/huggingface/datasets/pull/850.patch&#39;}
+
+&gt;&gt; URL: https://github.com/huggingface/datasets/issues/2773
+&gt;&gt; Pull request: None
+
+&gt;&gt; URL: https://github.com/huggingface/datasets/pull/783
+&gt;&gt; Pull request: {&#39;url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/pulls/783&#39;, &#39;html_url&#39;: &#39;https://github.com/huggingface/datasets/pull/783&#39;, &#39;diff_url&#39;: &#39;https://github.com/huggingface/datasets/pull/783.diff&#39;, &#39;patch_url&#39;: &#39;https://github.com/huggingface/datasets/pull/783.patch&#39;}
+</code></pre></div></div>
+
+<p>Here we can see that each pull request is associated with various URLs, while ordinary issues have a <code>None</code> entry. We can use this distinction to create a new <code>is_pull_request</code> column that checks whether the <code>pull_request</code> field is <code>None</code> or not:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">issues_dataset</span> <span class="o">=</span> <span class="n">issues_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;is_pull_request&quot;</span><span class="p">:</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pull_request&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> Calculate the average time it takes to close issues in Hugging Face Datasets. You may find the <code>Dataset.filter()</code> function useful to filter out the pull requests and open issues, and you can use the <code>Dataset.set_format()</code> function to convert the dataset to a <code>DataFrame</code> so you can easily manipulate the <code>created_at</code> and <code>closed_at</code> timestamps. For bonus points, calculate the average time it takes to close pull requests.</span></p>
+</blockquote>
+<p>Although we could proceed to further clean up the dataset by dropping or renaming some columns, it is generally a good practice to keep the dataset as "raw" as possible at this stage so that it can be easily used in multiple applications.</p>
+<p>Before we push our dataset to the Hugging Face Hub, let's deal with one thing that's missing from it: the comments associated with each issue and pull request. We'll add them next with -- you guessed it -- the GitHub REST API!</p>
+<h2>Augmenting the dataset <a class="anchor" href="#augmenting-the-dataset" id="augmenting-the-dataset">#</a></h2>
+<p>As shown in the following screenshot, the comments associated with an issue or pull request provide a rich source of information, especially if we're interested in building a search engine to answer user queries about the library.</p>
+<div class="flex justify-center">
+<img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter5/datasets-issues-comment.png" alt="Comments associated with an issue about Hugging Face Datasets." width="80%"/>
+</div>
+
+<p>The GitHub REST API provides a <a href="https://docs.github.com/en/rest/reference/issues#list-issue-comments" target="_blank" rel="noopener"><code>Comments</code> endpoint</a> that returns all the comments associated with an issue number. Let's test the endpoint to see what it returns:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">issue_number</span> <span class="o">=</span> <span class="mi">2792</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.github.com/repos/huggingface/datasets/issues/</span><span class="si">{</span><span class="n">issue_number</span><span class="si">}</span><span class="s2">/comments&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>[{&#39;url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/issues/comments/897594128&#39;,
+  &#39;html_url&#39;: &#39;https://github.com/huggingface/datasets/pull/2792#issuecomment-897594128&#39;,
+  &#39;issue_url&#39;: &#39;https://api.github.com/repos/huggingface/datasets/issues/2792&#39;,
+  &#39;id&#39;: 897594128,
+  &#39;node_id&#39;: &#39;IC_kwDODunzps41gDMQ&#39;,
+  &#39;user&#39;: {&#39;login&#39;: &#39;bhavitvyamalik&#39;,
+   &#39;id&#39;: 19718818,
+   &#39;node_id&#39;: &#39;MDQ6VXNlcjE5NzE4ODE4&#39;,
+   &#39;avatar_url&#39;: &#39;https://avatars.githubusercontent.com/u/19718818?v=4&#39;,
+   &#39;gravatar_id&#39;: &#39;&#39;,
+   &#39;url&#39;: &#39;https://api.github.com/users/bhavitvyamalik&#39;,
+   &#39;html_url&#39;: &#39;https://github.com/bhavitvyamalik&#39;,
+   &#39;followers_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/followers&#39;,
+   &#39;following_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/following{/other_user}&#39;,
+   &#39;gists_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/gists{/gist_id}&#39;,
+   &#39;starred_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/starred{/owner}{/repo}&#39;,
+   &#39;subscriptions_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/subscriptions&#39;,
+   &#39;organizations_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/orgs&#39;,
+   &#39;repos_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/repos&#39;,
+   &#39;events_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/events{/privacy}&#39;,
+   &#39;received_events_url&#39;: &#39;https://api.github.com/users/bhavitvyamalik/received_events&#39;,
+   &#39;type&#39;: &#39;User&#39;,
+   &#39;site_admin&#39;: False},
+  &#39;created_at&#39;: &#39;2021-08-12T12:21:52Z&#39;,
+  &#39;updated_at&#39;: &#39;2021-08-12T12:31:17Z&#39;,
+  &#39;author_association&#39;: &#39;CONTRIBUTOR&#39;,
+  &#39;body&#39;: &quot;@albertvillanova my tests are failing here:\r\n```\r\ndataset_name = &#39;gooaq&#39;\r\n\r\n    def test_load_dataset(self, dataset_name):\r\n        configs = self.dataset_tester.load_all_configs(dataset_name, is_local=True)[:1]\r\n&gt;       self.dataset_tester.check_load_dataset(dataset_name, configs, is_local=True, use_local_dummy_data=True)\r\n\r\ntests/test_dataset_common.py:234: \r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\ntests/test_dataset_common.py:187: in check_load_dataset\r\n    self.parent.assertTrue(len(dataset[split]) &gt; 0)\r\nE   AssertionError: False is not true\r\n```\r\nWhen I try loading dataset on local machine it works fine. Any suggestions on how can I avoid this error?&quot;,
+  &#39;performed_via_github_app&#39;: None}]
+</code></pre></div></div>
+
+<p>We can see that the comment is stored in the <code>body</code> field, so let's write a simple function that returns all the comments associated with an issue by picking out the <code>body</code> contents for each element in <code>response.json()</code>:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_comments</span><span class="p">(</span><span class="n">issue_number</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.github.com/repos/huggingface/datasets/issues/</span><span class="si">{</span><span class="n">issue_number</span><span class="si">}</span><span class="s2">/comments&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()]</span>
+
+
+<span class="c1"># Test our function works as expected</span>
+<span class="n">get_comments</span><span class="p">(</span><span class="mi">2792</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>[&quot;@albertvillanova my tests are failing here:\r\n```\r\ndataset_name = &#39;gooaq&#39;\r\n\r\n    def test_load_dataset(self, dataset_name):\r\n        configs = self.dataset_tester.load_all_configs(dataset_name, is_local=True)[:1]\r\n&gt;       self.dataset_tester.check_load_dataset(dataset_name, configs, is_local=True, use_local_dummy_data=True)\r\n\r\ntests/test_dataset_common.py:234: \r\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\ntests/test_dataset_common.py:187: in check_load_dataset\r\n    self.parent.assertTrue(len(dataset[split]) &gt; 0)\r\nE   AssertionError: False is not true\r\n```\r\nWhen I try loading dataset on local machine it works fine. Any suggestions on how can I avoid this error?&quot;]
+</code></pre></div></div>
+
+<p>This looks good, so let's use <code>Dataset.map()</code> to add a new <code>comments</code> column to each issue in our dataset:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="c1"># Depending on your internet connection, this can take a few minutes...</span>
+<span class="n">issues_with_comments_dataset</span> <span class="o">=</span> <span class="n">issues_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="n">get_comments</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>The final step is to push our dataset to the Hub. Let's take a look at how we can do that.</p>
+<h2>Uploading the dataset to the Hugging Face Hub <a class="anchor" href="#uploading-the-dataset-to-the-hugging-face-hub" id="uploading-the-dataset-to-the-hugging-face-hub">#</a></h2>
+<p class="video"><a href="https://www.youtube.com/watch?v=HaN6qCr_Afc" target="_blank" rel="noopener"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="14" height="14" rx="3"/><path d="M16.5 10.5l5-3v9l-5-3z"/></svg><span>Companion video &middot; youtu.be/HaN6qCr_Afc</span></a></p>
+
+<p>Now that we have our augmented dataset, it's time to push it to the Hub so we can share it with the community! Uploading a dataset is very simple: just like models and tokenizers from Hugging Face Transformers, we can use a <code>push_to_hub()</code> method to push a dataset. To do that we need an authentication token, which can be obtained by first logging into the Hugging Face Hub with the <code>notebook_login()</code> function:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">notebook_login</span>
+
+<span class="n">notebook_login</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>This will create a widget where you can enter your username and password, and an API token will be saved in <em>~/.huggingface/token</em>. If you're running the code in a terminal, you can log in via the CLI instead:</p>
+<div class="codeblock"><span class="lang">bash</span><div class="hl"><pre><span></span><code>huggingface-cli<span class="w"> </span>login
+</code></pre></div></div>
+
+<p>Once we've done this, we can upload our dataset by running:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">issues_with_comments_dataset</span><span class="o">.</span><span class="n">push_to_hub</span><span class="p">(</span><span class="s2">&quot;github-issues&quot;</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>From here, anyone can download the dataset by simply providing <code>load_dataset()</code> with the repository ID as the <code>path</code> argument:</p>
+<div class="codeblock"><span class="lang">python</span><div class="hl"><pre><span></span><code><span class="n">remote_dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;lewtun/github-issues&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+<span class="n">remote_dataset</span>
+</code></pre></div></div>
+
+<div class="codeblock output"><span class="lang">output</span><div class="hl"><pre><span></span><code>Dataset({
+    features: [&#39;url&#39;, &#39;repository_url&#39;, &#39;labels_url&#39;, &#39;comments_url&#39;, &#39;events_url&#39;, &#39;html_url&#39;, &#39;id&#39;, &#39;node_id&#39;, &#39;number&#39;, &#39;title&#39;, &#39;user&#39;, &#39;labels&#39;, &#39;state&#39;, &#39;locked&#39;, &#39;assignee&#39;, &#39;assignees&#39;, &#39;milestone&#39;, &#39;comments&#39;, &#39;created_at&#39;, &#39;updated_at&#39;, &#39;closed_at&#39;, &#39;author_association&#39;, &#39;active_lock_reason&#39;, &#39;pull_request&#39;, &#39;body&#39;, &#39;performed_via_github_app&#39;, &#39;is_pull_request&#39;],
+    num_rows: 2855
+})
+</code></pre></div></div>
+
+<p>Cool, we've pushed our dataset to the Hub and it's available for others to use! There's just one important thing left to do: adding a <em>dataset card</em> that explains how the corpus was created and provides other useful information for the community.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p>You can also upload a dataset to the Hugging Face Hub directly from the terminal by using <code>huggingface-cli</code> and a bit of Git magic. See the <a href="https://huggingface.co/docs/datasets/share#share-a-dataset-using-the-cli" target="_blank" rel="noopener">Hugging Face Datasets guide</a> for details on how to do this.</p>
+</blockquote>
+<h2>Creating a dataset card <a class="anchor" href="#creating-a-dataset-card" id="creating-a-dataset-card">#</a></h2>
+<p>Well-documented datasets are more likely to be useful to others (including your future self!), as they provide the context to enable users to decide whether the dataset is relevant to their task and to evaluate any potential biases in or risks associated with using the dataset.</p>
+<p>On the Hugging Face Hub, this information is stored in each dataset repository's <em>README.md</em> file. There are two main steps you should take before creating this file:</p>
+<ol>
+<li>Use the <a href="https://huggingface.co/datasets/tagging/" target="_blank" rel="noopener"><code>datasets-tagging</code> application</a> to create metadata tags in YAML format. These tags are used for a variety of search features on the Hugging Face Hub and ensure your dataset can be easily found by members of the community. Since we have created a custom dataset here, you'll need to clone the <code>datasets-tagging</code> repository and run the application locally. Here's what the interface looks like:</li>
+</ol>
+<div class="flex justify-center">
+<img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter5/datasets-tagger.png" alt="The `datasets-tagging` interface." width="80%"/>
+</div>
+
+<ol start="2">
+<li>Read the <a href="https://github.com/huggingface/datasets/blob/master/templates/README_guide.md" target="_blank" rel="noopener">Hugging Face Datasets guide</a> on creating informative dataset cards and use it as a template.</li>
+</ol>
+<p>You can create the <em>README.md</em> file directly on the Hub, and you can find a template dataset card in the <code>lewtun/github-issues</code> dataset repository. A screenshot of the filled-out dataset card is shown below.</p>
+<div class="flex justify-center">
+<img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter5/dataset-card.png" alt="A dataset card." width="80%"/>
+</div>
+
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> Use the <code>dataset-tagging</code> application and <a href="https://github.com/huggingface/datasets/blob/master/templates/README_guide.md" target="_blank" rel="noopener">Hugging Face Datasets guide</a> to complete the <em>README.md</em> file for your GitHub issues dataset.</span></p>
+</blockquote>
+<p>That's it! We've seen in this section that creating a good dataset can be quite involved, but fortunately uploading it and sharing it with the community is not. In the next section we'll use our new dataset to create a semantic search engine with Hugging Face Datasets that can match questions to the most relevant issues and comments.</p>
+<blockquote class="callout note"><p class="callout-head"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.4"/></svg><span>Tip</span></p>
+<p class="tryit"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M14.5 5.5l4 4"/></svg><span><strong>Try it out!</strong> Go through the steps we took in this section to create a dataset of GitHub issues for your favorite open source library (pick something other than Hugging Face Datasets, of course!). For bonus points, fine-tune a multilabel classifier to predict the tags present in the <code>labels</code> field.</span></p>
+</blockquote><footer class="lesson-foot"><div class="pager"><a class="prev" href="../chapter5/4.html"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span><em>Previous</em>Big data? Hugging Face Datasets to the rescue!</span></a><a class="next" href="../chapter5/6.html"><span><em>Next</em>Semantic search with FAISS</span><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div><p class="sources"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5a4 4 0 006 .5l2.5-2.5a4 4 0 00-5.7-5.7L12 7.2"/><path d="M13.5 10.5a4 4 0 00-6-.5L5 12.5a4 4 0 005.7 5.7L12 16.8"/></svg><a href="https://huggingface.co/learn/llm-course/en/chapter5/5" target="_blank" rel="noopener">Read this section on huggingface.co</a></p></footer></article></div>
+<div class="ruler"><div class="rail" aria-hidden="true"></div><div class="gauge"><div class="ticks" aria-hidden="true"></div><nav class="marks" aria-label="Section outline"></nav><span class="pct">0.00</span></div></div>
+<div class="palette" hidden data-base="../" data-v="9f75a64a">
+  <div class="palette-box" role="dialog" aria-label="Search the course" aria-modal="true">
+    <div class="palette-field"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input type="search" placeholder="Search the course" autocomplete="off"
+             spellcheck="false" aria-label="Search query">
+      <kbd class="esc">Esc</kbd>
+    </div>
+    <div class="palette-results" role="listbox"></div>
+    <div class="palette-foot">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>
+      <span><kbd><svg class="icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6v6.5a2 2 0 01-2 2H5"/><path d="M8.5 11L5 14.5 8.5 18"/></svg></kbd> open</span>
+      <span class="hits"></span>
+    </div>
+  </div>
+</div>
+<div class="ask" hidden data-book="llm">
+  <div class="ask-box" role="dialog" aria-label="Ask about this book" aria-modal="true">
+    <aside class="ask-side">
+      <div class="ask-side-head"><span>Chats</span>
+        <button class="ask-new" type="button" title="Start a new chat">
+          <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>New</span></button>
+      </div>
+      <div class="ask-list"></div>
+    </aside>
+    <div class="ask-main">
+      <div class="ask-head">
+        <button class="ask-side-toggle" type="button" title="Chats"
+          aria-label="Chat history"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.4L19.5 10l-5.6 1.6L12 17l-1.9-5.4L4.5 10l5.6-1.6z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg><span class="grow">Ask about this book</span>
+        <button class="ask-config" type="button" title="Model settings"
+          aria-label="Model settings"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-2.9 1.2 2 2 0 11-4 0 1.7 1.7 0 00-2.9-1.2l-.1.1a2 2 0 11-2.8-2.8l.1-.1A1.7 1.7 0 003 15a2 2 0 110-4 1.7 1.7 0 001.2-2.9l-.1-.1a2 2 0 112.8-2.8l.1.1A1.7 1.7 0 0010 4.2a2 2 0 114 0 1.7 1.7 0 002.9 1.2l.1-.1a2 2 0 112.8 2.8l-.1.1A1.7 1.7 0 0021 11a2 2 0 110 4z"/></svg></button>
+        <button class="ask-close" type="button" title="Close" aria-label="Close">
+          <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="ask-form">
+        <div class="ask-side-head"><span>Google model</span>
+          <button class="ask-form-done" type="button" title="Done">Done</button>
+        </div>
+        <div class="ask-form-body">
+          <div class="ask-row"><label for="ask-provider">Provider</label>
+            <select id="ask-provider">
+              <option value="aistudio">AI Studio (Gemini API)</option>
+              <option value="vertex">Vertex AI</option>
+            </select></div>
+          <div class="ask-row"><label for="ask-key">API key</label>
+            <input id="ask-key" type="password" placeholder="AIza..." autocomplete="off"></div>
+          <div class="ask-row"><label for="ask-model">Model</label>
+            <input id="ask-model" type="text" placeholder="gemini-2.5-flash"></div>
+          <p class="ask-note">Both providers take a plain API key &mdash; no project, no
+          location, no access token. Get an AI Studio key from
+          <code>aistudio.google.com</code>, or a Vertex AI key from the Google Cloud
+          console. If the key is not valid for the provider you picked, the other one is
+          tried automatically. The key stays in this browser's <code>localStorage</code>
+          and is sent only to Google; nothing is stored in the page itself.</p>
+        </div>
+      </div>
+      <div class="ask-body">
+        <div class="ask-turns"></div>
+      </div>
+      <div class="ask-ask">
+        <textarea rows="1" placeholder="Ask a question about the material..."
+          aria-label="Your question"></textarea>
+        <button class="ask-send" type="button" title="Send" aria-label="Send">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12h14"/><path d="M12.5 5.5L19 12l-6.5 6.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../assets/app.js?v=9f75a64a"></script>
+</body>
+</html>
