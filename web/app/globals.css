@@ -1,0 +1,841 @@
+/* The book theme, carried over unchanged from the Python build (build/build.py STYLE and
+   build/build_ml.py ML_CSS) so the hosted app and the existing single-file books look
+   identical. Everything here is driven by the tokens in :root — the admin UI further
+   down reuses the same ones, so the editor matches the page it produces. */
+
+@import "katex/dist/katex.min.css";
+
+:root {
+  color-scheme: light;
+  --blue: #2457ff;
+  --ink: #252525;
+  --muted: #6c6c6c;
+  --faint: #8f8f8f;
+  --line: #dedede;
+  --hair: #ececec;
+  --paper: #fff;
+  --outside: #f4f4f3;
+  --side: #f7f7f7;
+  --sink: #f0f0f0;
+  --ok: #0a7d42;
+  --bad: #c0392b;
+  --thumb: #c2c2c6;
+  --thumb-hot: #9a9aa0;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --sidebar: 306px;
+  --askw: 0px;
+  --reserve: 0px;
+}
+
+/* The Ask panel is docked, so the reading column shrinks instead of being covered.
+   --reserve keeps a lane for the outline ruler between the text and the panel. */
+html.with-ask { --askw: 420px; --reserve: 478px }
+/* Too narrow to give up a column: the panel floats over the page instead. */
+@media (max-width: 1240px) { html.with-ask { --reserve: 0px } }
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --blue: #7fa1ff;
+  --ink: #e4e4e6;
+  --muted: #a2a2a8;
+  --faint: #7d7d85;
+  --line: #33333a;
+  --hair: #2a2a30;
+  --paper: #16161a;
+  --outside: #0f0f12;
+  --side: #131317;
+  --sink: #1d1d22;
+  --ok: #57c98a;
+  --bad: #ef8b7f;
+  --thumb: #3a3a44;
+  --thumb-hot: #52525e;
+}
+
+* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--thumb) transparent }
+html { scroll-behavior: smooth; background: var(--outside) }
+body { margin: 0; background: var(--outside); color: var(--ink);
+  font-family: var(--serif); line-height: 1.72; overflow-x: clip }
+a { color: var(--blue); text-underline-offset: 3px }
+img, svg, video { display: block; max-width: 100%; height: auto }
+.icon { display: inline-block; vertical-align: -2px; flex: none }
+code { font-family: var(--mono); font-size: .86em; background: var(--sink);
+  padding: .08em .28em; border-radius: 2px; overflow-wrap: break-word }
+::-webkit-scrollbar { width: 8px; height: 8px }
+::-webkit-scrollbar-button { display: none; width: 0; height: 0 }
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track { background: transparent }
+::-webkit-scrollbar-thumb { background: var(--thumb); border: 2px solid transparent;
+  background-clip: padding-box; border-radius: 999px }
+::-webkit-scrollbar-thumb:hover { background: var(--thumb-hot); background-clip: padding-box }
+
+/* ---------------- sidebar ---------------- */
+.sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sidebar); overflow-y: auto;
+  background: var(--side); border-right: 1px solid var(--line);
+  padding: 40px 23px 70px; z-index: 30 }
+.logo { display: block; margin: 0 0 34px; color: var(--blue); font: 700 14px/1 var(--mono);
+  letter-spacing: .08em; text-decoration: none }
+.sidebar h2 { margin: 0 0 10px; font: 700 11px/1.45 var(--mono); letter-spacing: .045em;
+  text-transform: uppercase; color: var(--ink) }
+.sidebar section { margin: 0 0 25px }
+.sidebar ul { margin: 0; padding: 0 0 0 16px }
+.sidebar li { padding: 2.5px 0; font: 400 15px/1.5 var(--serif) }
+.sidebar li::marker { color: var(--faint) }
+.sidebar a { color: var(--ink); text-decoration: none }
+.sidebar a:hover { color: var(--blue) }
+.sidebar a.active { color: var(--blue); font-weight: 700 }
+.side-note { margin: 34px 0 0; padding-top: 16px; border-top: 1px solid var(--line);
+  font: 400 11.5px/1.6 var(--serif); color: var(--faint) }
+.side-note .mono { font: 400 10.5px/1.6 var(--mono) }
+.nav-toggle { display: none }
+
+/* ---------------- paper ---------------- */
+.paper { width: min(960px, calc(100vw - 370px - var(--reserve))); min-height: 100vh;
+  margin-left: calc(var(--sidebar) + max(55px, (100vw - var(--sidebar) - var(--reserve) - 960px) / 2));
+  background: var(--paper); border-inline: 1px solid var(--line) }
+.topbar { position: sticky; top: 0; z-index: 15; height: 52px; display: flex;
+  align-items: center; gap: 6px; padding: 0 18px;
+  background: color-mix(in srgb, var(--paper) 95%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--hair);
+  font: 700 9px/1 var(--mono); text-transform: uppercase; letter-spacing: .065em;
+  color: var(--faint) }
+/* Also used as a <button>, so the browser's default control chrome has to be cleared —
+   left alone, a disabled one paints as a solid grey box in a dark colour-scheme. */
+.nudge { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 3px;
+  color: var(--muted); text-decoration: none; background: none; border: 0; padding: 0;
+  font: inherit; cursor: pointer; appearance: none }
+.nudge:hover:not(:disabled) { background: var(--sink); color: var(--blue) }
+.nudge.off, .nudge:disabled { opacity: .25; pointer-events: none }
+.crumb { flex: 1; min-width: 0; margin-left: 8px; white-space: nowrap; overflow: hidden;
+  text-overflow: ellipsis }
+.crumb b { padding: 0 8px; color: var(--line); font-weight: 400 }
+.crumb .here { color: var(--ink) }
+.theme { display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
+  cursor: pointer; border: 1px solid var(--hair); border-radius: 3px; background: none;
+  color: var(--muted) }
+.theme:hover { color: var(--blue); border-color: var(--line) }
+html[data-theme="dark"] .ico-light, html[data-theme="light"] .ico-dark { display: none }
+.find { display: flex; align-items: center; gap: 7px; height: 28px; margin-right: 2px;
+  padding: 0 6px; cursor: pointer; border: 0; background: none; color: var(--faint);
+  font: 700 9px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase }
+.find:hover { color: var(--blue) }
+.find kbd { font: inherit; letter-spacing: .06em }
+
+/* ---------------- search palette ---------------- */
+.palette { position: fixed; inset: 0; z-index: 60; display: flex; justify-content: center;
+  padding: 11vh 20px 20px;
+  background: color-mix(in srgb, var(--outside) 76%, transparent); backdrop-filter: blur(3px) }
+.palette[hidden] { display: none }
+.palette-box { display: flex; flex-direction: column; width: min(680px, 100%);
+  max-height: 74vh; background: var(--paper); border: 1px solid var(--line);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .17) }
+html[data-theme="dark"] .palette-box { box-shadow: 0 24px 70px rgba(0, 0, 0, .5) }
+.palette-field { display: flex; align-items: center; gap: 11px; padding: 14px 16px;
+  border-bottom: 1px solid var(--hair); color: var(--muted) }
+.palette-field input { flex: 1; min-width: 0; border: 0; background: none; color: var(--ink);
+  font: 400 19px/1.4 var(--serif); outline: none }
+.palette-field input::placeholder { color: var(--faint) }
+.esc, .palette-foot kbd { font: 700 9px/1 var(--mono); letter-spacing: .05em;
+  color: var(--faint); border: 1px solid var(--hair); border-radius: 2px; padding: 4px 5px }
+.palette-results { flex: 1; overflow-y: auto; padding: 6px }
+.hit { display: block; padding: 9px 11px; text-decoration: none; color: var(--ink);
+  border-radius: 2px }
+.hit:hover, .hit.on { background: var(--side) }
+.hit.on { box-shadow: inset 2px 0 0 var(--blue) }
+.hit-where { font: 700 9px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--faint) }
+.hit-title { font: 400 18px/1.35 var(--serif); margin: 1px 0 2px }
+.hit-snip { font: 400 15px/1.5 var(--serif); color: var(--muted) }
+.hit mark { background: color-mix(in srgb, var(--blue) 18%, transparent); color: inherit;
+  border-radius: 2px; padding: 0 1px }
+.palette-empty { padding: 22px 12px; text-align: center; font: 400 14px/1.6 var(--serif);
+  color: var(--faint) }
+.palette-foot { display: flex; align-items: center; gap: 16px; padding: 9px 14px;
+  border-top: 1px solid var(--hair); font: 700 9px/1 var(--mono); letter-spacing: .07em;
+  text-transform: uppercase; color: var(--faint) }
+.palette-foot span { display: flex; align-items: center; gap: 5px }
+.palette-foot kbd { display: grid; place-items: center }
+.palette-foot .hits { margin-left: auto }
+
+.lesson { width: min(700px, calc(100% - 74px)); margin: 0 auto; padding: 0 0 90px }
+
+/* ---------------- lesson head ---------------- */
+.lesson-head { padding: 62px 0 8px; text-align: center }
+.meta { margin: 0; font: 700 10px/1.5 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted) }
+.lesson-head h1 { margin: .5em 0 .32em; font: 400 40px/1.14 var(--serif);
+  letter-spacing: -.012em }
+.dek { margin: 0 auto; max-width: 46ch; font: 400 18px/1.6 var(--serif); color: var(--muted) }
+.rule { margin: 34px 0 42px; color: var(--faint); font: 400 12px/1 var(--mono);
+  letter-spacing: .18em; text-align: center }
+
+/* ---------------- prose ---------------- */
+.lesson p, .lesson li { font-size: 19px }
+.lesson h2 { margin: 2.5em 0 .55em; padding-top: .55em; border-top: 1px solid var(--hair);
+  font: 400 26px/1.25 var(--serif); letter-spacing: -.008em }
+.lesson h3 { margin: 2em 0 .4em; font: 700 18px/1.35 var(--serif) }
+.lesson h4 { margin: 1.7em 0 .35em; font: 700 15px/1.4 var(--mono); letter-spacing: .02em }
+.lesson h5, .lesson h6 { margin: 1.5em 0 .35em; font: 700 13px/1.4 var(--mono);
+  text-transform: uppercase; letter-spacing: .05em; color: var(--muted) }
+/* The topbar is sticky, so an anchor jump has to stop short of it or the heading it
+   lands on ends up underneath. */
+.lesson :is(h2, h3, h4, h5, h6)[id] { scroll-margin-top: 72px }
+.anchor { float: right; margin-right: -.9em; color: transparent; text-decoration: none;
+  font: 400 15px var(--mono) }
+h2:hover .anchor, h3:hover .anchor { color: var(--line) }
+.anchor:hover { color: var(--blue) }
+.lesson ul, .lesson ol { padding-left: 1.35em }
+.lesson li { margin: .28em 0 }
+.lesson li::marker { color: var(--faint) }
+hr { border: 0; border-top: 1px solid var(--hair); margin: 2.6em 0 }
+strong { font-weight: 700 }
+
+/* ---------------- page toc ---------------- */
+.page-toc { margin: 0 0 44px; padding: 16px 20px; background: var(--side);
+  border: 1px solid var(--hair) }
+.page-toc h2 { display: flex; align-items: center; gap: 7px; margin: 0 0 8px; padding: 0;
+  border: 0; font: 700 9.5px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted) }
+.page-toc ul { margin: 0; padding: 0; list-style: none }
+.page-toc li { margin: .1em 0; font-size: 16px }
+.page-toc .lvl3 { padding-left: 15px; font-size: 15px; color: var(--muted) }
+.page-toc a { color: var(--ink); text-decoration: none }
+.page-toc a:hover { color: var(--blue) }
+
+/* ---------------- code ---------------- */
+.codeblock { position: relative; margin: 1.7em 0; border: 1px solid var(--hair);
+  background: var(--side) }
+.codeblock .lang { position: absolute; left: 0; top: 0; padding: 4px 9px;
+  font: 700 9px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--faint); background: var(--sink); border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair); z-index: 1 }
+/* Program output, not source: unhighlighted, quieter, and wrapped — a long traceback
+   should be readable where it sits rather than clipped at the column edge. */
+.codeblock.output { background: var(--paper) }
+.codeblock.output pre { color: var(--muted); white-space: pre-wrap; overflow-wrap: anywhere }
+.codeblock pre { margin: 0; padding: 34px 16px 15px; overflow-x: auto;
+  font: 400 15px/1.62 var(--mono); background: none !important; border: 0 }
+.codeblock pre code { background: none; padding: 0; font-size: inherit }
+.copy { position: absolute; right: 6px; top: 5px; display: grid; place-items: center;
+  width: 26px; height: 24px; padding: 0; cursor: pointer; border: 1px solid transparent;
+  border-radius: 3px; background: none; color: var(--faint); opacity: 0;
+  transition: opacity .12s; z-index: 1 }
+.codeblock:hover .copy, .copy:focus { opacity: 1 }
+.copy:hover { color: var(--blue); border-color: var(--hair); background: var(--paper) }
+.copy.done { color: var(--ok); opacity: 1 }
+
+/* Shiki emits both themes at once as custom properties; the switch is a token swap
+   rather than a re-highlight. */
+.shiki, .shiki span { color: var(--sh-light) }
+html[data-theme="dark"] .shiki, html[data-theme="dark"] .shiki span { color: var(--sh-dark) }
+
+/* ---------------- callouts / figures ---------------- */
+blockquote { margin: 1.8em 0; padding: 14px 18px; border: 1px solid var(--hair);
+  border-left: 2px solid var(--blue); background: var(--side) }
+blockquote p { margin: .5em 0; font-size: 17.5px }
+blockquote p:first-child { margin-top: 0 }
+blockquote p:last-child { margin-bottom: 0 }
+.callout-head { display: flex; align-items: center; gap: 7px;
+  font: 700 9.5px/1.4 var(--mono) !important; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted) }
+blockquote.warn { border-left-color: var(--bad) }
+blockquote.warn .callout-head { color: var(--bad) }
+.tryit { padding: 12px 16px; border: 1px dashed var(--line); background: var(--side);
+  display: flex; gap: 9px; align-items: flex-start; font-size: 17.5px !important }
+.tryit .icon { margin-top: 4px; color: var(--blue) }
+.tryit > span { flex: 1 }
+.tryit strong { font: 700 10px/1.9 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  display: block; color: var(--blue) }
+.video a, .demo a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 13px;
+  border: 1px solid var(--hair); background: var(--side); text-decoration: none;
+  color: var(--ink); font: 700 11px/1 var(--mono); letter-spacing: .05em;
+  text-transform: uppercase }
+.video a:hover, .demo a:hover { border-color: var(--blue); color: var(--blue) }
+.demo a { border-style: dashed }
+.flex.justify-center { display: flex; justify-content: center; margin: 2em 0 }
+img { margin: 0 auto }
+html[data-theme="dark"] .dark\:hidden { display: none }
+html[data-theme="light"] .hidden.dark\:block { display: none }
+figure { margin: 2em 0 }
+figcaption { margin-top: 9px; text-align: center; font: 400 12.5px/1.5 var(--mono);
+  color: var(--faint) }
+
+table { border-collapse: collapse; width: 100%; margin: 1.9em 0; font-size: 16.5px;
+  display: block; overflow-x: auto }
+th, td { border: 1px solid var(--hair); padding: 8px 11px; text-align: left;
+  vertical-align: top }
+th { background: var(--side); font: 700 11px/1.4 var(--mono); letter-spacing: .04em;
+  text-transform: uppercase }
+
+/* ---------------- footer ---------------- */
+.lesson-foot { margin-top: 64px; padding-top: 26px; border-top: 1px solid var(--hair) }
+.pager { display: flex; gap: 14px; flex-wrap: wrap }
+.pager a { flex: 1 1 230px; display: flex; gap: 10px; align-items: center; padding: 13px 15px;
+  border: 1px solid var(--hair); text-decoration: none; color: var(--ink);
+  background: var(--side) }
+.pager a:hover { border-color: var(--blue) }
+.pager .next { justify-content: flex-end; text-align: right }
+.pager em { display: block; font: 700 9px/1.8 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--faint); font-style: normal }
+.pager span { font: 400 17px/1.4 var(--serif) }
+.sources { margin: 22px 0 0; font: 400 15px/1.7 var(--serif); color: var(--muted) }
+.sources .icon { vertical-align: -2px; margin-right: 7px }
+
+/* ---------------- ruler ---------------- */
+.ruler { position: fixed; right: var(--askw, 0px); top: 0; bottom: 0; width: 58px; z-index: 12;
+  pointer-events: none; transition: width .16s ease, background .16s ease }
+.rail { position: absolute; right: 0; top: 0; bottom: 0; width: 58px; pointer-events: auto;
+  transition: width .16s ease; cursor: pointer }
+.ruler:hover .rail { width: 100% }
+.ruler:hover { width: min(430px, 40vw);
+  background: linear-gradient(to left, var(--paper) 62%, transparent) }
+.gauge { position: absolute; left: 0; right: 0; top: 96px; bottom: 26px }
+.pct { position: absolute; right: 30px; top: 0; transform: translateY(-50%);
+  font: 700 10px/1 var(--mono); color: var(--blue); letter-spacing: .04em;
+  transition: opacity .14s ease }
+.ruler:hover .pct { opacity: 0 }
+.ticks { position: absolute; right: 14px; top: 0; bottom: 0; display: flex;
+  flex-direction: column; justify-content: space-between; align-items: flex-end }
+.ticks i { display: block; height: 1px; width: 9px; background: var(--line) }
+.ticks i.on { width: 16px; background: var(--blue) }
+.marks { position: absolute; inset: 0; pointer-events: none }
+.mark { position: absolute; right: 14px; display: flex; align-items: center; gap: 10px;
+  transform: translateY(-50%); text-decoration: none; pointer-events: auto;
+  justify-content: flex-end; max-width: calc(100vw - 40px) }
+.mark i { display: block; width: 22px; height: 1px; background: var(--ink); flex: none }
+/* A heading can be a whole sentence. Left uncapped the label runs out of the ruler and
+   across the page it is meant to annotate, so it is clipped to the width the ruler
+   opens to and the full text stays on the link's title. */
+.mark .lbl { font: 700 10px/1.4 var(--mono); letter-spacing: .07em; text-transform: uppercase;
+  color: var(--ink); white-space: nowrap; opacity: 0; transform: translateX(10px);
+  transition: opacity .14s ease, transform .14s ease;
+  max-width: min(340px, 26vw); overflow: hidden; text-overflow: ellipsis }
+.ruler:hover .lbl { opacity: 1; transform: none }
+.mark.here i, .mark:hover i { background: var(--blue); width: 30px }
+.mark.here .lbl, .mark:hover .lbl { color: var(--blue) }
+
+/* the scrubber: where a click would land, and what is there */
+.scrub { position: absolute; right: 14px; display: flex; align-items: center; gap: 10px;
+  transform: translateY(-50%); pointer-events: none; z-index: 2;
+  justify-content: flex-end; max-width: calc(100vw - 40px) }
+.scrub i { display: block; width: 34px; height: 2px; background: var(--blue); flex: none;
+  border-radius: 2px }
+.scrub-label { font: 700 10px/1.4 var(--mono); letter-spacing: .07em; text-transform: uppercase;
+  color: var(--paper); background: var(--blue); padding: 4px 8px; border-radius: 2px;
+  white-space: nowrap; max-width: min(340px, 26vw); overflow: hidden; text-overflow: ellipsis;
+  opacity: 0; transform: translateX(10px); transition: opacity .12s ease, transform .12s ease }
+.ruler:hover .scrub-label { opacity: 1; transform: none }
+
+/* ---------------- covers and the shelf ---------------- */
+.cover { padding: 96px 0 0; text-align: center }
+.cover h1 { margin: .42em 0 .3em; font: 400 52px/1.08 var(--serif); letter-spacing: -.02em }
+.start a { display: inline-flex; align-items: center; gap: 7px; padding: 11px 18px;
+  border: 1px solid var(--ink); text-decoration: none; color: var(--ink);
+  font: 700 10px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase }
+.start a:hover { border-color: var(--blue); color: var(--blue) }
+.figures { display: flex; flex-wrap: wrap; gap: 26px 42px; justify-content: center;
+  padding: 34px 0 6px; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+  margin: 52px 0 0 }
+.fig { text-align: center; margin-bottom: 28px }
+.fig b { display: block; font: 400 30px/1 var(--serif) }
+.fig span { font: 700 9.5px/2.2 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted) }
+.contents-head { margin: 56px 0 6px !important; border: 0 !important; padding: 0 !important;
+  font: 700 10px/1 var(--mono) !important; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted) }
+.ch { padding: 26px 0; border-top: 1px solid var(--hair) }
+.ch-num { margin: 0; font: 700 9.5px/1 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--blue) }
+.ch h3 { margin: .4em 0 .1em; font: 400 23px/1.25 var(--serif) }
+.ch-meta { margin: 0 0 10px; font: 400 12px/1.5 var(--mono); color: var(--faint) }
+.ch ol { margin: 0; padding-left: 1.5em; columns: 2; column-gap: 34px }
+.ch li { margin: .15em 0; font-size: 16.5px; break-inside: avoid }
+.ch a { color: var(--ink); text-decoration: none }
+.ch a:hover { color: var(--blue) }
+
+/* the shelf: one card per book */
+.shelf { display: grid; gap: 18px; margin: 44px 0 0 }
+.shelf a { display: block; padding: 22px 24px; border: 1px solid var(--hair);
+  background: var(--side); text-decoration: none; color: var(--ink) }
+.shelf a:hover { border-color: var(--blue) }
+.shelf b { display: block; font: 400 24px/1.25 var(--serif) }
+.shelf .shelf-meta { font: 700 9.5px/2.2 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted) }
+.shelf p { margin: .4em 0 0; font-size: 17.5px; color: var(--muted) }
+
+/* ---------------- diagrams and math ---------------- */
+pre.mermaid { background: none; border: 0; padding: 0; margin: 1.8em 0; text-align: center;
+  font: inherit; line-height: normal; overflow: visible; cursor: zoom-in }
+pre.mermaid:not([data-done]) { color: var(--faint); font: 400 12px/1.6 var(--mono);
+  text-align: left; white-space: pre-wrap; cursor: default }
+pre.mermaid svg { max-width: 100%; max-height: 60vh; width: auto; height: auto }
+pre.mermaid svg, .figbox svg { line-height: 1.25 }
+pre.mermaid foreignObject div, .figbox foreignObject div,
+pre.mermaid .nodeLabel, .figbox .nodeLabel,
+pre.mermaid .edgeLabel, .figbox .edgeLabel { line-height: 1.25 }
+
+.figsvg { margin: 1.8em 0; text-align: center; cursor: zoom-in }
+.figsvg svg { max-width: 100%; max-height: 62vh; width: auto; height: auto; overflow: visible }
+.figsvg text, .figbox .figsvg text { fill: var(--ink); font-family: var(--serif) }
+.cyc-ring { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 3 6 }
+.cyc-node circle { fill: var(--sink); stroke: var(--line); stroke-width: 1.2 }
+.cyc-tip { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round;
+  stroke-linejoin: round }
+.cyc-num { font: 600 13px/1 var(--mono); fill: var(--blue) }
+.cyc-lab { font: 400 13px/1.25 var(--serif); fill: var(--ink) }
+.cyc-hub { font: 500 15px/1.3 var(--serif); fill: var(--muted) }
+
+.figimg { margin: 2em 0; text-align: center; cursor: zoom-in }
+.figimg img { max-width: 100%; height: auto; border: 1px solid var(--line);
+  border-radius: 2px; background: var(--paper) }
+.figimg figcaption { margin-top: .7em; font: 400 12.5px/1.6 var(--mono); color: var(--muted);
+  letter-spacing: .01em }
+.figbox .figimg img, .figbox img { border: 0; max-width: none; max-height: none }
+
+html.figbox-open, html.figbox-open body { overflow: hidden }
+.figbox { position: fixed; inset: 0; z-index: 120; display: flex; align-items: center;
+  justify-content: center; padding: 3.4rem 2.2rem 2.2rem; background: rgba(8, 8, 10, .62);
+  backdrop-filter: blur(7px) }
+.figbox[hidden] { display: none }
+/* No plate behind the figure: the picture is the thing being looked at, so it sits on
+   the dimmed page rather than inside a panel the size of the screen. */
+.figbox-stage { width: 100%; height: 100%; display: flex; align-items: center;
+  justify-content: center; overflow: hidden; background: none; border: 0 }
+.figbox-stage img { max-width: 100%; max-height: 100%; width: auto; height: auto;
+  border-radius: 2px; box-shadow: 0 24px 70px -18px rgba(0, 0, 0, .55) }
+.figbox-stage svg { flex: none }
+.figbox-exit { position: absolute; top: 1rem; right: 1.6rem; z-index: 1;
+  font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: none; border: 0; padding: .5rem; cursor: pointer }
+.figbox-exit:hover { color: var(--blue) }
+.katex { font-size: 1.03em }
+.katex-display { margin: 1.2em 0; overflow-x: auto; overflow-y: hidden; padding: 2px 0 }
+
+/* ---------------- responsive ---------------- */
+@media (max-width: 1400px) { .ruler { display: none } }
+@media (max-width: 1020px) {
+  .nav-toggle { display: grid; place-items: center; position: fixed; left: 12px; top: 11px;
+    z-index: 41; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 3px;
+    background: var(--paper); color: var(--ink); cursor: pointer }
+  .sidebar { transform: translateX(-100%); transition: transform .18s ease; z-index: 40;
+    width: 86vw; max-width: 320px; box-shadow: 0 0 44px rgba(0, 0, 0, .16) }
+  body.nav-open .sidebar { transform: none }
+  body.nav-open .nav-toggle { border-color: transparent; background: transparent }
+  .paper { width: 100%; margin-left: 0; border: 0 }
+  .topbar { padding-left: 56px }
+  .lesson { width: calc(100% - 40px) }
+  .cover h1 { font-size: 38px }
+  .find span, .find kbd { display: none }
+  .find { padding: 0 7px }
+  .palette { padding: 8vh 12px 12px }
+  .lesson-head h1 { font-size: 31px }
+  .ch ol { columns: 1 }
+}
+@media print {
+  .sidebar, .topbar, .ruler, .nav-toggle, .pager, .copy { display: none }
+  .paper { width: 100%; margin: 0; border: 0 }
+}
+
+/* ==================================================================================
+   Admin. Same tokens, same type — the editor is part of the book, not a bolted-on CMS.
+   ================================================================================== */
+.admin { max-width: 1100px; margin: 0 auto; padding: 40px 28px 90px }
+.admin-bar { display: flex; align-items: center; gap: 14px; padding: 0 28px; height: 56px;
+  border-bottom: 1px solid var(--line); background: var(--paper); position: sticky; top: 0;
+  z-index: 20 }
+.admin-bar .logo { margin: 0 }
+.admin-bar nav { display: flex; gap: 16px; flex: 1; font: 700 10px/1 var(--mono);
+  letter-spacing: .08em; text-transform: uppercase }
+.admin-bar nav a { color: var(--muted); text-decoration: none }
+.admin-bar nav a:hover, .admin-bar nav a.on { color: var(--blue) }
+.admin h1 { font: 400 34px/1.15 var(--serif); margin: 0 0 6px }
+.admin h2 { font: 700 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin: 38px 0 12px }
+.admin .lede { color: var(--muted); margin: 0 0 8px; font-size: 17.5px }
+
+.field { display: block; margin: 0 0 16px }
+.field > span { display: block; font: 700 9.5px/1.8 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted) }
+.field input, .field textarea, .field select { width: 100%; padding: 9px 11px;
+  border: 1px solid var(--line); border-radius: 2px; background: var(--paper);
+  color: var(--ink); font: 400 17px/1.5 var(--serif); outline: none }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--blue) }
+.field.mono input { font-family: var(--mono); font-size: 15.5px }
+.row { display: flex; gap: 16px; flex-wrap: wrap }
+.row > * { flex: 1 1 220px }
+
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+  font: 700 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  border-radius: 2px; text-decoration: none }
+.btn:hover { border-color: var(--blue); color: var(--blue) }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff }
+.btn.primary:hover { color: #fff; opacity: .88 }
+.btn.danger:hover { border-color: var(--bad); color: var(--bad) }
+.btn[disabled] { opacity: .45; pointer-events: none }
+.btn-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap }
+
+.list { border: 1px solid var(--hair); border-radius: 2px; overflow: hidden }
+.list-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px;
+  border-bottom: 1px solid var(--hair); background: var(--paper) }
+.list-row:last-child { border-bottom: 0 }
+.list-row:hover { background: var(--side) }
+.list-row .grow { flex: 1; min-width: 0 }
+.list-row .grow a { color: var(--ink); text-decoration: none; font: 400 18px/1.3 var(--serif) }
+.list-row .grow a:hover { color: var(--blue) }
+.list-row .sub { font: 400 11.5px/1.6 var(--mono); color: var(--faint) }
+.list-row .handle { font: 700 10px/1 var(--mono); color: var(--faint); width: 28px }
+.chip { font: 700 9px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 7px; border: 1px solid var(--hair); border-radius: 2px; color: var(--muted) }
+.chip.draft { color: var(--bad); border-color: var(--bad) }
+.empty { padding: 26px; text-align: center; color: var(--faint); font-size: 17px }
+.notice { padding: 10px 13px; border: 1px solid var(--hair); border-left: 2px solid var(--blue);
+  background: var(--side); font-size: 16.5px; margin: 0 0 18px }
+.notice.bad { border-left-color: var(--bad); color: var(--bad) }
+
+/* ---- login ---- */
+.login { min-height: 100vh; display: grid; place-items: center; padding: 20px }
+.login form { width: min(360px, 100%); background: var(--paper); border: 1px solid var(--line);
+  padding: 32px 28px }
+.login h1 { font: 400 26px/1.2 var(--serif); margin: 0 0 4px }
+.login p { margin: 0 0 22px; color: var(--muted); font-size: 14.5px }
+
+/* ---- the writing desk ----------------------------------------------------------
+   The editor is the point of the admin, so it gets the screen: a single compact bar,
+   then panes that fill everything left over. Metadata lives in a drawer. */
+.workbench-shell { display: flex; flex-direction: column; height: calc(100vh - 56px) }
+.workbench-head { display: flex; align-items: baseline; gap: 14px; padding: 10px 20px 9px;
+  border-bottom: 1px solid var(--hair); flex: none }
+.workbench-head h1 { margin: 0; font: 400 20px/1.2 var(--serif) }
+.workbench-head .crumbs { margin: 0; font: 700 9px/1 var(--mono); letter-spacing: .08em;
+  text-transform: uppercase; color: var(--faint) }
+.workbench-head .crumbs a { color: var(--muted); text-decoration: none }
+.workbench-head .crumbs a:hover { color: var(--blue) }
+
+.workbench { display: flex; flex-direction: column; flex: 1; min-height: 0 }
+.workbench-bar { display: flex; align-items: center; gap: 8px; flex: none;
+  padding: 7px 14px; border-bottom: 1px solid var(--hair); background: var(--side) }
+.workbench-bar .grow { flex: 1 }
+.workbench-bar .btn { padding: 6px 10px; font-size: 9px }
+.workbench-details { flex: none; padding: 16px 20px; border-bottom: 1px solid var(--hair);
+  background: var(--side) }
+.workbench-details .field { margin-bottom: 10px }
+
+/* mode switch */
+.seg { display: flex; border: 1px solid var(--line); border-radius: 3px; overflow: hidden }
+.seg button { display: flex; align-items: center; gap: 5px; padding: 6px 11px; cursor: pointer;
+  border: 0; background: var(--paper); color: var(--muted);
+  font: 700 9px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase }
+.seg button + button { border-left: 1px solid var(--line) }
+.seg button:hover { color: var(--blue) }
+.seg button.on { background: var(--blue); color: #fff }
+
+.editor-status-group { display: flex; align-items: center; gap: 10px }
+.editor-count { font: 400 10px/1 var(--mono); color: var(--faint) }
+.editor-status { font: 400 10px/1 var(--mono); color: var(--faint) }
+.editor-status.saving { color: var(--blue) }
+.editor-status.saved { color: var(--ok) }
+.editor-status.dirty { color: var(--muted) }
+.editor-status.error { color: var(--bad) }
+
+.workbench-panes { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0 }
+.workbench-panes.solo { grid-template-columns: 1fr }
+.editor-pane { display: flex; flex-direction: column; min-width: 0; min-height: 0;
+  overflow: hidden }
+.editor-pane + .editor-pane { border-left: 1px solid var(--line) }
+.editor-head { display: flex; align-items: center; gap: 10px; padding: 7px 14px;
+  border-bottom: 1px solid var(--hair); background: var(--side);
+  font: 700 9.5px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted); flex: none }
+.editor-head .grow { flex: 1 }
+.editor-code { flex: 1; overflow: auto; min-height: 0 }
+/* CodeMirror brings its own light and dark palettes for the syntax colours; the surfaces
+   are pulled back to the book's tokens so the pane matches the page beside it. */
+.editor-code .cm-editor { height: 100%; background: var(--paper) }
+.editor-code .cm-editor.cm-focused { outline: none }
+.editor-code .cm-scroller { font-family: var(--mono); font-size: 15.5px; line-height: 1.62 }
+.editor-code .cm-gutters { background: var(--side); border-right: 1px solid var(--hair);
+  color: var(--faint) }
+.editor-code .cm-activeLine { background: color-mix(in srgb, var(--blue) 5%, transparent) }
+.editor-code .cm-activeLineGutter { background: transparent; color: var(--blue) }
+.editor-code .cm-content { caret-color: var(--blue) }
+.editor-code .cm-cursor { border-left-color: var(--blue) }
+.editor-preview { flex: 1; overflow: auto; background: var(--paper); padding: 22px 26px 60px;
+  min-height: 0 }
+.editor-preview .lesson { width: 100%; padding-bottom: 0 }
+.editor-preview .lesson-head { padding-top: 0 }
+.editor-toolbar { display: flex; gap: 4px; flex-wrap: wrap; padding: 5px 10px;
+  border-bottom: 1px solid var(--hair); flex: none; background: var(--paper) }
+.editor-toolbar button { padding: 5px 8px; cursor: pointer; border: 1px solid transparent;
+  background: none; color: var(--muted); border-radius: 2px;
+  font: 700 10px/1 var(--mono); letter-spacing: .05em }
+.editor-toolbar button:hover { border-color: var(--hair); color: var(--blue);
+  background: var(--side) }
+
+/* ---- the visual editor ----------------------------------------------------------
+   Editor.js keeps its own chrome minimal: a plus button, a drag handle and a floating
+   bar on selection. These styles put it on the book's type and palette so the writing
+   surface looks like the page it produces. */
+.visual-editor { flex: 1; min-height: 0; overflow: auto; background: var(--paper) }
+.block-holder { max-width: 760px; margin: 0 auto; padding: 26px 10px 140px }
+.codex-editor__redactor { padding-bottom: 120px !important }
+.ce-block__content, .ce-toolbar__content { max-width: 700px }
+.ce-paragraph, .cdx-block { font-family: var(--serif); font-size: 18.5px; line-height: 1.72;
+  color: var(--ink) }
+.ce-header { font-family: var(--serif); color: var(--ink); padding: .5em 0 .2em }
+h2.ce-header { font: 400 25px/1.25 var(--serif) }
+h3.ce-header { font: 700 18px/1.35 var(--serif) }
+h4.ce-header { font: 700 15px/1.4 var(--mono) }
+.ce-block a { color: var(--blue) }
+.ce-block code, .inline-code { font-family: var(--mono); font-size: .86em;
+  background: var(--sink); padding: .08em .28em; border-radius: 2px }
+.cdx-marker { background: color-mix(in srgb, var(--blue) 20%, transparent); color: inherit }
+.cdx-quote, .cdx-quote__text { border-left: 2px solid var(--blue); background: var(--side);
+  padding: 10px 16px; min-height: 0 }
+.ce-delimiter::before { color: var(--faint) }
+
+/* Editor.js paints its popovers white; these follow the theme instead. */
+.ce-toolbar__plus, .ce-toolbar__settings-btn { color: var(--muted); background: transparent;
+  border: 1px solid transparent }
+.ce-toolbar__plus:hover, .ce-toolbar__settings-btn:hover { background: var(--sink);
+  color: var(--blue) }
+.ce-popover, .ce-inline-toolbar, .ce-conversion-toolbar {
+  background: var(--paper); border: 1px solid var(--line); color: var(--ink);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .18) }
+html[data-theme="dark"] .ce-popover,
+html[data-theme="dark"] .ce-inline-toolbar { box-shadow: 0 18px 50px rgba(0, 0, 0, .55) }
+.ce-popover__container { background: var(--paper); border: 0 }
+.ce-popover-item__title, .ce-inline-tool, .ce-conversion-tool__title { color: var(--ink);
+  font-family: var(--serif) }
+.ce-popover-item:hover, .ce-inline-tool:hover, .ce-conversion-tool:hover {
+  background: var(--side) }
+.ce-popover-item__icon, .ce-inline-tool { color: var(--muted) }
+.ce-popover-item--active .ce-popover-item__title { color: var(--blue) }
+/* The block menu paints itself for a light page: white icon tiles, near-white item text
+   and a pale search field, none of which survive a dark background. */
+.ce-popover__search, .cdx-search-field { background: var(--sink); border: 1px solid var(--hair);
+  border-radius: 3px; color: var(--ink) }
+.cdx-search-field__input { color: var(--ink); font-family: var(--serif); background: none }
+.cdx-search-field__input::placeholder { color: var(--faint) }
+.cdx-search-field__icon svg { color: var(--faint) }
+.ce-popover-item__icon, .ce-popover-item-icon { background: var(--sink); color: var(--ink);
+  box-shadow: none; border: 1px solid var(--hair) }
+.ce-popover-item__title, .ce-popover-item__secondary-title { color: var(--ink) }
+.ce-popover-item__secondary-title { color: var(--faint) }
+.ce-popover-item:hover .ce-popover-item__icon { background: var(--paper) }
+.ce-popover-item--focused, .ce-popover-item--focused:hover {
+  background: color-mix(in srgb, var(--blue) 14%, transparent) !important }
+.ce-popover--nothing-found .ce-popover__nothing-found-message { color: var(--faint) }
+.ce-popover__items { scrollbar-color: var(--thumb) transparent }
+.ce-toolbar__settings-btn, .ce-popover-item-separator__line { background: transparent }
+.ce-popover-item-separator__line { background: var(--hair) }
+.ce-block--selected .ce-block__content { background: color-mix(in srgb, var(--blue) 10%, transparent) }
+.ce-inline-toolbar__dropdown:hover { background: var(--side) }
+.cdx-settings-button:hover, .ce-settings__button:hover { background: var(--side) }
+
+/* images keep the book's figure treatment while being edited */
+.image-tool__image { border: 1px solid var(--line); border-radius: 2px }
+.image-tool__caption, .cdx-input { font-family: var(--mono); font-size: 12px;
+  color: var(--muted); background: var(--paper); border: 1px solid var(--hair) }
+
+/* the two custom blocks */
+.block-fenced { border: 1px solid var(--hair); background: var(--side); border-radius: 2px }
+.block-fenced-head { display: flex; padding: 5px 8px; border-bottom: 1px solid var(--hair) }
+.block-fenced-lang { flex: 1; border: 0; background: none; color: var(--muted); outline: none;
+  font: 700 9.5px/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase }
+.block-fenced-code, .block-raw-code { display: block; width: 100%; resize: none; border: 0;
+  outline: none; background: none; color: var(--ink); padding: 10px 12px;
+  font: 400 15px/1.62 var(--mono); overflow: hidden }
+.block-raw { border: 1px dashed var(--line); background: var(--side); border-radius: 2px }
+.block-raw-label { display: block; padding: 5px 10px 0; color: var(--faint);
+  font: 700 9px/1.6 var(--mono); letter-spacing: .09em; text-transform: uppercase }
+
+/* ---- ask panel -------------------------------------------------------------------
+   Docked, not floating: --askw and --reserve already hold a lane open for it, so the
+   reading column narrows and the passage being asked about stays on screen. */
+.ask { position: fixed; right: 0; top: 0; bottom: 0; z-index: 40; width: var(--askw, 420px);
+  display: flex; flex-direction: column; background: var(--paper);
+  border-left: 1px solid var(--line) }
+.ask-head { display: flex; align-items: center; gap: 9px; padding: 13px 16px; flex: none;
+  border-bottom: 1px solid var(--hair); font: 700 9.5px/1 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted) }
+.ask-head .grow { flex: 1 }
+.ask-head button { display: grid; place-items: center; width: 26px; height: 26px; padding: 0;
+  cursor: pointer; border: 1px solid var(--hair); border-radius: 3px; background: none;
+  color: var(--muted) }
+.ask-head button:hover { color: var(--blue); border-color: var(--line) }
+
+.ask-log { flex: 1; min-height: 0; overflow-y: auto; padding: 16px }
+.ask-none { margin: 0; font: 400 14px/1.65 var(--serif); color: var(--faint) }
+.ask-turn { margin: 0 0 26px }
+/* The question sits in its own box — dashed, like the book's other set-aside notes —
+   so a long one reads as a block rather than trailing into the answer below it. */
+.ask-q { margin: 0 0 12px; padding: 10px 13px; border: 1px dashed var(--line);
+  border-left: 2px solid var(--blue); border-radius: 2px; background: var(--side);
+  font: 400 17px/1.6 var(--serif); color: var(--ink); overflow-wrap: anywhere }
+.ask-lookups { margin: 0 0 10px; padding: 0; list-style: none }
+.ask-lookups li { font: 400 11px/1.7 var(--mono); color: var(--faint) }
+.ask-lookups li::before { content: "→ "; color: var(--blue) }
+.ask-a { font: 400 17px/1.7 var(--serif); color: var(--ink); white-space: pre-wrap;
+  overflow-wrap: anywhere }
+.ask-error { margin: 0; font: 400 14.5px/1.6 var(--serif); color: var(--bad) }
+.ask-wait { display: inline-flex; align-items: center; gap: 7px; color: var(--faint);
+  font: 400 14px/1.6 var(--serif) }
+.spin { animation: spin 1s linear infinite }
+@keyframes spin { to { transform: rotate(360deg) } }
+
+.ask-sources { margin: 14px 0 0; padding: 12px 0 0; border-top: 1px solid var(--hair);
+  list-style: decimal; padding-left: 18px }
+.ask-sources li { margin: 0 0 7px; font: 400 13.5px/1.4 var(--serif) }
+.ask-sources li::marker { color: var(--faint); font: 700 10px var(--mono) }
+.ask-sources a { color: var(--ink); text-decoration: none; display: block }
+.ask-sources a:hover { color: var(--blue) }
+.ask-sources span { display: block; font: 700 8.5px/1.7 var(--mono); letter-spacing: .07em;
+  text-transform: uppercase; color: var(--faint) }
+
+/* Also rendered inside the editor's diagram panel, where it is not in a scrolling
+   column, so the scrolling is opt-in rather than assumed. */
+.ask-key { padding: 16px }
+.ask .ask-key { flex: 1; min-height: 0; overflow-y: auto }
+.workbench-details .ask-key { padding: 0 0 14px }
+.ask-key .ask-none { margin: 0 0 18px }
+.ask-key .field { margin-bottom: 14px }
+.ask-more { margin: 0 0 16px; padding: 0; cursor: pointer; border: 0; background: none;
+  color: var(--blue); font: 700 9.5px/1 var(--mono); letter-spacing: .08em;
+  text-transform: uppercase }
+
+.ask-field { flex: none; display: flex; gap: 8px; align-items: flex-end; padding: 12px 14px;
+  border-top: 1px solid var(--hair); background: var(--side) }
+.ask-field textarea { flex: 1; resize: none; padding: 9px 11px; border: 1px solid var(--line);
+  border-radius: 2px; background: var(--paper); color: var(--ink); outline: none;
+  font: 400 15px/1.5 var(--serif) }
+.ask-field textarea:focus { border-color: var(--blue) }
+.ask-field button { display: grid; place-items: center; width: 34px; height: 34px; flex: none;
+  cursor: pointer; border: 1px solid var(--blue); border-radius: 2px; background: var(--blue);
+  color: #fff }
+.ask-field button:disabled { opacity: .4; pointer-events: none }
+
+@media (max-width: 1240px) {
+  /* No lane to dock into, so it covers the page instead. */
+  .ask { box-shadow: 0 0 60px rgba(0, 0, 0, .28) }
+}
+@media (max-width: 560px) { .ask { width: 100vw } }
+
+/* ---- generating a picture from the editor ---- */
+.gen-row { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px }
+.gen-row textarea { flex: 1; resize: vertical; min-height: 62px; padding: 9px 11px;
+  border: 1px solid var(--line); border-radius: 2px; background: var(--paper);
+  color: var(--ink); outline: none; font: 400 15px/1.5 var(--serif) }
+.gen-row textarea:focus { border-color: var(--blue) }
+
+/* ---- editing on the page ---------------------------------------------------------
+   The edit shell reuses .sidebar and .paper so an author works on the layout readers
+   see. Only the contents column gains controls. */
+.editing { --admin-bar: 56px }
+/* The sidebar and the sticky page bar are fixed to the viewport, so they have to be
+   pushed below the admin bar or they sit on top of it. */
+.editing .sidebar { top: var(--admin-bar); padding-top: 24px }
+.editing .topbar { top: var(--admin-bar) }
+.editing .paper { min-height: calc(100vh - var(--admin-bar)) }
+.edit-sidebar h2.edit-chapter { display: flex; align-items: center; gap: 2px; cursor: grab }
+.edit-sidebar h2 form { display: flex }
+.edit-sidebar li { padding: 0 }
+.edit-row { display: flex; align-items: center; gap: 4px }
+.edit-row form { display: flex }
+.edit-sidebar .grip { color: transparent; cursor: grab; flex: none }
+.edit-sidebar li:hover .grip, .edit-chapter:hover .grip { color: var(--faint) }
+.edit-sidebar li .nudge, .edit-chapter .nudge { width: 20px; height: 20px; opacity: 0 }
+.edit-sidebar li:hover .nudge, .edit-chapter:hover .nudge { opacity: 1 }
+.edit-sidebar .dragging { opacity: .35 }
+.edit-sidebar ul { padding-left: 2px; list-style: none }
+.edit-sidebar.busy { opacity: .6; pointer-events: none }
+
+/* Where the dragged item will land. A line rather than a highlight, because the answer
+   is "between these two", not "onto this one". */
+.edit-sidebar .drop-before, .edit-sidebar .drop-after { position: relative }
+.edit-sidebar .drop-before::before, .edit-sidebar .drop-after::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 2px;
+  background: var(--blue); border-radius: 2px; pointer-events: none }
+.edit-sidebar .drop-before::before { top: -1px }
+.edit-sidebar .drop-after::after { bottom: -1px }
+.edit-chapter-block { position: relative }
+.edit-chapter-block.drop-before::before, .edit-chapter-block.drop-after::after {
+  height: 2px; background: var(--blue) }
+.edit-add { margin: 6px 0 0 }
+.edit-add input { width: 100%; padding: 6px 8px; border: 1px dashed var(--line);
+  border-radius: 2px; background: none; color: var(--ink); outline: none;
+  font: 400 15px/1.5 var(--serif) }
+.edit-add input:focus { border-color: var(--blue); border-style: solid }
+
+/* the writing surface, sitting where the prose sits */
+.editor-code.on-page .cm-editor { background: none }
+.editor-code.on-page .cm-scroller { font-family: var(--mono); font-size: 16px;
+  line-height: 1.7 }
+.editor-code.on-page .cm-content { padding: 0 }
+.editing .visual-editor { overflow: visible; background: none }
+.editing .block-holder { max-width: none; margin: 0; padding: 0 0 160px }
+.editing .ce-block__content, .editing .ce-toolbar__content { max-width: 100% }
+.editing .ce-toolbar__plus { left: -34px }
+.editing .ce-toolbar__actions { right: 100% }
+
+/* an empty chapter or book: one thing to do, offered plainly */
+.blank-slate { padding-top: 40px }
+.blank-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap }
+.blank-form input { flex: 1 1 240px; padding: 10px 12px; border: 1px solid var(--line);
+  border-radius: 2px; background: var(--paper); color: var(--ink);
+  font: 400 18px/1.5 var(--serif); outline: none }
+.blank-form input:focus { border-color: var(--blue) }
+
+/* ---- the diagram panel -----------------------------------------------------------
+   Docked beside the page rather than stacked above it: drawing is something you do while
+   looking at the paragraph the figure belongs to, so the page narrows to make room and
+   the two stay side by side. */
+/* Docked to the window, not nested in the paper: sitting inside the column squeezed the
+   writing area to a third of its width and left the rest of the page empty. The column
+   gives up a lane instead, exactly as it does for the reader's Ask panel. */
+.editing:has(.onpage.with-panel) { --reserve: 392px }
+.genpanel { position: fixed; top: var(--admin-bar); right: 0; bottom: 0; width: 372px;
+  z-index: 25; display: flex; flex-direction: column;
+  border-left: 1px solid var(--line); background: var(--side) }
+.genpanel .ask-head { background: var(--paper) }
+.genpanel-body { flex: 1; min-height: 0; overflow-y: auto; padding: 16px }
+.genpanel-body .field textarea { width: 100%; resize: vertical; padding: 9px 11px;
+  border: 1px solid var(--line); border-radius: 2px; background: var(--paper);
+  color: var(--ink); outline: none; font: 400 15px/1.5 var(--serif) }
+.genpanel-body .field textarea:focus { border-color: var(--blue) }
+.genpanel-body h2 { font: 700 9.5px/1 var(--mono); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted) }
+.genpanel-body .notice em { font-style: normal; color: var(--ink) }
+.genpanel-body .ask-more { display: inline-flex; align-items: center; gap: 4px;
+  margin-left: 8px }
+
+.genpanel-shots { display: grid; gap: 12px }
+.genpanel-shots figure { margin: 0; border: 1px solid var(--hair); background: var(--paper);
+  padding: 8px }
+.genpanel-shots img { width: 100%; height: 120px; object-fit: contain; background: var(--paper) }
+.genpanel-shots figcaption { margin: 6px 0 0; font: 400 11.5px/1.5 var(--serif);
+  color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden }
+
+/* Below this the page has no width to give away, so the panel goes back to stacking. */
+/* Too narrow to give up a lane: the panel floats over the page instead. */
+@media (max-width: 1180px) {
+  .editing:has(.onpage.with-panel) { --reserve: 0px }
+  .genpanel { box-shadow: 0 0 60px rgba(0, 0, 0, .28) }
+}
+@media (max-width: 560px) { .genpanel { width: 100vw } }
+
+/* ---- media library ---- */
+.grid-media { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px }
+.media-card { border: 1px solid var(--hair); background: var(--side); padding: 8px }
+.media-card img { width: 100%; height: 110px; object-fit: contain; background: var(--paper) }
+.media-card .name { font: 400 10.5px/1.5 var(--mono); color: var(--faint);
+  word-break: break-all; margin-top: 6px }
+.media-card img { cursor: zoom-in }
+.media-actions { display: flex; gap: 6px; margin-top: 6px; align-items: center }
+.media-actions .media-size { flex: 1; font: 400 10px/1 var(--mono); color: var(--faint) }
+.media-actions .btn { padding: 5px 7px; font-size: 9px }
+.figbox-stage img { max-width: 100%; max-height: 100%; width: auto; height: auto }
+.drop { border: 1px dashed var(--line); padding: 26px; text-align: center; color: var(--muted);
+  background: var(--side); font-size: 14.5px; cursor: pointer }
+.drop.hot { border-color: var(--blue); color: var(--blue) }
